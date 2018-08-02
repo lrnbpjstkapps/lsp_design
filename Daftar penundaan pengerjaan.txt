@@ -1,0 +1,7 @@
+- Memperbarui relasi pada tabel MMA_KUK (terutama masalah Foreign Key)
+- Memperbarui codingan APL-02, APL-01, bukti kelengkapan
+- Memperbarui codingan skema sertifikasi, unit kompetensi, elemen kompetensi, kriteria unjuk kerja
+- Di cek lagi, mana data yang sebenarnya dari form - form sebelumnya
+
+Sesudah ganti design
+- Pada menu bukti kelengkapan, user tidak bisa mengubah & menghapus file yang sedang & telah digunakan untuk pengajuan asesmen
