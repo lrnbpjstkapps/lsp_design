@@ -5,7 +5,6 @@ class M_form_apl_01 extends CI_Model {
 		{			
 			$data["saveMethod"]		= "add";
 			$data[$form_name[134]] 	= '';
-			$data[$form_name[163]] 	= '';
 			$data[$form_name[140]] 	= '';
 			$data[$form_name[150]] 	= '';
 			$data[$form_name[115]] 	= '';
@@ -31,7 +30,6 @@ class M_form_apl_01 extends CI_Model {
 			$data[$form_name[144]] 	= '';
 			$data[$form_name[158]] 	= '';
 			$data[$form_name[162]] 	= '';
-			$data[$form_name[161]] 	= '';
 			$data[$form_name[160]] 	= '';
 			$data[$form_name[101]] 	= '';
 			$data[$form_name[102]] 	= ''; //UUID_SKEMA
@@ -45,9 +43,8 @@ class M_form_apl_01 extends CI_Model {
 		{
 			$data["saveMethod"]		= "edit";
 			$data[$form_name[134]] 	= $result->UUID_APL01;
-			$data[$form_name[163]] 	= $result->UUID_ADM;
 			$data[$form_name[140]] 	= $result->UUID_USER;
-			$data[$form_name[150]] 	= $result->NO_DOKUMEN;
+			$data[$form_name[150]] 	= $result->NO_ASESMEN;
 			$data[$form_name[115]] 	= $result->NAMA_LENGKAP;
 			$data[$form_name[116]] 	= $result->TEMPAT_LAHIR;
 			$data[$form_name[117]] 	= $result->TGL_LAHIR;
@@ -68,12 +65,10 @@ class M_form_apl_01 extends CI_Model {
 			$data[$form_name[131]] 	= $result->FAX_KANTOR;
 			$data[$form_name[133]] 	= $result->TUJUAN_ASESMEN;
 			$data[$form_name[141]] 	= $result->TUJUAN_ASESMEN_LAINNYA_KETERANGAN;
-			$data[$form_name[144]] 	= $result->JENIS_SKEMA;
 			$data[$form_name[158]] 	= $result->UUID_SKEMA;
 			$data[$form_name[101]] 	= $result->NOMOR_SKEMA;
-			$data[$form_name[162]] 	= $result->IS_DITERIMA;
-			$data[$form_name[161]] 	= $result->IS_MEMENUHI_SYARAT;
-			$data[$form_name[160]] 	= $result->ALASAN_KURANG_SYARAT;
+			$data[$form_name[162]] 	= $result->IS_DIREKOMENDASIKAN;
+			$data[$form_name[160]] 	= $result->CATATAN;
 			$data[$form_name[102]] 	= ''; //UUID_SKEMA
 			$data[$form_name[105]] 	= ''; //UUID_UK
 			$data[$form_name[136]] 	= ''; //UUID_BUKTI

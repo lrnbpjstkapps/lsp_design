@@ -8,6 +8,13 @@ class bukti_kelengkapan extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
+			if($this->session->userdata('lsp_bpjstk_login_id') == null){
+				redirect('');
+			}
+			if($this->session->userdata('lsp_bpjstk_role_code') != "ASESI"){
+				$role_code = $this->session->userdata('lsp_bpjstk_role_code');
+				redirect('common/akun/switchInterface/'.$role_code);
+			}
 			$this->load->model("common/m_globalval", "m_globalval");
 			$this->load->model("common/m_crud", "m_crud");
 			$this->load->model("asesi/bukti_kelengkapan/m_param", "m_param");

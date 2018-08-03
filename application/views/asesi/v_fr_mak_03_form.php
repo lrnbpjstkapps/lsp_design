@@ -1,7 +1,7 @@
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#">Beranda</a></li>
-		<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>asesi/fr_mak_03">FR-MAK-03</a></li>
+		<li class="breadcrumb-item"><a href="fr_mak_03">FR-MAK-03</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Tambah</li>
 	  </ol>
 	</nav>

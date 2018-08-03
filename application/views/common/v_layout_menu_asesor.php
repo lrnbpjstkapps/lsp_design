@@ -1,62 +1,34 @@
 </head>
-   <body class="sidebar-mini skin-black">
-		<div id="divLoading"></div>
-		<div class="wrapper">
-		  <header class="main-header">
-			<a href="Home" class="logo">
-			  <span class="logo-lg"><font face="Segoe UI Semibold">Asesor</font></span>			  
-			</a>
-			
-			<nav class="navbar navbar-static-top">
-			  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-				<span class="sr-only">Toggle navigation</span>
-			  </a>	
-				  <div class="navbar-custom-menu">
-					<ul class="nav navbar-nav">
-						<li class="dropdown user user-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							  <span class="hidden-xs"><?php echo $this->session->userdata('sdd_nama'); ?></span>
-							</a>
-							<ul class="dropdown-menu">
-								  <li class="user-header">
-									<p>
-									  <?php echo "NAMA"; ?>
-									  <small><?php echo "ROLE"; ?></small>
-									</p>
-								  </li>
-								<li class="user-footer">
-								<div class="pull-left">
-								  <a href="javascript:void(0)" class="btn btn-default btn-flat" onclick="edit_person()"><i class="fa fa-pencil-square-o"></i> Ubah Password</a>
-								</div>
-								<div class="pull-right">
-								  <a href="Login/doLogout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
-								</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
+   <body>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  <a class="navbar-brand" href="#">LSP BPJS Ketenagakerjaan</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url(); ?>asesor/fr_mma">FR-MMA <span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data Asesi</a>
+				  <div class="dropdown-menu" aria-labelledby="dropdown10">
+					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_apl_01">FR-APL-01</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_apl_02">FR-APL-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_mak_02">FR-MAK-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_mak_03">FR-MAK-03</a>
 				  </div>
-			</nav>
-		  </header>
-
-		  <aside class="main-sidebar">
-			<section class="sidebar">
-				<ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Application Manager</li>
-        <li><a href="<?php echo base_url(); ?>asesor/about"><i class="fa fa-folder-open"></i> <span>About</span></a></li>
-        <li class="header">Asesmen</li>
-		<li class="treeview active menu-open">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Administrasi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>asesi/fr_apl_01"><i class="fa fa-folder-open"></i> Riwayat</a></li>
-			<li><a href="<?php echo base_url(); ?>asesor/fr_mma"><i class="fa fa-folder-open"></i> FR-MMA</a></li>
-          </ul>
-        </li>
-      </ul>
-			</section>
-		  </aside>
+				</li>
+			</ul>
+			
+			<form class="form-inline mt-2 mt-md-0" action="<?php echo base_url(); ?>common/akun/logout" method="post">
+			  <button class="btn btn-danger" type="submit">Keluar</button>
+			</form>
+		  </div>
+		</nav>
+		<div class="container">

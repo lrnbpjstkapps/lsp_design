@@ -9,7 +9,7 @@
 		
 		// Method yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('apl01.UUID_APL01, apl01.NO_DOKUMEN, skema.NAMA_SKEMA, apl01.DTM_CRT');
+			$this->db->select('apl01.UUID_APL01, apl01.NO_ASESMEN, skema.NAMA_SKEMA, apl01.DTM_CRT');
 			$this->db->from($this->table);
 			$this->db->join("SKEMA AS skema", "apl01.UUID_SKEMA = skema.UUID_SKEMA", "LEFT");
 			$this->db->where('apl01.IS_ACTIVE', '1');
@@ -60,7 +60,7 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('apl01.UUID_APL01, apl01.NO_DOKUMEN, skema.NAMA_SKEMA, apl01.DTM_CRT');
+			$this->db->select('apl01.UUID_APL01, apl01.NO_ASESMEN, skema.NAMA_SKEMA, apl01.DTM_CRT');
 			$this->db->from($this->table);
 			$this->db->join("SKEMA AS skema", "apl01.UUID_SKEMA = skema.UUID_SKEMA", "LEFT");
 			$this->db->where('apl01.IS_ACTIVE', '1');
@@ -79,7 +79,7 @@
 						$no++;
 						$row	= array();
 						$row[]	= $no;
-						$row[] 	= $values->NO_DOKUMEN;
+						$row[] 	= $values->NO_ASESMEN;
 						$row[] 	= $values->NAMA_SKEMA;
 						$row[] 	= date('d-M-y H.i', strtotime($values->DTM_CRT));
 						$row[] 	= '<a href="javascript:void(0)" onclick="editDt('."'".$values->UUID_APL01."'".')"><i class="fa fa-edit"></i></a>';

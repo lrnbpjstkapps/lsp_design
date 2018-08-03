@@ -19,9 +19,9 @@
 				$this->UUID_UK		= (!$this->input->post($form_name[105]) ? $this->uuid->v4() : $this->input->post($form_name[105]));
 				$this->JUDUL_UK		= (!$this->input->post($form_name[103]) ? null : $this->input->post($form_name[103]));
 				$this->KODE_UK		= (!$this->input->post($form_name[104]) ? null : $this->input->post($form_name[104]));
-				$this->USR_CRT		= 'Karid Nurvenus';
+				$this->USR_CRT		= 'SUPER ADMIN';
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
-				$this->USR_UPD		= 'Karid Nurvenus';
+				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
 				$this->IS_ACTIVE	= '1';
 				

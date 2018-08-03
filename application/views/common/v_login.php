@@ -10,8 +10,14 @@
     <title>LSP BPJS Ketenagakerjaan</title>
 
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/css/form-validation.css" rel="stylesheet">
-	<link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">	
+    <link href="<?php echo base_url(); ?>assets/css/validation/screen.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.js"></script>	
+	<script src="<?php echo base_url(); ?>assets/js/messages_id.js"></script>
   </head>
 
   <body class="bg-light">
@@ -25,17 +31,14 @@
 	  
       <div class="row justify-content-center">
         <div class="col-md-7">
-          <form class="needs-validation" action="common/akun/login" method="post">
+          <form action="common/akun/login" method="post" id = "formLogin">
 		  
             <div class="mb-3">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control" name = "username" placeholder="Masukan username" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Please enter a valid email address for shipping updates.
-                </div>
+                <input type="text" class="form-control" name = "login_id" id = "login_id" placeholder="Masukan login id" required>
               </div>
             </div>
 			
@@ -44,14 +47,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa fa-lock"></i></span>
                 </div>
-                <input type="password" class="form-control" name = "password" placeholder="Masukan password" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Please enter a valid email address for shipping updates.
-                </div>
+                <input type="password" class="form-control" name = "password" id = "password" placeholder="Masukan password" required>
               </div>
             </div>			
             
 			<button class="btn btn-primary btn-lg btn-block" type="submit">Masuk</button>
+			
+			</br><div id="login_id_validate" class="text-center"></div>
+			<div id="password_validate" class="text-center"></div>
 
           </form>
         </div>
@@ -62,11 +65,42 @@
       </footer>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+	<script text="text/javascript">	
+		$("#formLogin").validate({
+			rules: {
+				login_id: {
+					required: true
+				},
+				password:{
+					required	: true,
+					remote 		: { 
+						url 	: "common/akun/cekPassword", 
+						type 	:"post",
+						data	: {
+							login_id: function(){
+								return $("#login_id").val();
+							}
+						}
+					}
+				}
+			},
+			messages:{
+				login_id : 
+					{ 
+						required : "Kolom <b>Login ID</b> diperlukan"
+					},
+				password : 
+					{ 
+						required : "Kolom <b>password</b> diperlukan",
+						remote : "Login ID dan password tidak cocok" 
+					}
+			},
+			errorPlacement: function (error, element) {
+				var name = $(element).attr("name");
+				error.appendTo($("#" + name + "_validate"));
+				$("#" + name + "_validate").show();
+			}
+		});
+	</script>    
   </body>
 </html>

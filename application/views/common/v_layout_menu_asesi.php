@@ -8,6 +8,10 @@
 		  <div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto">
 			  <li class="nav-item">
+				<a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item">
 				<a class="nav-link" href="<?php echo base_url(); ?>asesi/bukti_kelengkapan">Bukti Kelengkapan <span class="sr-only">(current)</span></a>
 			  </li>
 			  

@@ -1,9 +1,8 @@
 <?php
 	class M_fr_apl_01 extends CI_Model{
 		public $UUID_APL01;
-		public $UUID_ADM;
 		public $UUID_USER;
-		public $NO_DOKUMEN;
+		public $NO_ASESMEN;
 		public $NAMA_LENGKAP;
 		public $TEMPAT_LAHIR;
 		public $TGL_LAHIR;
@@ -24,11 +23,9 @@
 		public $FAX_KANTOR;
 		public $TUJUAN_ASESMEN;
 		public $TUJUAN_ASESMEN_LAINNYA_KETERANGAN;
-		public $JENIS_SKEMA;
 		public $UUID_SKEMA;
-		public $IS_DITERIMA;
-		public $IS_MEMENUHI_SYARAT;
-		public $ALASAN_KURANG_SYARAT;
+		public $IS_DIREKOMENDASIKAN;
+		public $CATATAN;
 		public $USR_CRT;
 		public $DTM_CRT;
 		public $USR_UPD;
@@ -53,12 +50,12 @@
 			
 		public function get_detail_entry($condition)
 			{
-				$this->db->select('apl01.UUID_APL01, apl01.UUID_ADM, apl01.UUID_USER, apl01.NO_DOKUMEN, apl01.NAMA_LENGKAP, 
+				$this->db->select('apl01.UUID_APL01, apl01.UUID_USER, apl01.NO_ASESMEN, apl01.NAMA_LENGKAP, 
 					apl01.TEMPAT_LAHIR, apl01.TGL_LAHIR, apl01.JENIS_KELAMIN, apl01.KEBANGSAAN, apl01.ALAMAT_RUMAH,
 					apl01.KODE_POS_RUMAH, apl01.NO_TLP_RUMAH, apl01.NO_TLP_HP, apl01.NO_TLP_KANTOR, apl01.EMAIL, 
 					apl01.PENDIDIKAN_TERAKHIR, apl01.NAMA_PERUSAHAAN, apl01.JABATAN, apl01.ALAMAT_KANTOR, 
 					apl01.KODE_POS_PERUSAHAAN, apl01.EMAIL_KANTOR, apl01.FAX_KANTOR, apl01.TUJUAN_ASESMEN, apl01.TUJUAN_ASESMEN_LAINNYA_KETERANGAN,
-					apl01.JENIS_SKEMA, apl01.UUID_SKEMA, apl01.IS_DITERIMA, apl01.IS_MEMENUHI_SYARAT, apl01.ALASAN_KURANG_SYARAT,
+					apl01.UUID_SKEMA, apl01.IS_DIREKOMENDASIKAN, apl01.CATATAN,
 					apl01.USR_CRT, apl01.DTM_CRT, apl01.USR_UPD, apl01.DTM_UPD, apl01.IS_ACTIVE,
 					skema.NAMA_SKEMA, skema.NOMOR_SKEMA');
 				$this->db->from("FR_APL_01 AS apl01");
@@ -70,9 +67,8 @@
 		public function insert_entry($form_name)
 			{
 				$this->UUID_APL01			= (!$this->input->post($form_name[134]) ? $this->uuid->v4() : $this->input->post($form_name[134]));
-				$this->UUID_ADM				= (!$this->input->post($form_name[163]) ? null : $this->input->post($form_name[163]));
 				$this->UUID_USER			= 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f';
-				$this->NO_DOKUMEN			= 'APL01'.$this->uniqidReal(7);
+				$this->NO_ASESMEN			= 'APL01'.$this->uniqidReal(7);
 				$this->NAMA_LENGKAP			= (!$this->input->post($form_name[115]) ? null : $this->input->post($form_name[115]));
 				$this->TEMPAT_LAHIR			= (!$this->input->post($form_name[116]) ? null : $this->input->post($form_name[116]));
 				$this->TGL_LAHIR			= (!$this->input->post($form_name[117]) ? null : $this->input->post($form_name[117]));
@@ -93,14 +89,12 @@
 				$this->FAX_KANTOR			= (!$this->input->post($form_name[131]) ? null : $this->input->post($form_name[131]));
 				$this->TUJUAN_ASESMEN		= (!$this->input->post($form_name[133]) ? null : $this->input->post($form_name[133]));
 				$this->TUJUAN_ASESMEN_LAINNYA_KETERANGAN = (!$this->input->post($form_name[141]) ? null : $this->input->post($form_name[141]));
-				$this->JENIS_SKEMA			= (!$this->input->post($form_name[144]) ? null : $this->input->post($form_name[144]));
 				$this->UUID_SKEMA			= (!$this->input->post($form_name[102]) ? null : $this->input->post($form_name[102]));
-				$this->IS_DITERIMA			= (!$this->input->post($form_name[162]) ? null : $this->input->post($form_name[162]));
-				$this->IS_MEMENUHI_SYARAT	= (!$this->input->post($form_name[161]) ? null : $this->input->post($form_name[161]));
-				$this->ALASAN_KURANG_SYARAT	= (!$this->input->post($form_name[160]) ? null : $this->input->post($form_name[160]));
+				$this->IS_DIREKOMENDASIKAN	= (!$this->input->post($form_name[162]) ? null : $this->input->post($form_name[162]));
+				$this->CATATAN				= (!$this->input->post($form_name[160]) ? null : $this->input->post($form_name[160]));
 				$this->USR_CRT				= 'Karid Nurvenus';
 				$this->DTM_CRT				= date('Y-m-d H:i:s');
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= null;
 				$this->DTM_UPD				= null;
 				$this->IS_ACTIVE			= '1';
 				
@@ -110,9 +104,8 @@
 		public function update_entry($form_name, $data, $condition)
 			{
 				$this->UUID_APL01			= $data->UUID_APL01;
-				$this->UUID_ADM				= (!$this->input->post($form_name[163]) ? $data->UUID_ADM : $this->input->post($form_name[163]));
 				$this->UUID_USER			= $data->UUID_USER;
-				$this->NO_DOKUMEN			= $data->NO_DOKUMEN;
+				$this->NO_ASESMEN			= $data->NO_ASESMEN;
 				$this->NAMA_LENGKAP			= (!$this->input->post($form_name[115]) ? $data->NAMA_LENGKAP : $this->input->post($form_name[115]));
 				$this->TEMPAT_LAHIR			= (!$this->input->post($form_name[116]) ? $data->TEMPAT_LAHIR : $this->input->post($form_name[116]));
 				$this->TGL_LAHIR			= (!$this->input->post($form_name[117]) ? $data->TGL_LAHIR : $this->input->post($form_name[117]));
@@ -133,11 +126,9 @@
 				$this->FAX_KANTOR			= (!$this->input->post($form_name[131]) ? $data->FAX_KANTOR : $this->input->post($form_name[131]));
 				$this->TUJUAN_ASESMEN		= (!$this->input->post($form_name[133]) ? $data->TUJUAN_ASESMEN : $this->input->post($form_name[133]));
 				$this->TUJUAN_ASESMEN_LAINNYA_KETERANGAN = (!$this->input->post($form_name[141]) ? $data->TUJUAN_ASESMEN_LAINNYA_KETERANGAN : $this->input->post($form_name[141]));
-				$this->JENIS_SKEMA			= (!$this->input->post($form_name[144]) ? $data->JENIS_SKEMA : $this->input->post($form_name[144]));
 				$this->UUID_SKEMA			= (!$this->input->post($form_name[102]) ? $data->UUID_SKEMA : $this->input->post($form_name[102]));
-				$this->IS_DITERIMA			= (!$this->input->post($form_name[162]) ? $data->IS_DITERIMA : $this->input->post($form_name[162]));
-				$this->IS_MEMENUHI_SYARAT	= (!$this->input->post($form_name[161]) ? $data->IS_MEMENUHI_SYARAT : $this->input->post($form_name[161]));
-				$this->ALASAN_KURANG_SYARAT	= (!$this->input->post($form_name[160]) ? $data->ALASAN_KURANG_SYARAT : $this->input->post($form_name[160]));
+				$this->IS_DIREKOMENDASIKAN	= (!$this->input->post($form_name[162]) ? $data->IS_DIREKOMENDASIKAN : $this->input->post($form_name[162]));
+				$this->CATATAN				= (!$this->input->post($form_name[160]) ? $data->CATATAN : $this->input->post($form_name[160]));
 				$this->USR_CRT				= $data->USR_CRT;
 				$this->DTM_CRT				= $data->DTM_CRT;
 				$this->USR_UPD				= 'Karid Nurvenus';
