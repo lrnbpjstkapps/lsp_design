@@ -56,10 +56,70 @@
 		validator = $("#<?php echo $form_id[136]; ?>").validate({
 			rules: 
 				{
-					<?php echo $form_name[142]; ?>: 
+					<?php echo $form_name[115]; ?>: 
 						{
-							date: true
+							required: true
 						},
+					<?php echo $form_name[116]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[117]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[119]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[120]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[121]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[123]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[124]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[125]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[126]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[127]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[128]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[129]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[130]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[105]; ?>: 
+						{
+							required: true
+						},
+					<?php echo $form_name[136]; ?>: 
+						{
+							required: true
+						}
 				}, 
 			messages:
 				{
