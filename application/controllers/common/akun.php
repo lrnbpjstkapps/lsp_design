@@ -27,11 +27,13 @@ class akun extends CI_Controller {
 	public function logout()
 		{	
 			$login_id	= $this->session->userdata('lsp_bpjstk_login_id');
+			$uuid_user	= $this->session->userdata('lsp_bpjstk_uuid_user');			
 			$user_name	= $this->session->userdata('lsp_bpjstk_user_name');
 			$role_name	= $this->session->userdata('lsp_bpjstk_role_name');
 			$role_code	= $this->session->userdata('lsp_bpjstk_role_code');
 			
 			$this->session->unset_userdata('lsp_bpjstk_login_id', $login_id);
+			$this->session->unset_userdata('lsp_bpjstk_uuid_user', $uuid_user);
 			$this->session->unset_userdata('lsp_bpjstk_user_name', $user_name);
 			$this->session->unset_userdata('lsp_bpjstk_role_name', $role_name);
 			$this->session->unset_userdata('lsp_bpjstk_role_code', $role_code);
@@ -54,6 +56,7 @@ class akun extends CI_Controller {
 		if($result->num_rows()>0){
 			$val 	= $result->row();
 			$this->session->set_userdata('lsp_bpjstk_login_id', $login_id);
+			$this->session->set_userdata('lsp_bpjstk_uuid_user', $val->UUID_USER);
 			$this->session->set_userdata('lsp_bpjstk_user_name', $val->USER_NAME);
 			$this->session->set_userdata('lsp_bpjstk_role_name', $val->ROLE_NAME);
 			$this->session->set_userdata('lsp_bpjstk_role_code', $val->ROLE_CODE);

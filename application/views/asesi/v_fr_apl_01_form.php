@@ -218,7 +218,7 @@
 				<div class="form-group">
 					<label> Tujuan asesmen </label>
 					<div>
-						<input type="radio" name="<?php echo $form_name[133]; ?>" value = "Sertifikasi" onchange="disableTujuanText()" <?php if ($$form_name[133] == 'Sertifikasi'){ echo 'checked'; } ?>> Sertifikasi
+						<input type="radio" name="<?php echo $form_name[133]; ?>" value = "Sertifikasi" onchange="disableTujuanText()" <?php if ($$form_name[133] == 'Sertifikasi' || $$form_name[133] == ''){ echo 'checked'; } ?>> Sertifikasi
 						&nbsp <input type="radio" name="<?php echo $form_name[133]; ?>" value = "Sertifikasi Ulang" onchange="disableTujuanText()" <?php if ($$form_name[133] == 'Sertifikasi  Ulang'){ echo 'checked'; } ?>> Sertifikasi Ulang
 						&nbsp <input type="radio" name="<?php echo $form_name[133]; ?>" id="<?php echo $form_id[162]; ?>" value = "Lainnya" onchange="disableTujuanText()" <?php if ($$form_name[133] == 'Lainnya'){ echo 'checked'; } ?>> Lainnya:
 						</br></br><input name="<?php echo $form_name[141]; ?>" value="<?php echo $$form_name[141]; ?>" id="<?php echo $form_id[164]; ?>" class="form-control" type="text">

@@ -10,6 +10,7 @@ class fr_apl_01 extends CI_Controller {
 			$this->load->model("common/m_globalval", "m_globalval");
 			$this->load->model("datatables/M_list_apl01", "M_list_apl01");
 			$this->load->model("form/M_form_apl_01", "M_form_apl_01");
+			$this->load->model("table/M_administrasi", "M_administrasi");
 			$this->load->model("table/M_apl01_uk", "M_apl01_uk");
 			$this->load->model("table/M_apl01_bukti", "M_apl01_bukti");
 			$this->load->model("table/M_bukti", "M_bukti");
@@ -17,6 +18,7 @@ class fr_apl_01 extends CI_Controller {
 			$this->load->model("table/M_unit_kompetensi", "M_uk");
 			$this->load->model("table/M_skema", "M_skema");
 			$this->load->model("table/M_skema_uk", "M_skema_uk");
+			$this->load->model("table/M_status_administrasi", "M_sa");
 		}
 	
 	public function index()
@@ -29,6 +31,17 @@ class fr_apl_01 extends CI_Controller {
 			$data["dviewEvent"]		= $view[119];
 			$data["dlayoutMenu"]	= $layout[105];
 			$this->load->view($layout[100], $data);
+		}
+		
+	function uniqidReal($lenght) {
+			if (function_exists("random_bytes")) {
+				$bytes = random_bytes(ceil($lenght / 2));
+			} elseif (function_exists("openssl_random_pseudo_bytes")) {
+				$bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
+			} else {
+				throw new Exception("no cryptographically secure random function available");
+			}
+			return strtoupper(substr(bin2hex($bytes), 0, $lenght));
 		}
 	
 	// PAGING
@@ -82,10 +95,28 @@ class fr_apl_01 extends CI_Controller {
 			$data						= $this->m_globalval->getAllData();		
 			$form_name					= $data["form_name"];
 			
+			$condition					= array(
+				'SA_CODE' => 'ASI010');
+			$_POST[$form_name[251]]		= $this->M_sa->get_entry($condition)->row()->UUID_SA;
+			$_POST[$form_name[257]]		= $this->session->userdata('lsp_bpjstk_uuid_user');
 			$_POST[$form_name[134]]		= $this->uuid->v4();
+			
+			$condition_					= array(
+				'UUID_SA' => $_POST[$form_name[251]]);
+			$num_rows					= $this->M_administrasi->get_total_entry($condition);
+			
+			if($num_rows > 0)
+				$num_rows				= $num_rows+1;
+			else{ 
+				$num_rows 				= 1;
+			}
+			
+			$_POST[$form_name[150]]		= date('y').date('m').date('d').sprintf('%05u', ($num_rows));
+			
 			$qResult_apl_01_ins			= $this->M_apl_01->insert_entry($form_name);
 			$qResult_apl_01_uk_ins		= 1;
 			$qResult_apl_01_bukti_ins	= 1;
+			$qResult_apl_01_adm_ins		= 1;
 			
 			if($qResult_apl_01_ins == 1)
 				{
@@ -107,6 +138,8 @@ class fr_apl_01 extends CI_Controller {
 								}
 						}
 				}
+		
+			$qResult_apl_01_adm_ins		= $this->M_administrasi->insert_entry($form_name);
 					
 			if($qResult_apl_01_ins != 1 || $qResult_apl_01_uk_ins != 1 || $qResult_apl_01_bukti_ins != 1)
 				{
@@ -114,7 +147,7 @@ class fr_apl_01 extends CI_Controller {
 				}
 			else
 				{			
-					echo 1;
+					echo $num_rows;
 				}
 		}
 	
@@ -187,17 +220,14 @@ class fr_apl_01 extends CI_Controller {
 			
 			$condition 				= array(
 				'UUID_APL01'		=> $uuid);
+				
+			$qResult_apl01_adm_del	= $this->M_administrasi->delete_entry($condition);
 			$qResult_apl01_uk_del	= $this->M_apl01_uk->delete_entry($condition);
-			
-			$condition 				= array(
-				'UUID_APL01'		=> $uuid);
 			$qResult_apl01_bukti_del= $this->M_apl01_bukti->delete_entry($condition);
-					
-			$condition 				= array(
-				'UUID_APL01'		=> $uuid);
 			$qResult_apl01			= $this->M_apl_01->delete_entry($condition);
 			
-			if($qResult_apl01_uk_del != 1 || $qResult_apl01_bukti_del != 1 || $qResult_apl01 != 1)
+			if($qResult_apl01_adm_del != 1 || $qResult_apl01_uk_del != 1 || 
+				$qResult_apl01_bukti_del != 1 || $qResult_apl01 != 1)
 				{
 					echo -1;
 				}

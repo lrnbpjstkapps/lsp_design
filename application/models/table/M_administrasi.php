@@ -15,15 +15,31 @@
 		public $UUID_MANAJER_SERTIFIKASI;
 		public $UUID_SUPERVISOR;
 		public $USR_CRT;
-		public $USR_CRT;
 		public $DTM_CRT;
 		public $USR_UPD;
 		public $DTM_UPD;
 		public $IS_ACTIVE;
 		
+		function uniqidReal($lenght) {
+			if (function_exists("random_bytes")) {
+				$bytes = random_bytes(ceil($lenght / 2));
+			} elseif (function_exists("openssl_random_pseudo_bytes")) {
+				$bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
+			} else {
+				throw new Exception("no cryptographically secure random function available");
+			}
+			return strtoupper(substr(bin2hex($bytes), 0, $lenght));
+		}
+		
 		public function get_entry($condition)
 			{
 				return $this->db->get_where('ADMINISTRASI', $condition);
+			}
+			
+		public function get_total_entry($condition)
+			{
+				$this->db->where($condition);
+				return $this->db->count_all('ADMINISTRASI');
 			}
 			
 		public function insert_entry($form_name)

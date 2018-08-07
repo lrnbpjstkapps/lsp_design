@@ -54,9 +54,10 @@
 		disableTujuanText();
 		
 		validator = $("#<?php echo $form_id[136]; ?>").validate({
+			ignore: [],
 			rules: 
 				{
-					<?php echo $form_name[115]; ?>: 
+					/*<?php echo $form_name[115]; ?>: 
 						{
 							required: true
 						},
@@ -112,11 +113,15 @@
 						{
 							required: true
 						},
-					<?php echo $form_name[105]; ?>: 
+					"<?php echo $form_name[143]; ?>": 
 						{
 							required: true
 						},
 					<?php echo $form_name[136]; ?>: 
+						{
+							required: true
+						},*/
+					"<?php echo $form_name[139]; ?>":
 						{
 							required: true
 						}
@@ -164,7 +169,7 @@
     });
 	
 	function setDt102()
-		{	
+		{				
 			var select_id 	= document.getElementById('<?php echo $form_id[101]; ?>');
 			var param 		= select_id.options[select_id.selectedIndex].value;
 			
@@ -177,12 +182,17 @@
 					document.getElementById('<?php echo $form_id[102]; ?>').value = msg;                  
 				}
 			});	
-
+			
 			dropdown1();			
 		}
 		
 	function dropdown1()
 		{		
+			if ($("#<?php echo $form_id[115]; ?>").hasClass("error")) {
+				$('#<?php echo $form_id[115]; ?>').removeClass('error');
+				$("#<?php echo $form_id[115]; ?>").css("display", "block");
+			}
+				
 			var e 		= document.getElementById("<?php echo $form_id[101]; ?>");
 			var valOpt1 = e.options[e.selectedIndex].value;
 			

@@ -31,17 +31,6 @@
 		public $USR_UPD;
 		public $DTM_UPD;
 		public $IS_ACTIVE;
-
-		function uniqidReal($lenght) {
-			if (function_exists("random_bytes")) {
-				$bytes = random_bytes(ceil($lenght / 2));
-			} elseif (function_exists("openssl_random_pseudo_bytes")) {
-				$bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
-			} else {
-				throw new Exception("no cryptographically secure random function available");
-			}
-			return strtoupper(substr(bin2hex($bytes), 0, $lenght));
-		}
 		
 		public function get_entry($condition)
 			{
@@ -68,7 +57,7 @@
 			{
 				$this->UUID_APL01			= (!$this->input->post($form_name[134]) ? $this->uuid->v4() : $this->input->post($form_name[134]));
 				$this->UUID_USER			= 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f';
-				$this->NO_ASESMEN			= 'APL01'.$this->uniqidReal(7);
+				$this->NO_ASESMEN			= $this->input->post($form_name[150]);
 				$this->NAMA_LENGKAP			= (!$this->input->post($form_name[115]) ? null : $this->input->post($form_name[115]));
 				$this->TEMPAT_LAHIR			= (!$this->input->post($form_name[116]) ? null : $this->input->post($form_name[116]));
 				$this->TGL_LAHIR			= (!$this->input->post($form_name[117]) ? null : $this->input->post($form_name[117]));
