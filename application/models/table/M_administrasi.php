@@ -36,10 +36,14 @@
 				return $this->db->get_where('ADMINISTRASI', $condition);
 			}
 			
-		public function get_total_entry($condition)
+		public function get_total_entry($uuid_sa)
 			{
-				$this->db->where($condition);
-				return $this->db->count_all('ADMINISTRASI');
+				return $this->db->query("SELECT CAST(RIGHT(NO_ASESMEN, 3) AS  INT) AS TOTAL 
+					FROM ADMINISTRASI
+					WHERE UUID_SA = '".$uuid_sa."'
+					AND DTM_CRT LIKE '".date('Y-m-d')."%' 
+					ORDER BY DTM_CRT DESC
+					LIMIT 1");
 			}
 			
 		public function insert_entry($form_name)

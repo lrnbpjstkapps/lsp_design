@@ -7,6 +7,13 @@ class fr_apl_01 extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
+			if($this->session->userdata('lsp_bpjstk_login_id') == null){
+				redirect('');
+			}
+			if($this->session->userdata('lsp_bpjstk_role_code') != "ASESI"){
+				$role_code = $this->session->userdata('lsp_bpjstk_role_code');
+				redirect('common/akun/switchInterface/'.$role_code);
+			}
 			$this->load->model("common/m_globalval", "m_globalval");
 			$this->load->model("datatables/M_list_apl01", "M_list_apl01");
 			$this->load->model("form/M_form_apl_01", "M_form_apl_01");
@@ -103,15 +110,20 @@ class fr_apl_01 extends CI_Controller {
 			
 			$condition_					= array(
 				'UUID_SA' => $_POST[$form_name[251]]);
-			$num_rows					= $this->M_administrasi->get_total_entry($condition);
+			$result1					= $this->M_administrasi->get_total_entry($_POST[$form_name[251]]);
+			if($result1->num_rows()){
+				$num_rows 				= $result1->row()->TOTAL;
+			}else{
+				$num_rows				= 0;
+			}
 			
-			if($num_rows > 0)
+			if($num_rows > 0){
 				$num_rows				= $num_rows+1;
-			else{ 
+			}else{ 
 				$num_rows 				= 1;
 			}
 			
-			$_POST[$form_name[150]]		= date('y').date('m').date('d').sprintf('%05u', ($num_rows));
+			$_POST[$form_name[150]]		= date('y').date('m').date('d').sprintf('%03u', ($num_rows));
 			
 			$qResult_apl_01_ins			= $this->M_apl_01->insert_entry($form_name);
 			$qResult_apl_01_uk_ins		= 1;
@@ -141,13 +153,14 @@ class fr_apl_01 extends CI_Controller {
 		
 			$qResult_apl_01_adm_ins		= $this->M_administrasi->insert_entry($form_name);
 					
-			if($qResult_apl_01_ins != 1 || $qResult_apl_01_uk_ins != 1 || $qResult_apl_01_bukti_ins != 1)
+			if($qResult_apl_01_adm_ins != 1|| $qResult_apl_01_ins != 1 || 
+				$qResult_apl_01_uk_ins != 1 || $qResult_apl_01_bukti_ins != 1)
 				{
 					echo -1;
 				}
 			else
 				{			
-					echo $num_rows;
+					echo 1;
 				}
 		}
 	
