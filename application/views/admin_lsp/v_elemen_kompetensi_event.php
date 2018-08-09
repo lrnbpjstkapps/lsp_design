@@ -3,7 +3,7 @@
 	var validator;
 	var save_method;
 	var url;
-	
+
 	function addDt()
 		{
 			save_method = "add";		
@@ -60,7 +60,7 @@
 				url = "<?php echo $ajax_url[115]; ?>";
 				
 				if ($("#<?php echo $form_id[119]; ?>").valid()) {
-					alertify.confirm('<?php echo $form_label[103]; ?>', function(){
+					alertify.confirm('<?php echo $validationMsg[112]; ?>', function(){
 						$("#<?php echo $form_id[119]; ?>").submit();						
 					}).setting({
 						'labels'	: {
@@ -74,7 +74,7 @@
 		
 	function deleteDt(uuid)
 		{	
-			alertify.confirm('<?php echo $form_label[104]; ?>', function(){
+			alertify.confirm('<?php echo $validationMsg[113]; ?>', function(){
 				{
 					$.ajax({
 						url 		: "<?php echo $ajax_url[116]; ?>"+uuid,
@@ -85,14 +85,14 @@
 								reloadDt();
 								
 								if(data=="1"){
-									alertify.success('<?php echo $form_label[107]; ?>');
+									alertify.success('<?php echo $validationMsg[114]; ?>');
 								}else{
-									alertify.error('<?php echo $form_label[110]; ?>');
+									alertify.error('<?php echo $validationMsg[110]; ?>');
 								}							
 							},
 						error		: function (jqXHR, textStatus, errorThrown)
 						{
-							alertify.error('<?php echo $form_label[110]; ?>');
+							alertify.error('<?php echo $validationMsg[110]; ?>');
 							reloadDt();
 						}				
 					});
@@ -160,15 +160,15 @@
 							
 							if(save_method == "add"){
 								if(data=="1"){		
-									alertify.success('<?php echo $form_label[105]; ?>');
+									alertify.success('<?php echo $validationMsg[106]; ?>');
 								}else{
-									alertify.error('<?php echo $form_label[108]; ?>');
+									alertify.error('<?php echo $validationMsg[107]; ?>');
 								}	
 							}else{
 								if(data=="1"){		
-									alertify.success('<?php echo $form_label[106]; ?>');
+									alertify.success('<?php echo $validationMsg[108]; ?>');
 								}else{
-									alertify.error('<?php echo $form_label[109]; ?>');
+									alertify.error('<?php echo $validationMsg[109]; ?>');
 								}
 							}
 

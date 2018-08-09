@@ -1,75 +1,40 @@
 </head>
-   <body class="sidebar-mini skin-black">
-		<div id="divLoading"></div>
-		<div class="wrapper">
-		  <header class="main-header">
-			<a href="Home" class="logo">
-			  <span class="logo-lg"><font face="Segoe UI Semibold">Admin LSP</font></span>			  
-			</a>
-			
-			<nav class="navbar navbar-static-top">
-			  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-				<span class="sr-only">Toggle navigation</span>
-			  </a>	
-				  <div class="navbar-custom-menu">
-					<ul class="nav navbar-nav">
-						<li class="dropdown user user-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							  <span class="hidden-xs"><?php echo $this->session->userdata('sdd_nama'); ?></span>
-							</a>
-							<ul class="dropdown-menu">
-								  <li class="user-header">
-									<p>
-									  <?php echo "NAMA"; ?>
-									  <small><?php echo "ROLE"; ?></small>
-									</p>
-								  </li>
-								<li class="user-footer">
-								<div class="pull-left">
-								  <a href="javascript:void(0)" class="btn btn-default btn-flat" onclick="edit_person()"><i class="fa fa-pencil-square-o"></i> Ubah Password</a>
-								</div>
-								<div class="pull-right">
-								  <a href="Login/doLogout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
-								</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
+   <body>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  <a class="navbar-brand" href="#">LSP BPJS Ketenagakerjaan</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+			  </li>
+			  
+			  <li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master Data</a>
+				  <div class="dropdown-menu" aria-labelledby="dropdown10">
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/skema_sertifikasi">Skema Sertifikasi</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/unit_kompetensi">Unit Kompetensi</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/elemen_kompetensi">Elemen Kompetensi</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/kriteria_unjuk_kerja">Kriteria Unjuk Kerja</a>
 				  </div>
-			</nav>
-		  </header>
-
-		  <aside class="main-sidebar">
-			<section class="sidebar">
-				<ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Application Manager</li>
-        <li><a href="<?php echo base_url(); ?>lsp/about"><i class="fa fa-folder-open"></i> <span>About</span></a></li>
-        <li class="header">Asesmen</li>
-        <li class="treeview active menu-open">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Setting</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>lsp/skema_sertifikasi"><i class="fa fa-folder-open"></i> Skema Sertifikasi</a></li>
-            <li><a href="<?php echo base_url(); ?>lsp/unit_kompetensi"><i class="fa fa-folder-open"></i> Unit Kompetensi</a></li>
-            <li><a href="<?php echo base_url(); ?>lsp/elemen_kompetensi"><i class="fa fa-folder-open"></i> Elemen Kompetensi</a></li>
-            <li><a href="<?php echo base_url(); ?>lsp/kriteria_unjuk_kerja"><i class="fa fa-folder-open"></i> Kriteria Unjuk Kerja</a></li>
-          </ul>
-        </li>
-		        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Monitoring</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../examples/invoice.html"><i class="fa fa-folder-open"></i> Persetujuan</a></li>
-          </ul>
-        </li>
-      </ul>
-			</section>
-		  </aside>
+				</li>
+				
+				<li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Verifikasi</a>
+				  <div class="dropdown-menu" aria-labelledby="dropdown10">
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/skema_sertifikasi">FR-APL-01</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/unit_kompetensi">FR-APL-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/elemen_kompetensi">FR-MAK-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/kriteria_unjuk_kerja">FR-MAK-03</a>
+				  </div>
+				</li>
+			</ul>
+			
+			<form class="form-inline mt-2 mt-md-0" action="<?php echo base_url(); ?>common/akun/logout" method="post">
+			  <button class="btn btn-danger" type="submit">Keluar</button>
+			</form>
+		  </div>
+		</nav>
+		<div class="container">

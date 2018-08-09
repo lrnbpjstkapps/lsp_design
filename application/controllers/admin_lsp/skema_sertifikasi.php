@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class skema_sertifikasi extends CI_Controller {
 
-	// LSP		
+	// Admin LSP		
 	public function __construct()
 		{
 			parent::__construct();
 			$this->load->model("common/m_globalval", "m_globalval");
 			$this->load->model("common/m_crud", "m_crud");
-			$this->load->model("lsp/skema_sertifikasi/m_param", "m_param");
-			$this->load->model("lsp/skema_sertifikasi/m_list_skema", "m_list_skema");
+			$this->load->model("admin_lsp/skema_sertifikasi/m_param", "m_param");
+			$this->load->model("admin_lsp/skema_sertifikasi/m_list_skema", "m_list_skema");
 		}
 	
 	public function index()

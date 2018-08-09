@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class elemen_kompetensi extends CI_Controller {
 
-	// LSP		
+	// Admin LSP		
 	public function __construct()
 		{
 			parent::__construct();
 			$this->load->model("common/m_globalval", "m_globalval");
 			$this->load->model("common/m_crud", "m_crud");
-			$this->load->model("lsp/elemen_kompetensi/m_param", "m_param");
-			$this->load->model("lsp/elemen_kompetensi/m_list_ek", "m_list_ek");
+			$this->load->model("admin_lsp/elemen_kompetensi/m_param", "m_param");
+			$this->load->model("admin_lsp/elemen_kompetensi/m_list_ek", "m_list_ek");
 		}
 	
 	public function index()

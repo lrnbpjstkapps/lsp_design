@@ -7,10 +7,11 @@ class validation extends CI_Controller {
 		{
 			parent::__construct();
 			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("table/M_skema", "M_skema");
-			$this->load->model("table/M_uk", "M_uk");
-			$this->load->model("table/M_kuk", "M_kuk");
 			$this->load->model("table/M_bukti", "M_bukti");
+			$this->load->model("table/M_ek", "M_ek");
+			$this->load->model("table/M_kuk", "M_kuk");
+			$this->load->model("table/M_uk", "M_uk");
+			$this->load->model("table/M_skema", "M_skema");
 		}
 	
 	// IS_EXIST
