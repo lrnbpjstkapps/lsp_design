@@ -14,6 +14,7 @@
 		public $UUID_KOORDINATOR_TUK;
 		public $UUID_MANAJER_SERTIFIKASI;
 		public $UUID_SUPERVISOR;
+		public $CATATAN;
 		public $USR_CRT;
 		public $DTM_CRT;
 		public $USR_UPD;
@@ -62,6 +63,7 @@
 				$this->UUID_KOORDINATOR_TUK	= (!$this->input->post($form_name[260]) ? null : $this->input->post($form_name[260]));
 				$this->UUID_MANAJER_SERTIFIKASI	= (!$this->input->post($form_name[261]) ? null : $this->input->post($form_name[261]));
 				$this->UUID_SUPERVISOR	= (!$this->input->post($form_name[262]) ? null : $this->input->post($form_name[262]));
+				$this->CATATAN			= (!$this->input->post($form_name[264]) ? null : $this->input->post($form_name[264]));
 				$this->USR_CRT			= 'SUPER ADMIN';
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
 				$this->USR_UPD			= null;
@@ -87,6 +89,7 @@
 				$this->UUID_KOORDINATOR_TUK	= (!$this->input->post($form_name[260]) ? $data->UUID_KOORDINATOR_TUK : $this->input->post($form_name[260]));
 				$this->UUID_MANAJER_SERTIFIKASI	= (!$this->input->post($form_name[261]) ? $data->UUID_MANAJER_SERTIFIKASI : $this->input->post($form_name[261]));
 				$this->UUID_SUPERVISOR	= (!$this->input->post($form_name[262]) ? $data->UUID_SUPERVISOR : $this->input->post($form_name[262]));
+				$this->CATATAN			= (!$this->input->post($form_name[264]) ? $data->CATATAN : $this->input->post($form_name[264]));
 				$this->USR_CRT			= $data->USR_CRT;
 				$this->DTM_CRT			= $data->DTM_CRT;
 				$this->USR_UPD			= 'SUPER ADMIN';

@@ -68,6 +68,7 @@
 				$menu_title[121] 	= "FR-MAK-03. Banding Asesmen - Tambah";
 				$menu_title[122] 	= "FR-MAK-03. Banding Asesmen - Edit";
 				$menu_title[123] 	= "FR-MAK-03. Banding Asesmen - Upload";
+				$menu_title[124] 	= "FR-APL-01. Formulir Permohonan Sertifikasi Kompetensi - Verifikasi";
 				return $menu_title;
 			}		
 		
@@ -271,6 +272,7 @@
 				$form_name[261] 	= "val_adm_uuid_manaj_sert";
 				$form_name[262] 	= "val_adm_uuid_supervisor";
 				$form_name[263] 	= "val_adm_is_active";
+				$form_name[264] 	= "val_adm_catatan";
 
 				return $form_name;
 			}		
@@ -316,8 +318,8 @@
 				$form_id[136]		= "fr_apl_01_form";
 				$form_id[137]		= "fr_apl_01_modal";
 				$form_id[138]		= "fr_apl_01_tabel";
-				$form_id[139]		= "";
-				$form_id[140]		= "";
+				$form_id[139]		= "verif_apl_01_tabel";
+				$form_id[140]		= "verif_apl_01_form";
 				$form_id[141]		= "";
 				$form_id[142]		= "fr_apl_01_tanggal_lahir";
 				$form_id[143]		= "";
@@ -391,6 +393,7 @@
 				$form_button[105] 	= "Selanjutnya";
 				$form_button[106] 	= "Tambah";
 				$form_button[107] 	= "Unggah Dokumen";
+				$form_button[108] 	= "Verifikasi";
 				return $form_button;
 			}
 
@@ -493,6 +496,14 @@
 				$ajax_url[170] 	= base_url()."asesi/fr_mak_03/getList_mak03";
 				$ajax_url[171] 	= base_url()."asesi/fr_mak_03/updateDt_mak03";
 				$ajax_url[172] 	= base_url()."asesi/fr_mak_03/deleteDt_mak03";
+				$ajax_url[173] 	= base_url()."admin_lsp/verif_apl_01/getList_verif_apl_01";
+				$ajax_url[174] 	= base_url()."admin_lsp/verif_apl_01/pagingList";
+				$ajax_url[175] 	= base_url()."admin_lsp/verif_apl_01/pagingVerif";
+				$ajax_url[176] 	= base_url()."admin_lsp/verif_apl_01/pagingVerif/";
+				$ajax_url[177] 	= base_url()."admin_lsp/verif_apl_01/getOneDt_nomorSkema";
+				$ajax_url[178] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_skema_uk";
+				$ajax_url[179] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_bukti";
+				$ajax_url[180] 	= base_url()."admin_lsp/verif_apl_01/verifDt_apl_01";
 				return $ajax_url;
 			}
 		
@@ -501,7 +512,7 @@
 			{
 				$layout[100]	= "common/v_layout";
 				$layout[101]	= "common/v_layout_header";
-				$layout[102]	= "common/v_layout_menu_lsp";
+				$layout[102]	= "common/v_layout_menu_admin_lsp";
 				$layout[103]	= "common/v_layout_title";
 				$layout[104]	= "common/v_layout_footer";
 				$layout[105]	= "common/v_layout_menu_asesi";
@@ -558,6 +569,11 @@
 				$view[143]	= "asesi/v_fr_mak_03_form";
 				$view[144]	= "asesi/v_fr_mak_03_form_event";
 				$view[145]	= "asesi/v_fr_mak_03_paging_event";
+				$view[146]	= "admin_lsp/v_verif_apl_01";
+				$view[147]	= "admin_lsp/v_verif_apl_01_event";
+				$view[148]	= "admin_lsp/v_verif_apl_01_paging_event";
+				$view[149]	= "admin_lsp/v_verif_apl_01_form";
+				$view[150]	= "admin_lsp/v_verif_apl_01_form_event";
 				return $view;
 			}
 			

@@ -14,6 +14,7 @@
 			  <li class="nav-item dropdown">
 				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master Data</a>
 				  <div class="dropdown-menu" aria-labelledby="dropdown10">
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/daftar_isi">Daftar Isi</a>
 					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/skema_sertifikasi">Skema Sertifikasi</a>
 					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/unit_kompetensi">Unit Kompetensi</a>
 					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/elemen_kompetensi">Elemen Kompetensi</a>
@@ -24,10 +25,11 @@
 				<li class="nav-item dropdown">
 				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Verifikasi</a>
 				  <div class="dropdown-menu" aria-labelledby="dropdown10">
-					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/skema_sertifikasi">FR-APL-01</a>
-					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/unit_kompetensi">FR-APL-02</a>
-					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/elemen_kompetensi">FR-MAK-02</a>
-					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/kriteria_unjuk_kerja">FR-MAK-03</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/verif_apl_01">FR-APL-01</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/verif_apl_02">FR-APL-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/verif_mma">FR-MMA</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/verif_mak_02">FR-MAK-02</a>
+					<a class="dropdown-item" href="<?php echo base_url(); ?>admin_lsp/verif_mak_03">FR-MAK-03</a>
 				  </div>
 				</li>
 			</ul>

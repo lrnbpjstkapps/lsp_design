@@ -3,19 +3,6 @@
 	var validator;
 	var save_method = '<?php echo $saveMethod; ?>';
 	
-	function disableTujuanText() {
-		var radioBtn	= document.getElementById("<?= $form_id[162]; ?>");
-		var inputText	= document.getElementById("<?= $form_id[164]; ?>");
-
-		if (radioBtn.checked == true){
-			inputText.value = "<?= $$form_name[141]; ?>";
-			inputText		= inputText.readOnly = false;
-		} else {
-			inputText.value = null;
-			inputText		= inputText.readOnly = true;
-		}
-	}
-	
 	function saveDt()
 		{	
 			if(save_method == 'add') {
@@ -245,5 +232,18 @@
 				}
 			});						
 		}	
+		
+	function disableTujuanText() {
+		var radioBtn	= document.getElementById("<?= $form_id[162]; ?>");
+		var inputText	= document.getElementById("<?= $form_id[164]; ?>");
+
+		if (radioBtn.checked == true){
+			inputText.value = "<?= $$form_name[141]; ?>";
+			inputText		= inputText.readOnly = false;
+		} else {
+			inputText.value = null;
+			inputText		= inputText.readOnly = true;
+		}
+	}
 		
 </script>
