@@ -2,9 +2,9 @@
 		
 </div>
 <script text="text/javascript">		
-	function pagingAdd()
+	function pagingAddApl02(uuid)
 		{
-			$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[143]; ?>");
+			$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[143]; ?>"+uuid);
 		};
 		
 	function uploadDt(uuid)

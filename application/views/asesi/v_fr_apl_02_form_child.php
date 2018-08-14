@@ -2,23 +2,25 @@
 	<input type = "hidden" name = "<?php echo $form_name[134]; ?>" value = "<?php echo $$form_name[134]; ?>">
 	<input type = "hidden" name = "<?php echo $form_name[102]; ?>" value = "<?php echo $$form_name[102]; ?>"> 
 	<input type = "hidden" name = "<?php echo $form_name[146]; ?>" value = "<?php echo $$form_name[146]; ?>">
+	<input type = "hidden" name = "<?php echo $form_name[150]; ?>" value = "<?php echo $$form_name[150]; ?>">
+	<input type = "hidden" name = "<?php echo $form_name[149]; ?>" value = "<?php echo $$form_name[149]; ?>">
 	
 	<div class = "table-responsive">
 		<?php if($listKUK->num_rows() > 0){ ?>
 			<table class = "table table-hover" cellspacing="0" width="100%">
 				<thead>
 					<tr>
-						<th rowspan="2"> <?php echo $table_column[100]; ?> </th>
-						<th rowspan="2"> <?php echo $table_column[104]; ?> </th>
-						<th rowspan="2"> <?php echo $table_column[117]; ?> </th>
-						<th colspan = "2"> <?php echo $table_column[118]; ?> </th>
-						<th rowspan="2" style="width: 15%"> <?php echo $table_column[121]; ?> </th>
-						<th class="sorting_disabled" align = "center" rowspan="2"> <?php echo $table_column[101]; ?> </th>
-						<th class="sorting_disabled" align = "center" rowspan="2"> <?php echo $table_column[101]; ?> </th>
+						<th rowspan="2"> # </th>
+						<th rowspan="2"> Judul Unit Kompetensi </th>
+						<th rowspan="2"> Daftar Pertanyaan </br>(Asesmen Mandiri/Self Assessment) </th>
+						<th colspan = "2"> Penilaian </th>
+						<th rowspan="2" style="width: 15%"> Bukti - bukti Pendukung </th>
+						<th class="sorting_disabled" align = "center" rowspan="2"> &nbsp </th>
+						<th class="sorting_disabled" align = "center" rowspan="2"> &nbsp </th>
 					</tr>
 					<tr>							
-						<th> <?php echo $table_column[119]; ?> </th>
-						<th> <?php echo $table_column[120]; ?> </th>
+						<th> K </th>
+						<th> BK </th>
 					</tr>
 				</thead>		
 				<tbody>
@@ -48,7 +50,7 @@
 									<td>								
 										<select multiple="multiple" name="<?php echo $form_name[136].'['.$i.'][]'; ?>" id="<?php echo $form_id[173]; ?>">															
 											<?php foreach($listBukti->result() as $row){ ?>
-												<option value = "<?php echo $row->UUID_BUKTI; ?>"><?php echo $row->KETERANGAN; ?></option>
+												<option value = "<?php echo $row->UUID_BUKTI; ?>"> <?php echo $row->KETERANGAN; ?></option>
 											<?php } ?>
 										</select>								
 									</td>
@@ -79,9 +81,9 @@
 										<select multiple="multiple" name="<?php echo $form_name[136].'['.$i.'][]'; ?>" id="<?php echo $form_id[173]; ?>">															
 											<?php foreach($listBukti->result() as $row){ ?>
 												<?php if(in_array($row->UUID_BUKTI, ${$form_name[136]}[$i])){ ?>
-													<option value = "<?php echo $row->UUID_BUKTI; ?>" selected><?php echo $row->KETERANGAN; ?></option>
+													<option value = "<?php echo $row->UUID_BUKTI; ?>" selected> <?php echo $row->KETERANGAN; ?></option>
 												<?php }else{ ?>
-													<option value = "<?php echo $row->UUID_BUKTI; ?>"><?php echo $row->KETERANGAN; ?></option>
+													<option value = "<?php echo $row->UUID_BUKTI; ?>"> <?php echo $row->KETERANGAN; ?></option>
 												<?php } ?>
 											<?php } ?>
 										</select>								
@@ -117,7 +119,7 @@
 				url = "<?php echo $ajax_url[150]; ?>";
 				
 				if ($("#<?php echo $form_id[181]; ?>").valid()) {
-					alertify.confirm('<?php echo $form_label[103]; ?>', function(){
+					alertify.confirm('<?php echo $validationMsg[112]; ?>', function(){
 						$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[145]; ?>");
 						$("#<?php echo $form_id[181]; ?>").submit();						
 					}).setting({
@@ -161,15 +163,15 @@
 						success		: function(data){		
 							if(save_method == "add"){
 								if(data=="1"){		
-									alertify.success('<?php echo $form_label[105]; ?>');
+									alertify.success('<?php echo $validationMsg[106]; ?>');
 								}else{
-									alertify.error('<?php echo $form_label[108]; ?>');
+									alertify.error('<?php echo $validationMsg[107]; ?>');
 								}	
 							}else{
 								if(data=="1"){		
-									alertify.success('<?php echo $form_label[106]; ?>');
+									alertify.success('<?php echo $validationMsg[108]; ?>');
 								}else{
-									alertify.error('<?php echo $form_label[109]; ?>');
+									alertify.error('<?php echo $validationMsg[109]; ?>');
 								}
 							}							
 						}

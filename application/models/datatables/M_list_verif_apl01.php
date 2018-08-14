@@ -15,6 +15,9 @@
 			$this->db->join("SKEMA AS skema", "apl01.UUID_SKEMA = skema.UUID_SKEMA", "LEFT");
 			$this->db->join("STATUS_ADMINISTRASI AS sa", "adm.UUID_SA = sa.UUID_SA", "LEFT");
 			$this->db->where('adm.IS_ACTIVE', '1');
+			$this->db->where('adm.IS_DONE', '0');
+			$this->db->where('sa.SA_CODE', 'ASI010');
+			
 			
 			$i = 0;
 			foreach ($this->column_search as $item){

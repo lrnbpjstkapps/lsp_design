@@ -11,11 +11,13 @@ class fr_apl_02 extends CI_Controller {
 			$this->load->model("common/M_query", "M_query");
 			$this->load->model("datatables/M_list_apl02", "M_list_apl02");
 			$this->load->model("form/M_form_apl_02", "M_form_apl_02");
+			$this->load->model("table/M_administrasi", "M_administrasi");
 			$this->load->model("table/M_answer_apl_02", "M_ans_apl02");
 			$this->load->model("table/M_apl01_bukti", "M_apl01_bukti");
 			$this->load->model("table/M_bukti", "M_bukti");
 			$this->load->model("table/M_fr_apl_01", "M_apl_01");
 			$this->load->model("table/M_fr_apl_02", "M_apl_02");
+			$this->load->model("table/M_status_administrasi", "M_sa");
 		}
 	
 	public function index()
@@ -40,22 +42,39 @@ class fr_apl_02 extends CI_Controller {
 			$this->load->view($view[125], $data);
 		}
 		
-	public function pagingAdd()
+	public function pagingAddApl02($uuid)
 		{
-			$data						= $this->m_globalval->getAllData();
-			$form_name 					= $data['form_name'];
-			$view						= $data['view'];			
+			$data					= $this->m_globalval->getAllData();
+			$form_name 				= $data['form_name'];
+			$view					= $data['view'];			
 			
-			$data 						= $this->M_form_apl_02->form_add($data, $form_name);
+			$data 					= $this->M_form_apl_02->form_add($data, $form_name);
 			
-			$condition					= array(
-				'apl01.IS_ACTIVE'		=> '1');
-			$data['listApl01']			= $this->M_apl_01->get_detail_entry($condition);
+			// HEADER
+			$condition				= array(
+				'UUID_ADM' 			=> $uuid);
+			$uuid_apl01				= $this->M_administrasi->get_entry($condition)->row()->UUID_APL01;	
+			
+			$condition				= array(
+				'apl01.UUID_APL01'	=> $uuid_apl01);
+			$result					= $this->M_apl_01->get_detail_entry($condition);
+			
+			$data[$form_name[115]]	= $result->row()->NAMA_LENGKAP;
+			$data[$form_name[100]]	= $result->row()->NAMA_SKEMA;
+			$data[$form_name[101]]	= $result->row()->NOMOR_SKEMA;
+			$data[$form_name[148]]	= "-";
+			$data[$form_name[134]]	= $uuid_apl01;
+			$data[$form_name[150]]	= $result->row()->NO_ASESMEN;
+			$data[$form_name[149]]	= $uuid;
+			
+			$condition				= array(
+				'apl01.IS_ACTIVE'	=> '1');
+			$data['listApl01']		= $this->M_apl_01->get_detail_entry($condition);
 		
-			$condition 					= array(
-				'UUID_USER'				=> 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f',
-				'IS_ACTIVE'				=> '1');
-			$data["listBukti"]			= $this->M_bukti->get_entry($condition);
+			$condition 				= array(
+				'UUID_USER'			=> 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f',
+				'IS_ACTIVE'			=> '1');
+			$data["listBukti"]		= $this->M_bukti->get_entry($condition);
 			
 			$this->load->view($view[126], $data);
 			$this->load->view($view[127], $data);
@@ -92,7 +111,8 @@ class fr_apl_02 extends CI_Controller {
 			$this->load->view($view[127], $data);
 		}
 		
-	public function pagingChild($uuidApl01, $uuidSkema, $saveMethod, $uuidApl02)
+	public function pagingChild($uuidApl01, $uuidSkema, $saveMethod, 
+		$uuidApl02, $uuidAdm, $noAsesmen)
 		{
 			$data								= $this->m_globalval->getAllData();
 			$data['saveMethod']					= $saveMethod;
@@ -136,6 +156,8 @@ class fr_apl_02 extends CI_Controller {
 			$data[$form_name[134]]				= $uuidApl01;
 			$data[$form_name[102]]				= $uuidSkema;
 			$data[$form_name[146]]				= $uuidApl02;
+			$data[$form_name[150]]				= $noAsesmen;
+			$data[$form_name[149]]				= $uuidAdm;
 			
 			$this->load->view($view[120], $data);
 		}
@@ -147,6 +169,8 @@ class fr_apl_02 extends CI_Controller {
 			$form_name						= $data["form_name"];
 			$qResult_apl02_ins				= 1;
 			$qResult_ans_apl02_ins			= 1;
+			$qResult_adm_upd				= 1;
+			$qResult_adm_ins				= 1;
 			
 			$_POST[$form_name[146]]			= $this->uuid->v4();
 			$qResult_apl02_ins				= $this->M_apl_02->insert_entry($form_name);
@@ -161,9 +185,25 @@ class fr_apl_02 extends CI_Controller {
 									$qResult_ans_apl02_ins = -1;
 								}
 						}
+						
+					if($qResult_ans_apl02_ins == 1){
+						$condition					= array(
+							'SA_CODE' => 'ASI030');
+						$_POST[$form_name[251]]	= $this->M_sa->get_entry($condition)->row()->UUID_SA;
+						$_POST[$form_name[257]]	= $this->session->userdata('lsp_bpjstk_uuid_user');
+					
+						$condition				= array(
+							'UUID_ADM'			=> $this->input->post($form_name[149]));
+						$qResult_adm_upd		= $this->M_administrasi->update_entry_as_done($condition);
+						
+						if($qResult_adm_upd == 1){
+							$qResult_adm_ins		= $this->M_administrasi->insert_entry($form_name);
+						}
+					}
 				}
 				
-			if($qResult_apl02_ins != 1 || $qResult_ans_apl02_ins != 1)
+			if($qResult_apl02_ins != 1 || $qResult_ans_apl02_ins != 1 || 
+				$qResult_adm_upd != 1 || $qResult_adm_ins != 1)
 				{
 					echo -1;
 				}

@@ -242,6 +242,7 @@
 	<hr>
 	<form id="<?php echo $form_id[140]; ?>">
 		<input type="hidden" name="<?php echo $form_name[134]; ?>" value="<?php echo $$form_name[134]; ?>"/> 
+		<input type="hidden" name="<?php echo $form_name[149]; ?>" value="<?php echo $$form_name[149]; ?>"/> 
 		<div class="form-group">
 			<label> Rekomendasi </label> 
 			<div>
@@ -254,7 +255,7 @@
 		<!-- Catatan Admin LSP -->
 		<div class="form-group">
 			<label> Catatan Admin LSP </label>
-			<textarea name="<?php echo $form_name[128]; ?>" class="form-control" rows="5" style="resize:none"></textarea>
+			<textarea name="<?php echo $form_name[264]; ?>" class="form-control" rows="5" style="resize:none"></textarea>
 			<span class="help-block"></span>
 		</div>
 	</form>	

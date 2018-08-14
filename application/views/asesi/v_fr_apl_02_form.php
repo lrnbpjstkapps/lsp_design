@@ -1,4 +1,11 @@
-<div class="box box-info">
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#">Beranda</a></li>
+		<li class="breadcrumb-item"><a href="fr_apl_02">FR-APL-02</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Tambah</li>
+	  </ol>
+	</nav>
+
 	<div class="box-header with-border">
 	  <?php if($saveMethod=="add"){ ?>
 		  <h3 class="box-title"> <?php echo $menu_title[111]; ?> </h3>
@@ -7,81 +14,66 @@
 	  <?php } ?>
 	</div>
 	
-	<div class="box-body pad table-responsive">
-		<form class="form-horizontal">
-			<div class="modal-body form">                
-				<div class="form-body">					
-					<p class="text-muted well well-sm no-shadow"> 
-						<?php echo $form_desc[112]; ?> 		
-						</br><?php echo $form_desc[113]; ?> 		
-						</br><?php echo $form_desc[114]; ?> 		
-						</br><?php echo $form_desc[115]; ?> 		
-						</br><?php echo $form_desc[116]; ?> 
-					</p>						
-
-					<!-- FR-APL-01 -->
-					<div class="form-group">
-						<label class="control-label col-md-2"> <?php echo $form_label[158]; ?> </label>
-						<div class="col-md-5">
-							<?php if($$form_name[134]==""){ ?>
-								<select name="<?php echo $form_name[134]; ?>" id="<?php echo $form_id[178]; ?>" onChange="setDt134()" class="form-control">
-									<option value = ""><?php echo $form_label[159]; ?></option>
-									<?php foreach($listApl01->result() as $row){ ?>
-											<option value = "<?php echo $row->UUID_APL01; ?>"><?php echo "(".date('d M y - H:i', strtotime($row->DTM_CRT)).") ".$row->NAMA_SKEMA." (ID ".$row->NO_DOKUMEN.")"; ?></option>
-									<?php } ?>
-								</select>
-							<?php }else{ ?>
-								<select name="<?php echo $form_name[134]; ?>" id="<?php echo $form_id[178]; ?>" class="form-control" disabled>
-									<option value = ""><?php echo $form_label[159]; ?></option>
-									<?php foreach($listApl01->result() as $row){ ?>
-										<?php if($$form_name[134]==$row->UUID_APL01){?>
-											<option value = "<?php echo $row->UUID_APL01; ?>" selected><?php echo "(".date('d M y - H:i', strtotime($row->DTM_CRT)).") ".$row->NAMA_SKEMA." (ID ".$row->NO_DOKUMEN.")"; ?></option>
-										<?php } ?>
-									<?php } ?>
-								</select>
-							<?php } ?>
-							<span class="help-block"></span>
-						</div>
-					</div>	
-
-					<!-- Nama Peserta -->
-					<div class="form-group">
-						<label class="control-label col-md-2"> <?php echo $form_label[155]; ?> </label>
-						<div class="col-md-4">
-							<input name="<?php echo $form_name[115]; ?>" value="<?php echo $$form_name[115]; ?>" id="<?php echo $form_id[140]; ?>" class="form-control" type="text" readonly>
-							<span class="help-block"></span>
-						</div>
-					</div>
-
-					<!-- Nomor Skema sertifikasi -->
-					<div class="form-group">
-						<label class="control-label col-md-2"> <?php echo $form_label[101]; ?> </label>
-						<div class="col-md-4">
-							<input name="<?php echo $form_name[101]; ?>" value="<?php echo $$form_name[101]; ?>" id="<?php echo $form_id[102]; ?>" class="form-control" type="text" readonly>
-							<span class="help-block"></span>
-						</div>
-					</div>
-					
-					<!-- Judul Skema sertifikasi -->
-					<div class="form-group">
-						<label class="control-label col-md-2"> <?php echo $form_label[100]; ?> </label>
-						<div class="col-md-4">
-							<input name="<?php echo $form_name[100]; ?>" value="<?php echo $$form_name[100]; ?>" id="<?php echo $form_id[101]; ?>" class="form-control" type="text" readonly>
-							<span class="help-block"></span>
-						</div>
-					</div>
-					
-				</div>   
-			</div>
-					
-			<div id="<?php echo $form_id[117]; ?>">
+	<form>
+		<div class="row">                
+			<div class="col-md-6">  									<!-- FR-APL-01 -->
+				<!-- Judul Skema sertifikasi -->
+				<div class="form-group">
+					<label> Judul Skema Sertifikasi </label>
+					<input name="<?php echo $form_name[100]; ?>" value="<?php echo $$form_name[100]; ?>" class="form-control" type="text" readonly>
+					<span class="help-block"></span>
+				</div>
 				
+				<!-- Nomor Skema sertifikasi -->
+				<div class="form-group">
+					<label> Nomor Skema Sertifikasi </label>
+					<input name="<?php echo $form_name[101]; ?>" value="<?php echo $$form_name[101]; ?>" class="form-control" type="text" readonly>
+					<span class="help-block"></span>
+				</div>
 			</div>
-		</form>
-	</div>
+				
+			<div class="col-md-6"> 
+				<!-- TUK -->
+				<div class="form-group">
+					<label> TUK </label>
+					<input name="<?php echo $form_name[148]; ?>" value="<?php echo $$form_name[148]; ?>" class="form-control" type="text" readonly>
+					<span class="help-block"></span>
+				</div>
+				
+				<!-- Nama Peserta -->
+				<div class="form-group">
+					<label> Nama Peserta </label>
+					<input name="<?php echo $form_name[115]; ?>" value="<?php echo $$form_name[115]; ?>" class="form-control" type="text" readonly>
+					<span class="help-block"></span>
+				</div>
+			</div>
+		</div>
+		
+		<hr>
+				
+		<p> 
+			Peserta diminta untuk:
+			</br>1. Mempelajari Kriteria Unjuk Kerja (KUK), Batasan Variabel, Panduan Penilaian, dan Aspek Kritis seluruh Unit Kompetensi yang diminta untuk di Ases.
+			</br>2. Melaksanakan Penilaian Mandiri secara obyektif atas sejumlah pertanyaan yang diajukan, bilamana Anda menilai diri sudah kompeten atas pertanyaan tersebut, pilih kolom Kompeten (K), dan bilamana Anda menilai diri belum kompeten pilih kolom Belum Kompeten (BK). 
+			</br>3. Mengisi bukti - bukti kompetensi yang relevan atas  sejumlah pertanyaan yang dinyatakan Kompeten (bila ada). 		
+			</br>4. Menandatangani form Asesmen Mandiri
+		</p>		
+				
+		<div id="<?php echo $form_id[117]; ?>">
+			
+		</div>
+	</form>
 	
-	<div class="box-footer pad table-responsive">
-		<a onClick="pagingList()" class="btn bg-navy btn-default pull-right margin"> <?php echo $form_button[103]; ?> </a>
-		<a onClick="saveDt()" class="btn bg-navy btn-default pull-right margin" id="<?php echo $form_id[180]; ?>"> <?php echo $form_button[101]; ?> </a>
+	<div class = "row float-right">
+		<table>
+			<tr>
+				<td>
+					<button onClick="saveDt()" class="btn btn-primary" id="<?php echo $form_id[180]; ?>"> <?php echo $form_button[101]; ?> </button>
+				</td>
+				<td>
+					<button onClick="pagingList()" class="btn btn-danger"> <?php echo $form_button[103]; ?> </button>
+				</td>					
+			</tr>		
+		</table>
 	</div>
-</div>
+	</br></br>

@@ -68,7 +68,9 @@ class verif_apl_01 extends CI_Controller {
 					
 			$condition				= array(
 				'IS_ACTIVE' 		=> '1');
-			$data["listSkema"]		= $this->M_skema->get_entry($condition);			
+			$data["listSkema"]		= $this->M_skema->get_entry($condition);
+
+			$data[$form_name[149]]	= $uuid;
 			
 			$this->load->view($view[149], $data);
 			$this->load->view($view[150], $data);
@@ -77,17 +79,44 @@ class verif_apl_01 extends CI_Controller {
 	// VERIFIKASI	
 	public function verifDt_apl_01()
 		{
-			/*$data						= $this->m_globalval->getAllData();		
-			$form_name					= $data["form_name"];
+			$data					= $this->m_globalval->getAllData();		
+			$form_name				= $data["form_name"];
+			$qResult_apl_01_upd		= 1;
+			$qResult_adm_upd		= 1;
+			$qResult_adm_ins		= 1;
 			
 			$condition				= array(
 				'UUID_APL01'		=> $this->input->post($form_name[134]));
-			if($this->input->post($form_name[162])=='Berdasarkan ketentuan persyaratan dasar pemohon, maka pemohon diterima sebagai peserta sertifikasi')
-				{
-					$this->M_apl_01->update_entry($form_name, $data, $condition);
-				}
+			$data_apl_01			= $this->M_apl_01->get_entry($condition);
+			
+			$condition					= array(
+				'SA_CODE' => 'ALS020');
+			$_POST[$form_name[251]]	= $this->M_sa->get_entry($condition)->row()->UUID_SA;
+			$_POST[$form_name[150]]	= $data_apl_01->row()->NO_ASESMEN;
+			$_POST[$form_name[259]]	= $this->session->userdata('lsp_bpjstk_uuid_user');
+			
+			$condition				= array(
+				'UUID_APL01'		=> $this->input->post($form_name[134]));
+			$qResult_apl_01_upd		= $this->M_apl_01->update_entry($form_name, $data_apl_01->row(), $condition);	
 				
-			$this->M_administrasi->insert_entry($form_name, $data, $condition);*/
+			if($qResult_apl_01_upd == 1){
+				$condition				= array(
+					'UUID_ADM'			=> $this->input->post($form_name[149]));
+				$qResult_adm_upd		= $this->M_administrasi->update_entry_as_done($condition);
+				
+				if($qResult_adm_upd == 1){
+					$qResult_adm_ins		= $this->M_administrasi->insert_entry($form_name);
+				}
+			}
+			
+			if($qResult_apl_01_upd != 1|| $qResult_adm_ins != 1)
+				{
+					echo -1;
+				}
+			else
+				{			
+					echo 1;
+				}
 			
 		}
 		

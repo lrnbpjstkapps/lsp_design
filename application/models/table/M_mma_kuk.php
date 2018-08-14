@@ -44,7 +44,7 @@
 				$this->UUID_BUKTI		= (!$this->input->post($form_name[136]) ? null : $this->input->post($form_name[136]));
 				$this->JENIS_BUKTI		= (!isset($this->input->post($form_name[234])[$i]) ? null : $this->input->post($form_name[234])[$i]);
 				$this->METODE			= (!isset($this->input->post($form_name[235])[$i]) ? null : $this->input->post($form_name[235])[$i]);
-				$this->USR_CRT			= 'Karid Nurvenus';
+				$this->USR_CRT			= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
 				$this->USR_UPD			= null;
 				$this->DTM_UPD			= null;

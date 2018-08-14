@@ -1,18 +1,23 @@
 <?php
 	class m_list_apl02 extends CI_Model{
-		var $table			= "FR_APL_02 AS apl02";
-		var $order			= array('apl02.DTM_CRT' => 'DESC'); 
+		var $table			= "ADMINISTRASI AS adm";
 		var $column_order	= array(
-			null, null, null, null, null, null); 
+			null, null, null, null, null, null, null, null, null); 
 		var $column_search	= array(
-			'apl02.ID_DOKUMEN');
-			
+			'adm.NO_ASESMEN', 'apl01.NAMA_LENGKAP', 'apl01.JABATAN', 'skema.NAMA_SKEMA', 
+			'apl01.TUJUAN_ASESMEN', 'adm.DTM_CRT', 'sa.SA_CODE', 'sa.KETERANGAN');
+		
 		// Method yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('apl02.UUID_APL02, apl02.NO_DOKUMEN AS NO_DOKUMEN02, apl02.NO_DOKUMEN AS NO_DOKUMEN01, ske.NAMA_SKEMA, apl02.DTM_CRT');
+			$this->db->select('adm.UUID_ADM, adm.NO_ASESMEN, apl01.NAMA_LENGKAP, apl01.JABATAN, skema.NAMA_SKEMA, apl01.TUJUAN_ASESMEN, adm.DTM_CRT, CONCAT(sa.SA_CODE, " - ",sa.KETERANGAN) AS STATUS_PENGAJUAN, sa.SA_CODE, sa.KETERANGAN');
 			$this->db->from($this->table);
-			$this->db->join("FR_APL_01 AS apl01", "apl01.UUID_APL01 = apl02.UUID_APL01", "LEFT");
-			$this->db->join("SKEMA AS ske", "apl01.UUID_SKEMA = ske.UUID_SKEMA", "LEFT");
+			$this->db->join("FR_APL_01 AS apl01", "adm.UUID_APL01 = apl01.UUID_APL01", "LEFT");
+			$this->db->join("SKEMA AS skema", "apl01.UUID_SKEMA = skema.UUID_SKEMA", "LEFT");
+			$this->db->join("STATUS_ADMINISTRASI AS sa", "adm.UUID_SA = sa.UUID_SA", "LEFT");
+			$this->db->where('adm.IS_ACTIVE', '1');
+			$this->db->where('adm.IS_DONE', '0');
+			$this->db->where('sa.SA_CODE', 'ALS020');
+			
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -32,20 +37,20 @@
 				$i++;
 			}		
 			
-			$this->db->where('apl02.IS_ACTIVE', '1');
-
 			if(isset($_POST['order'])){
 				$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
 			} 
-			else if(isset($this->order)){
-				$order = $this->order;
-				$this->db->order_by(key($order), $order[key($order)]);
+			else{
+				$this->db->order_by('adm.DTM_CRT', 'ASC');
+				$this->db->order_by('apl01.NAMA_LENGKAP', 'ASC');
+				$this->db->order_by('skema.NAMA_SKEMA', 'ASC');
 			}
 		}
 
 		// Mengambil sebagian data berdasarkan filternya.
 		public function get_datatables(){
-			$this->_get_datatables_query();			
+			$this->_get_datatables_query();
+			
 			if($_POST['length'] != -1)
 				$this->db->limit($_POST['length'], $_POST['start']);
 			
@@ -61,11 +66,7 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('apl02.UUID_APL02, apl02.NO_DOKUMEN AS NO_DOKUMEN02, apl02.NO_DOKUMEN AS NO_DOKUMEN01, ske.NAMA_SKEMA, apl02.DTM_CRT');
-			$this->db->from($this->table);
-			$this->db->join("FR_APL_01 AS apl01", "apl01.UUID_APL01 = apl02.UUID_APL01", "LEFT");
-			$this->db->join("SKEMA AS ske", "apl01.UUID_SKEMA = ske.UUID_SKEMA", "LEFT");
-			$this->db->where('apl02.IS_ACTIVE', '1');
+			$this->_get_datatables_query();
 			
 			return $this->db->count_all_results();
 		}
@@ -73,29 +74,31 @@
 		// Mengirim data sebagai JSON.
 		public function get_json($result, $recordsTotal, $recordsFiltered)
 			{			
-				$data 			= array();
-				$no				= $_POST['start'];
+				$data 		= array();
+				$no			= $_POST['start'];
 				
 				foreach ($result as $values) 
 					{
 						$no++;
 						$row	= array();
 						$row[]	= $no;
-						$row[] 	= $values->NO_DOKUMEN02;
-						$row[] 	= $values->NO_DOKUMEN01;
+						$row[] 	= $values->NO_ASESMEN;
+						$row[] 	= $values->NAMA_LENGKAP;
+						$row[] 	= $values->JABATAN;
 						$row[] 	= $values->NAMA_SKEMA;
-						$row[] 	= date('d M y - H:i', strtotime($values->DTM_CRT));
-						$row[] 	= '<a href="javascript:void(0)" onclick="editDt('."'".$values->UUID_APL02."'".')"><i class="fa fa-edit"></i></a>';
-						$row[] 	= '<a href="javascript:void(0)" onclick="deleteDt('."'".$values->UUID_APL02."'".')"><i class="fa fa-trash"></i></a>';
+						$row[] 	= $values->TUJUAN_ASESMEN;
+						$row[] 	= date('d-M-y H.i', strtotime($values->DTM_CRT));
+						$row[] 	= $values->STATUS_PENGAJUAN;
+						$row[] 	= '<a href="javascript:void(0)" onclick="pagingAddApl02('."'".$values->UUID_ADM."'".')"><i class="fa fa-check-square-o"></i> Ajukan FR-APL-02</a>';
 						$data[]	= $row;
 					}
 		
-				$output 		= array
+				$output 	= array
 					(
-						"draw" 				=> $_POST['draw'],
-						"recordsTotal" 		=> $recordsTotal, 
-						"recordsFiltered" 	=> $recordsFiltered,
-						"data"				=> $data
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $recordsTotal, 
+						"recordsFiltered" => $recordsFiltered,
+						"data" => $data
 					);
 				return $output;
 			}			

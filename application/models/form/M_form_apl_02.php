@@ -14,7 +14,6 @@ class M_form_apl_02 extends CI_Model {
 			$data[$form_name[170]] 	= '';
 			$data[$form_name[171]] 	= '';
 			$data[$form_name[172]] 	= '';
-			$data[$form_name[173]] 	= '';
 			$data[$form_name[115]]	= '';
 			$data[$form_name[101]] 	= '';
 			$data[$form_name[100]] 	= '';
@@ -26,16 +25,14 @@ class M_form_apl_02 extends CI_Model {
 		{
 			$data["saveMethod"]		= "edit";
 			$data[$form_name[146]] 	= $result->UUID_APL02;
-			$data[$form_name[163]] 	= $result->UUID_ADM;
 			$data[$form_name[140]] 	= $result->UUID_USER;
 			$data[$form_name[134]] 	= $result->UUID_APL01;
-			$data[$form_name[168]] 	= $result->NO_DOKUMEN;
+			$data[$form_name[168]] 	= $result->NO_ASESMEN;
 			$data[$form_name[148]] 	= $result->TUK;
-			$data[$form_name[169]] 	= $result->IS_KOMPETEN;
-			$data[$form_name[170]] 	= $result->ALASAN_BLM_KOMPETEN;
-			$data[$form_name[171]] 	= $result->IS_DILANJUTKAN;
-			$data[$form_name[172]] 	= $result->CATATAN_1;
-			$data[$form_name[173]] 	= $result->CATATAN_2;
+			$data[$form_name[169]] 	= $result->REKOM_1;
+			$data[$form_name[170]] 	= $result->REKOM_2;
+			$data[$form_name[171]] 	= $result->REKOM_3;
+			$data[$form_name[172]] 	= $result->CATATAN;
 			$data[$form_name[115]]	= $result->NAMA_LENGKAP;
 			$data[$form_name[101]] 	= $result->NOMOR_SKEMA;
 			$data[$form_name[100]] 	= $result->NAMA_SKEMA;

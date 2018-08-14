@@ -23,7 +23,7 @@
 				$this->SA_CODE		= (!$this->input->post($form_name[253]) ? null : $this->input->post($form_name[253]));
 				$this->FORM			= (!$this->input->post($form_name[254]) ? null : $this->input->post($form_name[254]));
 				$this->KETERANGAN	= (!$this->input->post($form_name[255]) ? null : $this->input->post($form_name[255]));
-				$this->USR_CRT		= 'SUPER ADMIN';
+				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
 				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
@@ -41,7 +41,7 @@
 				$this->KETERANGAN	= (!$this->input->post($form_name[255]) ? $data->KETERANGAN : $this->input->post($form_name[255]));
 				$this->USR_CRT		= $data->USR_CRT;
 				$this->DTM_CRT		= $data->DTM_CRT;
-				$this->USR_UPD		= 'SUPER ADMIN';
+				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE	= (!$this->input->post($form_name[256]) ? $data->IS_ACTIVE : $this->input->post($form_name[256]));
 					

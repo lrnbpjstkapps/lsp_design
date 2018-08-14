@@ -24,8 +24,8 @@
 
     <div class="container">
       <div class="py-5 text-center">
-		<img class="d-block mx-auto mb-4" src="<?php echo base_url(); ?>assets/image/BPJS_Ketenagakerjaan_logo.png" alt="" width="400" height="92">
-        <!--img class="d-block mx-auto mb-4" src="<?php echo base_url(); ?>assets/image/LSP_logo.png" alt="" width="300" height="136"-->
+		<!--img class="d-block mx-auto mb-4" src="<?php echo base_url(); ?>assets/image/BPJS_Ketenagakerjaan_logo.png" alt="" width="400" height="92"-->
+        <img class="d-block mx-auto mb-4" src="<?php echo base_url(); ?>assets/image/LSP_logo.png" alt="" width="510" height="142">
         <p class="lead"><i>"BPJS Ketenagakerjaan selaku penyelenggara program Jaminan Sosial Ketenagakerjaan mendirikan LSP bagi masyarakat yang membutuhkan sertifikasi terkait Jaminan Sosial Ketenagakerjaan."</i></br>- Agus Susanto, Direktur Utama BPJS Ketenagakerjaan</p>
 	  </div>
 	  

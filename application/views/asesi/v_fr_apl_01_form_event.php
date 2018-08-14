@@ -44,7 +44,7 @@
 			ignore: [],
 			rules: 
 				{
-					/*<?php echo $form_name[115]; ?>: 
+					<?php echo $form_name[115]; ?>: 
 						{
 							required: true
 						},
@@ -107,7 +107,7 @@
 					<?php echo $form_name[136]; ?>: 
 						{
 							required: true
-						},*/
+						},
 					"<?php echo $form_name[139]; ?>":
 						{
 							required: true

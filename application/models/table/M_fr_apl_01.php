@@ -56,7 +56,7 @@
 		public function insert_entry($form_name)
 			{
 				$this->UUID_APL01			= (!$this->input->post($form_name[134]) ? $this->uuid->v4() : $this->input->post($form_name[134]));
-				$this->UUID_USER			= 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f';
+				$this->UUID_USER			= $this->session->userdata('lsp_bpjstk_uuid_user');
 				$this->NO_ASESMEN			= $this->input->post($form_name[150]);
 				$this->NAMA_LENGKAP			= (!$this->input->post($form_name[115]) ? null : $this->input->post($form_name[115]));
 				$this->TEMPAT_LAHIR			= (!$this->input->post($form_name[116]) ? null : $this->input->post($form_name[116]));
@@ -81,7 +81,7 @@
 				$this->UUID_SKEMA			= (!$this->input->post($form_name[102]) ? null : $this->input->post($form_name[102]));
 				$this->IS_DIREKOMENDASIKAN	= (!$this->input->post($form_name[162]) ? null : $this->input->post($form_name[162]));
 				$this->CATATAN				= (!$this->input->post($form_name[160]) ? null : $this->input->post($form_name[160]));
-				$this->USR_CRT				= 'Karid Nurvenus';
+				$this->USR_CRT				= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT				= date('Y-m-d H:i:s');
 				$this->USR_UPD				= null;
 				$this->DTM_UPD				= null;
@@ -120,7 +120,7 @@
 				$this->CATATAN				= (!$this->input->post($form_name[160]) ? $data->CATATAN : $this->input->post($form_name[160]));
 				$this->USR_CRT				= $data->USR_CRT;
 				$this->DTM_CRT				= $data->DTM_CRT;
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD				= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE			= (!$this->input->post($form_name[159]) ? $data->IS_ACTIVE : $this->input->post($form_name[159]));
 					

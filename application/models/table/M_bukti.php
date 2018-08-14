@@ -21,9 +21,9 @@
 				$this->UUID_USER			= (!$this->input->post($form_name[140]) ? null : $this->input->post($form_name[140]));
 				$this->KETERANGAN			= (!$this->input->post($form_name[138]) ? null : $this->input->post($form_name[138]));
 				$this->URL					= (!$this->input->post($form_name[164]) ? null : $this->input->post($form_name[164]));
-				$this->USR_CRT				= 'Karid Nurvenus';
+				$this->USR_CRT				= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT				= date('Y-m-d H:i:s');
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= null;
 				$this->DTM_UPD				= null;
 				$this->IS_ACTIVE			= '1';
 				
@@ -38,7 +38,7 @@
 				$this->URL					= (!$this->input->post($form_name[164]) ? $data->URL : $this->input->post($form_name[164]));
 				$this->USR_CRT				= $data->USR_CRT;
 				$this->DTM_CRT				= $data->DTM_CRT;
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD				= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE			= (!$this->input->post($form_name[165]) ? $data->IS_ACTIVE : $this->input->post($form_name[165]));;
 					

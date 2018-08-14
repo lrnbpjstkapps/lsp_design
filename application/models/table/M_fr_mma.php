@@ -154,9 +154,9 @@
 				$this->MANAGER_SERTIFIKASI_JABATAN 	= (!$this->input->post($form_name[231]) ? null : $this->input->post($form_name[231]));
 				$this->MANAGER_SERTIFIKASI_DTM 		= (!$this->input->post($form_name[232]) ? null : $this->input->post($form_name[232]));
 				$this->UUID_ADM 					= (!$this->input->post($form_name[163]) ? null : $this->input->post($form_name[163]));
-				$this->USR_CRT						= 'Karid Nurvenus';
+				$this->USR_CRT						= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT						= date('Y-m-d H:i:s');
-				$this->USR_UPD						= 'Karid Nurvenus';
+				$this->USR_UPD						= null;
 				$this->DTM_UPD						= null;
 				$this->IS_ACTIVE					= '1';
 				
@@ -224,11 +224,9 @@
 				$this->MANAGER_SERTIFIKASI_DTM 		= (!$this->input->post($form_name[232]) ? null : date('Y-m-d H:i:s'));
 				$this->USR_CRT						= $data->USR_CRT;
 				$this->DTM_CRT						= $data->DTM_CRT;
-				$this->USR_UPD						= 'Karid Nurvenus';
+				$this->USR_UPD						= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD						= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE					= (!$this->input->post($form_name[233]) ? $data->IS_ACTIVE : $this->input->post($form_name[233]));
-
-				
 					
 				return $this->db->update('FR_MMA', $this, $condition);
 			}

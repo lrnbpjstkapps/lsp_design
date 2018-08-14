@@ -23,9 +23,9 @@
 				$this->NOMOR_KUK	= (!$this->input->post($form_name[112]) ? null : $this->input->post($form_name[112]));
 				$this->PERNYATAAN	= (!$this->input->post($form_name[111]) ? null : $this->input->post($form_name[111]));
 				$this->PERTANYAAN	= (!$this->input->post($form_name[114]) ? null : $this->input->post($form_name[114]));
-				$this->USR_CRT		= 'Karid Nurvenus';
+				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
-				$this->USR_UPD		= 'Karid Nurvenus';
+				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
 				$this->IS_ACTIVE	= '1';
 				
@@ -41,7 +41,7 @@
 				$this->PERTANYAAN	= (!$this->input->post($form_name[114]) ? $data->PERTANYAAN : $this->input->post($form_name[114]));
 				$this->USR_CRT		= $data->USR_CRT;
 				$this->DTM_CRT		= $data->DTM_CRT;
-				$this->USR_UPD		= 'Karid Nurvenus';
+				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE	= (!$this->input->post($form_name[166]) ? $data->IS_ACTIVE : $this->input->post($form_name[166]));
 					

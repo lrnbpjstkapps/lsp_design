@@ -68,9 +68,9 @@
 				$this->UUID_KUK			= (!$this->input->post($form_name[178])[$i] ? null : $this->input->post($form_name[178])[$i]);
 				$this->IS_KOMPETEN		= (!isset($this->input->post($form_name[179])[$i]) ? null : $this->input->post($form_name[179])[$i]);
 				$this->UUID_BUKTI		= $uuidBukti;
-				$this->USR_CRT			= 'Karid Nurvenus';
+				$this->USR_CRT			= $this->session->userdata('lsp_bpjstk_user_name');;
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
-				$this->USR_UPD			= 'Karid Nurvenus';
+				$this->USR_UPD			= null;
 				$this->DTM_UPD			= null;
 				$this->IS_ACTIVE		= '1';
 				

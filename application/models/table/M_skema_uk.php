@@ -41,9 +41,9 @@ ORDER BY SKEMA.NOMOR_SKEMA, UK.KODE_UK, EK.NOMOR_EK, KUK.NOMOR_KUK
 				$this->UUID_SKEMA_UK	= (!$this->input->post($form_name[157]) ? $this->uuid->v4() : $this->input->post($form_name[157]));
 				$this->UUID_SKEMA		= (!$this->input->post($form_name[102]) ? null : $this->input->post($form_name[102]));
 				$this->UUID_UK			= (!$this->input->post($form_name[105]) ? null : $this->input->post($form_name[105]));
-				$this->USR_CRT			= 'Karid Nurvenus';
+				$this->USR_CRT			= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
-				$this->USR_UPD			= 'Karid Nurvenus';
+				$this->USR_UPD			= null;
 				$this->DTM_UPD			= null;
 				$this->IS_ACTIVE		= '1';
 				

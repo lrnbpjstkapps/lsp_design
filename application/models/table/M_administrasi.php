@@ -15,22 +15,12 @@
 		public $UUID_MANAJER_SERTIFIKASI;
 		public $UUID_SUPERVISOR;
 		public $CATATAN;
+		public $IS_DONE;
 		public $USR_CRT;
 		public $DTM_CRT;
 		public $USR_UPD;
 		public $DTM_UPD;
 		public $IS_ACTIVE;
-		
-		function uniqidReal($lenght) {
-			if (function_exists("random_bytes")) {
-				$bytes = random_bytes(ceil($lenght / 2));
-			} elseif (function_exists("openssl_random_pseudo_bytes")) {
-				$bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
-			} else {
-				throw new Exception("no cryptographically secure random function available");
-			}
-			return strtoupper(substr(bin2hex($bytes), 0, $lenght));
-		}
 		
 		public function get_entry($condition)
 			{
@@ -49,7 +39,7 @@
 			
 		public function insert_entry($form_name)
 			{
-				$this->UUID_ADM			= (!$this->input->post($form_name[149]) ? $this->uuid->v4() : $this->input->post($form_name[149]));
+				$this->UUID_ADM			= $this->uuid->v4();
 				$this->NO_ASESMEN		= (!$this->input->post($form_name[150]) ? null : $this->input->post($form_name[150]));
 				$this->UUID_APL01		= (!$this->input->post($form_name[134]) ? null : $this->input->post($form_name[134]));
 				$this->UUID_APL02		= (!$this->input->post($form_name[146]) ? null : $this->input->post($form_name[146]));
@@ -64,7 +54,8 @@
 				$this->UUID_MANAJER_SERTIFIKASI	= (!$this->input->post($form_name[261]) ? null : $this->input->post($form_name[261]));
 				$this->UUID_SUPERVISOR	= (!$this->input->post($form_name[262]) ? null : $this->input->post($form_name[262]));
 				$this->CATATAN			= (!$this->input->post($form_name[264]) ? null : $this->input->post($form_name[264]));
-				$this->USR_CRT			= 'SUPER ADMIN';
+				$this->IS_DONE			= '0';
+				$this->USR_CRT			= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
 				$this->USR_UPD			= null;
 				$this->DTM_UPD			= null;
@@ -90,13 +81,23 @@
 				$this->UUID_MANAJER_SERTIFIKASI	= (!$this->input->post($form_name[261]) ? $data->UUID_MANAJER_SERTIFIKASI : $this->input->post($form_name[261]));
 				$this->UUID_SUPERVISOR	= (!$this->input->post($form_name[262]) ? $data->UUID_SUPERVISOR : $this->input->post($form_name[262]));
 				$this->CATATAN			= (!$this->input->post($form_name[264]) ? $data->CATATAN : $this->input->post($form_name[264]));
+				$this->IS_DONE			= (!$this->input->post($form_name[265]) ? $data->IS_DONE : $this->input->post($form_name[265]));
 				$this->USR_CRT			= $data->USR_CRT;
 				$this->DTM_CRT			= $data->DTM_CRT;
-				$this->USR_UPD			= 'SUPER ADMIN';
+				$this->USR_UPD			= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD			= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE		= (!$this->input->post($form_name[263]) ? $data->IS_ACTIVE : $this->input->post($form_name[263]));
 					
 				return $this->db->update('ADMINISTRASI', $this, $condition);
+			}
+			
+		public function update_entry_as_done($condition)
+			{	
+				$this->db->set('IS_DONE', '1');
+				$this->db->set('USR_UPD', $this->session->userdata('lsp_bpjstk_user_name'));
+				$this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+				$this->db->where($condition);		
+				return $this->db->update('ADMINISTRASI');
 			}
 			
 		public function delete_entry($condition)

@@ -162,11 +162,11 @@
 				$form_name[166]		= "val_kuk_is_active";
 				$form_name[167]		= "val_ek_is_active";
 				$form_name[168]		= "val_apl02_no_dokumen";
-				$form_name[169]		= "val_apl02_is_kompeten";
-				$form_name[170]		= "val_apl02_alasan_blm_kompeten";
-				$form_name[171]		= "val_apl02_is_dilanjutkan";
-				$form_name[172]		= "val_apl02_catatan_1";
-				$form_name[173]		= "val_apl02_catatan_2";
+				$form_name[169]		= "val_apl02_rekom_1";
+				$form_name[170]		= "val_apl02_rekom_2";
+				$form_name[171]		= "val_apl02_rekom_3";
+				$form_name[172]		= "val_apl02_catatan";
+				$form_name[173]		= "";
 				$form_name[174]		= "val_apl02_is_active";
 				$form_name[175]		= "val_ans_apl02_uuid";
 				$form_name[176]		= "val_ans_apl02_is_kompeten";
@@ -273,6 +273,7 @@
 				$form_name[262] 	= "val_adm_uuid_supervisor";
 				$form_name[263] 	= "val_adm_is_active";
 				$form_name[264] 	= "val_adm_catatan";
+				$form_name[265] 	= "val_adm_is_done";
 
 				return $form_name;
 			}		
@@ -465,7 +466,7 @@
 				$ajax_url[140] 	= base_url()."asesi/bukti_kelengkapan/deleteDt/";
 				$ajax_url[141] 	= base_url()."asesi/bukti_kelengkapan/getADt/";
 				$ajax_url[142] 	= base_url()."asesi/fr_apl_01/getAllDt_bukti";
-				$ajax_url[143] 	= base_url()."asesi/fr_apl_02/pagingAdd";
+				$ajax_url[143] 	= base_url()."asesi/fr_apl_02/pagingAddApl02/";
 				$ajax_url[144] 	= base_url()."asesi/fr_apl_02/pagingUpload/";
 				$ajax_url[145] 	= base_url()."asesi/fr_apl_02/pagingList";
 				$ajax_url[146] 	= base_url()."asesi/fr_apl_02/pagingEdit/";

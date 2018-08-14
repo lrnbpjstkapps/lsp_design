@@ -27,7 +27,7 @@
 				$this->PWD		= (!$this->input->post($form_name[241]) ? null : $this->input->post($form_name[241]));
 				$this->PHONE		= (!$this->input->post($form_name[242]) ? null : $this->input->post($form_name[242]));
 				$this->IS_ONLINE	= '0';
-				$this->USR_CRT		= 'SUPER ADMIN';
+				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
 				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
@@ -47,7 +47,7 @@
 				$this->IS_ONLINE	= (!$this->input->post($form_name[243]) ? $data->IS_ONLINE : $this->input->post($form_name[243]));
 				$this->USR_CRT		= $data->USR_CRT;
 				$this->DTM_CRT		= $data->DTM_CRT;
-				$this->USR_UPD		= 'Karid Nurvenus';
+				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE	= (!$this->input->post($form_name[244]) ? $data->IS_ACTIVE : $this->input->post($form_name[244]));
 					

@@ -32,7 +32,7 @@
 			{
 				$this->UUID_APL02			= (!$this->input->post($form_name[146]) ? $this->uuid->v4() : $this->input->post($form_name[146]));
 				$this->UUID_ADM				= (!$this->input->post($form_name[163]) ? null : $this->input->post($form_name[163]));
-				$this->UUID_USER			= 'd8c702c5-4e7f-11e8-bf00-00ff0b0c062f';
+				$this->UUID_USER			= $this->session->userdata('lsp_bpjstk_uuid_user');
 				$this->UUID_APL01			= (!$this->input->post($form_name[134]) ? null : $this->input->post($form_name[134]));
 				$this->NO_DOKUMEN			= 'APL02'.$this->uniqidReal(7);
 				$this->TUK					= (!$this->input->post($form_name[148]) ? null : $this->input->post($form_name[148]));
@@ -41,9 +41,9 @@
 				$this->IS_DILANJUTKAN		= (!$this->input->post($form_name[171]) ? null : $this->input->post($form_name[171]));
 				$this->CATATAN_1			= (!$this->input->post($form_name[172]) ? null : $this->input->post($form_name[172]));
 				$this->CATATAN_2			= (!$this->input->post($form_name[173]) ? null : $this->input->post($form_name[173]));
-				$this->USR_CRT				= 'Karid Nurvenus';
+				$this->USR_CRT				= $this->session->userdata('lsp_bpjstk_user_name');;
 				$this->DTM_CRT				= date('Y-m-d H:i:s');
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= null;
 				$this->DTM_UPD				= null;
 				$this->IS_ACTIVE			= '1';
 				
@@ -65,7 +65,7 @@
 				$this->CATATAN_2			= (!$this->input->post($form_name[173]) ? $data->CATATAN_2 : $this->input->post($form_name[173]));
 				$this->USR_CRT				= $data->USR_CRT;
 				$this->DTM_CRT				= $data->DTM_CRT;
-				$this->USR_UPD				= 'Karid Nurvenus';
+				$this->USR_UPD				= $this->session->userdata('lsp_bpjstk_user_name');;
 				$this->DTM_UPD				= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE			= (!$this->input->post($form_name[174]) ? $data->IS_ACTIVE : $this->input->post($form_name[174]));;
 					

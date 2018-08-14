@@ -30,7 +30,7 @@
 				$this->UUID_APL01_BUKTI		= $this->uuid->v4();
 				$this->UUID_APL01			= (!$this->input->post($form_name[134]) ? null : $this->input->post($form_name[134]));
 				$this->UUID_BUKTI			= (!$this->input->post($form_name[139])[$i] ? null : $this->input->post($form_name[139])[$i]);
-				$this->USR_CRT				= 'Karid Nurvenus';
+				$this->USR_CRT				= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT				= date('Y-m-d H:i:s');
 				$this->IS_ACTIVE			= '1';
 				
