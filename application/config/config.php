@@ -24,10 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 date_default_timezone_set('Asia/Jakarta');
-/*$root = "http://".$_SERVER['HTTP_HOST'];
+$root = "http://".$_SERVER['HTTP_HOST'];
 $root .= dirname($_SERVER['SCRIPT_NAME']);
-$config['base_url'] = $root;*/
-$config['base_url'] = '';
+$config['base_url'] = $root;
+//$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

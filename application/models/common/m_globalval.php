@@ -505,6 +505,15 @@
 				$ajax_url[178] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_skema_uk";
 				$ajax_url[179] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_bukti";
 				$ajax_url[180] 	= base_url()."admin_lsp/verif_apl_01/verifDt_apl_01";
+
+				$ajax_url[181] 	= base_url()."admin_lsp/verif_apl_02/getList_verif_apl_02";
+				$ajax_url[182] 	= base_url()."admin_lsp/verif_apl_02/pagingList";
+				$ajax_url[183] 	= base_url()."admin_lsp/verif_apl_02/pagingVerif";
+				$ajax_url[184] 	= base_url()."admin_lsp/verif_apl_02/pagingVerif/";
+				$ajax_url[185] 	= base_url()."admin_lsp/verif_apl_02/getOneDt_nomorSkema";
+				$ajax_url[186] 	= base_url()."admin_lsp/verif_apl_02/getAllDt_skema_uk";
+				$ajax_url[187] 	= base_url()."admin_lsp/verif_apl_02/getAllDt_bukti";
+				$ajax_url[188] 	= base_url()."admin_lsp/verif_apl_02/verifDt_apl_02";
 				return $ajax_url;
 			}
 		
@@ -575,6 +584,12 @@
 				$view[148]	= "admin_lsp/v_verif_apl_01_paging_event";
 				$view[149]	= "admin_lsp/v_verif_apl_01_form";
 				$view[150]	= "admin_lsp/v_verif_apl_01_form_event";
+
+				$view[151]	= "admin_lsp/v_verif_apl_02";
+				$view[152]	= "admin_lsp/v_verif_apl_02_event";
+				$view[153]	= "admin_lsp/v_verif_apl_02_paging_event";
+				$view[154]	= "admin_lsp/v_verif_apl_01_form";
+				$view[155]	= "admin_lsp/v_verif_apl_01_form_event";
 				return $view;
 			}
 			
