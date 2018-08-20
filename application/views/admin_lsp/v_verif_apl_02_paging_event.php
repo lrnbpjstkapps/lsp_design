@@ -9,7 +9,7 @@
 		
 	function pagingVerif(uuid)
 		{
-			$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[176]; ?>"+uuid);
+			$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[184]; ?>"+uuid);
 		}
 		
 	$(document).ready(function(){			

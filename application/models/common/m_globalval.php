@@ -69,6 +69,7 @@
 				$menu_title[122] 	= "FR-MAK-03. Banding Asesmen - Edit";
 				$menu_title[123] 	= "FR-MAK-03. Banding Asesmen - Upload";
 				$menu_title[124] 	= "FR-APL-01. Formulir Permohonan Sertifikasi Kompetensi - Verifikasi";
+				$menu_title[125] 	= "FR-APL-02. Asesmen Mandiri - Verifikasi";
 				return $menu_title;
 			}		
 		
@@ -166,7 +167,7 @@
 				$form_name[170]		= "val_apl02_rekom_2";
 				$form_name[171]		= "val_apl02_rekom_3";
 				$form_name[172]		= "val_apl02_catatan";
-				$form_name[173]		= "";
+				$form_name[173]		= "val_apl02_is_kompeten";
 				$form_name[174]		= "val_apl02_is_active";
 				$form_name[175]		= "val_ans_apl02_uuid";
 				$form_name[176]		= "val_ans_apl02_is_kompeten";
@@ -514,6 +515,8 @@
 				$ajax_url[186] 	= base_url()."admin_lsp/verif_apl_02/getAllDt_skema_uk";
 				$ajax_url[187] 	= base_url()."admin_lsp/verif_apl_02/getAllDt_bukti";
 				$ajax_url[188] 	= base_url()."admin_lsp/verif_apl_02/verifDt_apl_02";
+				$ajax_url[189] 	= base_url()."admin_lsp/verif_apl_02/getOneDt_apl01";
+				$ajax_url[190] 	= base_url()."admin_lsp/verif_apl_02/pagingChild/";
 				return $ajax_url;
 			}
 		
@@ -588,8 +591,9 @@
 				$view[151]	= "admin_lsp/v_verif_apl_02";
 				$view[152]	= "admin_lsp/v_verif_apl_02_event";
 				$view[153]	= "admin_lsp/v_verif_apl_02_paging_event";
-				$view[154]	= "admin_lsp/v_verif_apl_01_form";
-				$view[155]	= "admin_lsp/v_verif_apl_01_form_event";
+				$view[154]	= "admin_lsp/v_verif_apl_02_form";
+				$view[155]	= "admin_lsp/v_verif_apl_02_form_event";
+				$view[156]	= "admin_lsp/v_verif_apl_02_form_child";
 				return $view;
 			}
 			

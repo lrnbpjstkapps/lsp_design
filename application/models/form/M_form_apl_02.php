@@ -8,7 +8,7 @@ class M_form_apl_02 extends CI_Model {
 			$data[$form_name[163]] 	= '';
 			$data[$form_name[140]] 	= '';
 			$data[$form_name[134]] 	= '';
-			$data[$form_name[168]] 	= '';
+			$data[$form_name[150]] 	= '';
 			$data[$form_name[148]] 	= '';
 			$data[$form_name[169]] 	= '';
 			$data[$form_name[170]] 	= '';
@@ -27,7 +27,7 @@ class M_form_apl_02 extends CI_Model {
 			$data[$form_name[146]] 	= $result->UUID_APL02;
 			$data[$form_name[140]] 	= $result->UUID_USER;
 			$data[$form_name[134]] 	= $result->UUID_APL01;
-			$data[$form_name[168]] 	= $result->NO_ASESMEN;
+			$data[$form_name[150]] 	= $result->NO_ASESMEN;
 			$data[$form_name[148]] 	= $result->TUK;
 			$data[$form_name[169]] 	= $result->REKOM_1;
 			$data[$form_name[170]] 	= $result->REKOM_2;

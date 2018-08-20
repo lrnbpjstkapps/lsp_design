@@ -16,7 +16,7 @@
 	
 	<form>
 		<div class="row">                
-			<div class="col-md-6">  									<!-- FR-APL-01 -->
+			<div class="col-md-6">  									
 				<!-- Judul Skema sertifikasi -->
 				<div class="form-group">
 					<label> Judul Skema Sertifikasi </label>
