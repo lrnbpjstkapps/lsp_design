@@ -25,7 +25,8 @@
 				</thead>		
 				<tbody>
 					<?php 
-						$i = 0;		
+						$i 					= 0;	
+						$unit_kompetensi 	= null;						
 						foreach($listKUK->result() as $row){ ?>
 							<input type = "hidden" name = "<?php echo $form_name[143]; ?>" value = "<?php echo $row->UUID_UK; ?>">
 							<input type = "hidden" name = "<?php echo $form_name[178]; ?>" value = "<?php echo $row->UUID_KUK; ?>">
@@ -34,9 +35,19 @@
 								<td>
 									<?php echo ($i+1); ?>
 								</td>
-								<td>
-									<?php echo $row->JUDUL_UK; ?>
-								</td>
+								<?php 
+									if($unit_kompetensi == null){
+										$unit_kompetensi = $row->JUDUL_UK;
+										echo '<td>'.$row->JUDUL_UK.'</td>';
+									}else{
+										if($unit_kompetensi == $row->JUDUL_UK){												
+											echo '<td class="border-0"></td>'; 
+										}else{
+											$unit_kompetensi = $row->JUDUL_UK;
+											echo '<td>'.$row->JUDUL_UK.'</td>';
+										}
+									}										
+								?>
 								<td>
 									<?php echo $row->PERTANYAAN; ?>
 								</td>

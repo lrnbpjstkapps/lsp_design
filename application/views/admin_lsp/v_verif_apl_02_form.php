@@ -30,7 +30,11 @@
 				<!-- TUK -->
 				<div class="form-group">
 					<label> TUK </label>
-					<input name="<?php echo $form_name[148]; ?>" value="<?php echo $$form_name[148]; ?>" class="form-control" type="text">
+					<select name="" id="" class="form-control">			
+						<option value = "Sewaktu"> Sewaktu</option>
+						<option value = "Tempat Kerja"> Tempat Kerja</option>
+						<option value = "Mandiri"> Mandiri</option>
+					</select>
 					<span class="help-block"></span>
 				</div>
 				
