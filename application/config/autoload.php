@@ -132,4 +132,34 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array(
+		"common/m_globalval"		=> "m_globalval",
+		"datatables/M_list_apl01"	=> "M_list_apl01",
+		"datatables/M_list_apl02"	=> "M_list_apl02",		
+		"datatables/M_list_mma" 	=> "M_list_mma",
+		"datatables/M_list_verif_apl01" => "M_list_verif_apl01", 
+		"datatables/M_list_verif_apl02" => "M_list_verif_apl02", 
+		"form/M_form_apl_01"		=> "M_form_apl_01", 
+		"form/M_form_apl_02"		=> "M_form_apl_02", 
+		"form/M_form_mma"			=> "M_form_mma", 
+		"form/M_form_mma_kuk"		=> "M_form_mma_kuk", 
+		"table/M_administrasi"		=> "M_administrasi",
+		"table/M_answer_apl_02"		=> "M_ans_apl02",
+		"table/M_apl01_bukti"		=> "M_apl01_bukti",
+		"table/M_apl01_uk" 			=> "M_apl01_uk",
+		"table/M_bukti" 			=> "M_bukti",
+		"table/M_ek" 				=> "M_ek",
+		"table/M_fr_apl_01" 		=> "M_apl_01",
+		"table/M_fr_apl_02" 		=> "M_apl_02",
+		"table/M_fr_mma" 			=> "M_fr_mma",
+		"table/M_kuk" 				=> "M_kuk",
+		"table/M_mma_kuk" 			=> "M_mma_kuk",
+		"table/M_role" 				=> "M_role",
+		"table/M_skema" 			=> "M_skema",
+		"table/M_skema_uk" 			=> "M_skema_uk",
+		"table/M_status_administrasi" => "M_status_administrasi",
+		"table/M_uk" 				=> "M_uk",
+		"table/M_unit_kompetensi" 	=> "M_unit_kompetensi",
+		"table/M_user" 				=> "M_user",
+		"table/M_user_role" 		=> "M_user_role"	
+	);

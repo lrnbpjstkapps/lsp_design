@@ -7,17 +7,6 @@ class fr_apl_02 extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("common/M_query", "M_query");
-			$this->load->model("datatables/M_list_apl02", "M_list_apl02");
-			$this->load->model("form/M_form_apl_02", "M_form_apl_02");
-			$this->load->model("table/M_administrasi", "M_administrasi");
-			$this->load->model("table/M_answer_apl_02", "M_ans_apl02");
-			$this->load->model("table/M_apl01_bukti", "M_apl01_bukti");
-			$this->load->model("table/M_bukti", "M_bukti");
-			$this->load->model("table/M_fr_apl_01", "M_apl_01");
-			$this->load->model("table/M_fr_apl_02", "M_apl_02");
-			$this->load->model("table/M_status_administrasi", "M_sa");
 		}
 	
 	public function index()

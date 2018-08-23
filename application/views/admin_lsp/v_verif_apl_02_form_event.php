@@ -1,46 +1,42 @@
 <script text="text/javascript">
 	var table;
+	var url;
 	var validator;
 	var save_method = '<?php echo $saveMethod; ?>';
 	
 	function verifDt()
 		{	
-			url = "<?php echo $ajax_url[180]; ?>";	
+			url = "<?php echo $ajax_url[188]; ?>";	
 			
-			if ($("#<?php echo $form_id[140]; ?>").valid()) {
-				$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[174]; ?>");
-				$("#<?php echo $form_id[140]; ?>").submit();
+			if ($("#<?php echo $form_id[141]; ?>").valid()) {
+				$("#<?php echo $form_id[116]; ?>").load("<?php echo $ajax_url[182]; ?>");
+				$("#<?php echo $form_id[141]; ?>").submit();
 			}				
 		}
 		
-	$(document).ready(function() {		
-			setDt134();
-		});
-	
-	function setDt134()
-		{			
-			var uuidApl01 = '<?php echo $$form_name[134]; ?>';
-
-			if(uuidApl01 != "")
+	$(document).ready(function() {	
+		$(':radio:not(:checked)').attr('disabled', true);
+		
+		validator = $("#<?php echo $form_id[141]; ?>").validate({
+			submitHandler: function (form)
 				{
 					$.ajax({
-						type: "POST",
-						dataType: "JSON",
-						url: "<?php echo $ajax_url[189]; ?>",
-						data: "<?php echo $form_name[134]; ?>="+uuidApl01,
-						success: function(data){            
-							$("#<?php echo $form_id[117]; ?>").load("<?php echo $ajax_url[190]; ?>"+uuidApl01+"/"+data.UUID_SKEMA+"/"+'<?php echo $saveMethod; ?>'+'/'+'<?php echo $$form_name[146]; ?>'+'/'+'<?php echo $$form_name[149]; ?>'+'/'+'<?php echo $$form_name[150]; ?>');
-							$('select#<?php echo $form_id[173]; ?>').multipleSelect({width: '100%'});
-							$('#<?php echo $form_id[180]; ?>').attr('onClick', 'saveDt();');
-							$('#<?php echo $form_id[180]; ?>').removeAttr('disabled');
+						url			: url,
+						type		: 'POST',
+						data		: new FormData($("#<?php echo $form_id[141]; ?>")[0]),
+						cache		: false,
+						contentType	: false,
+						processData	: false,
+						success		: function(data){
+							if(data=="1"){		
+								alertify.success('<?php echo $validationMsg[115]; ?>');
+							}else{
+								alertify.error('<?php echo $validationMsg[116]; ?>');
+							}						
 						}
-					});			
+					});
+					return false;
 				}
-			else{
-				$("#<?php echo $form_id[117]; ?>").html("");
-				$('#<?php echo $form_id[180]; ?>').attr('onclick','').unbind('click');
-				$('#<?php echo $form_id[180]; ?>').attr('disabled','disabled');
-			}
-		}
-	
+		});
+	});
 </script>

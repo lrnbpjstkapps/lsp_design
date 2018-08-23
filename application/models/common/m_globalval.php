@@ -141,14 +141,14 @@
 				$form_name[144]		= "val_apl01_jenis_skema";
 				$form_name[145]		= "val_mma_uuid";
 				$form_name[146]		= "val_apl02_uuid";
-				$form_name[147]		= "val_apl02_nama_asesor";
+				$form_name[147]		= "val_apl02_asesor";
 				$form_name[148]		= "val_apl02_tuk";
 				$form_name[149]		= "val_adm_uuid";
 				$form_name[150]		= "val_adm_no_asesmen";
 				$form_name[151]		= "";
 				$form_name[152]		= "val_mak02_uuid";
-				$form_name[153]		= "";
-				$form_name[154]		= "";
+				$form_name[153]		= "val_apl02_koor_tuk";
+				$form_name[154]		= "val_apl02_manajer_sertifikasi";
 				$form_name[155]		= "val_skema_is_active";
 				$form_name[156]		= "val_uk_is_active";
 				$form_name[157]		= "val_skema_uk_uuid";
@@ -322,7 +322,7 @@
 				$form_id[138]		= "fr_apl_01_tabel";
 				$form_id[139]		= "verif_apl_01_tabel";
 				$form_id[140]		= "verif_apl_01_form";
-				$form_id[141]		= "";
+				$form_id[141]		= "verif_apl_02_form";
 				$form_id[142]		= "fr_apl_01_tanggal_lahir";
 				$form_id[143]		= "";
 				$form_id[144]		= "";
@@ -417,6 +417,8 @@
 				$validationMsg[112]	= "Apakah anda yakin ingin mengupdate data ini?";
 				$validationMsg[113]	= "Apakah anda yakin ingin menghapus data ini?";
 				$validationMsg[114]	= "Data berhasil dihapus";
+				$validationMsg[115]	= "Data berhasil diverifikasi";
+				$validationMsg[116]	= "Data gagal diverifikasi";
 
 				return $validationMsg;
 			}			
@@ -490,7 +492,6 @@
 				$ajax_url[163] 	= base_url()."asesi/fr_mak_02/getList_mak02";
 				$ajax_url[164] 	= base_url()."asesi/fr_mak_02/updateDt_mak02";
 				$ajax_url[165] 	= base_url()."asesi/fr_mak_02/deleteDt_mak02";
-
 				$ajax_url[166] 	= base_url()."asesi/fr_mak_03/saveDt_mak03";
 				$ajax_url[167] 	= base_url()."asesi/fr_mak_03/pagingAdd";
 				$ajax_url[168] 	= base_url()."asesi/fr_mak_03/pagingList";
@@ -506,7 +507,6 @@
 				$ajax_url[178] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_skema_uk";
 				$ajax_url[179] 	= base_url()."admin_lsp/verif_apl_01/getAllDt_bukti";
 				$ajax_url[180] 	= base_url()."admin_lsp/verif_apl_01/verifDt_apl_01";
-
 				$ajax_url[181] 	= base_url()."admin_lsp/verif_apl_02/getList_verif_apl_02";
 				$ajax_url[182] 	= base_url()."admin_lsp/verif_apl_02/pagingList";
 				$ajax_url[183] 	= base_url()."admin_lsp/verif_apl_02/pagingVerif";

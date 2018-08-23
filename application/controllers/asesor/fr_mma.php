@@ -7,15 +7,6 @@ class fr_mma extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("datatables/M_list_mma", "M_list_mma");
-			$this->load->model("form/M_form_global", "M_form_global");
-			$this->load->model("form/M_form_mma", "M_form_mma");
-			$this->load->model("form/M_form_mma_kuk", "M_form_mma_kuk");
-			$this->load->model("table/M_answer_apl_02", "M_ans_apl02");
-			$this->load->model("table/M_fr_apl_02", "M_fr_apl_02");
-			$this->load->model("table/M_fr_mma", "M_fr_mma");
-			$this->load->model("table/M_mma_kuk", "M_mma_kuk");
 		}
 	
 	public function index()

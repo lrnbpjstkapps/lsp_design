@@ -14,19 +14,6 @@ class verif_apl_01 extends CI_Controller {
 				$role_code = $this->session->userdata('lsp_bpjstk_role_code');
 				redirect('common/akun/switchInterface/'.$role_code);
 			}
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("datatables/M_list_verif_apl01", "M_list_verif_apl01");
-			$this->load->model("table/M_administrasi", "M_administrasi");
-			
-			$this->load->model("form/M_form_apl_01", "M_form_apl_01");
-			$this->load->model("table/M_apl01_uk", "M_apl01_uk");
-			$this->load->model("table/M_apl01_bukti", "M_apl01_bukti");
-			$this->load->model("table/M_bukti", "M_bukti");
-			$this->load->model("table/M_fr_apl_01", "M_apl_01");
-			$this->load->model("table/M_unit_kompetensi", "M_uk");
-			$this->load->model("table/M_skema", "M_skema");
-			$this->load->model("table/M_skema_uk", "M_skema_uk");
-			$this->load->model("table/M_status_administrasi", "M_sa");
 		}
 	
 	public function index()
