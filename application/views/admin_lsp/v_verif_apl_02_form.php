@@ -187,6 +187,14 @@
 				</table>
 			<?php } ?>
 		</div>
+		
+		<hr>
+		<!-- Catatan Admin LSP -->
+		<div class="form-group">
+			<label> Catatan Admin LSP </label>
+			<textarea name="<?php echo $form_name[264]; ?>" class="form-control" rows="5" style="resize:none"></textarea>
+			<span class="help-block"></span>
+		</div>
 	</form>
 	
 	<div class = "row float-right">

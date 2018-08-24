@@ -15,7 +15,7 @@
 				<a class="nav-link" href="<?php echo base_url(); ?>asesi/bukti_kelengkapan">Bukti Kelengkapan <span class="sr-only">(current)</span></a>
 			  </li>
 			  
-			  <li class="nav-item dropdown">
+				<li class="nav-item dropdown">
 				  <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data Asesi</a>
 				  <div class="dropdown-menu" aria-labelledby="dropdown10">
 					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_apl_01">FR-APL-01</a>

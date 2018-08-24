@@ -18,6 +18,17 @@
 		$(':radio:not(:checked)').attr('disabled', true);
 		
 		validator = $("#<?php echo $form_id[141]; ?>").validate({
+			rules: 
+				{
+					<?php echo $form_name[264]; ?>: 
+						{
+							required: true
+						}
+				}, 
+			messages:
+				{
+					
+				},
 			submitHandler: function (form)
 				{
 					$.ajax({

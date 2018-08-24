@@ -1,5 +1,5 @@
 <?php
-	class m_list_verif_apl02 extends CI_Model{
+	class m_list_verif_apl02_admlsp extends CI_Model{
 		var $table			= "ADMINISTRASI AS adm";
 		var $column_order	= array(
 			null, null, null, null, null, null, null, null, null); 

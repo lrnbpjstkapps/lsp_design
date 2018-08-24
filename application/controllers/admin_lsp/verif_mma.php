@@ -143,11 +143,11 @@ class verif_apl_02 extends CI_Controller {
 	// DATATABLES
 	public function getList_verif_apl_02()
 		{				
-			$result				= $this->M_list_verif_apl02_admlsp->get_datatables();
-			$recordsTotal		= $this->M_list_verif_apl02_admlsp->count_all();
-			$recordsFiltered	= $this->M_list_verif_apl02_admlsp->count_filtered();
+			$result				= $this->M_list_verif_apl02->get_datatables();
+			$recordsTotal		= $this->M_list_verif_apl02->count_all();
+			$recordsFiltered	= $this->M_list_verif_apl02->count_filtered();
 
-			$output				= $this->M_list_verif_apl02_admlsp->get_json($result, $recordsTotal, $recordsFiltered);
+			$output				= $this->M_list_verif_apl02->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($output);
 		}

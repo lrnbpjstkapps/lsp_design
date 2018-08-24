@@ -593,7 +593,13 @@
 				$view[153]	= "admin_lsp/v_verif_apl_02_paging_event";
 				$view[154]	= "admin_lsp/v_verif_apl_02_form";
 				$view[155]	= "admin_lsp/v_verif_apl_02_form_event";
-				$view[156]	= "admin_lsp/v_verif_apl_02_form_child";
+				
+
+				$view[156]	= "asesor/v_verif_apl_02";
+				$view[157]	= "asesor/v_verif_apl_02_event";
+				$view[158]	= "asesor/v_verif_apl_02_paging_event";
+				$view[159]	= "asesor/v_verif_apl_02_form";
+				$view[160]	= "asesor/v_verif_apl_02_form_event";
 				return $view;
 			}
 			

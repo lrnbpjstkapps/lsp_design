@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class verif_apl_02 extends CI_Controller {
 
-	// Admin LSP		
+	// ASESOR		
 	public function __construct()
 		{
 			parent::__construct();
@@ -23,8 +23,8 @@ class verif_apl_02 extends CI_Controller {
 			$view					= $data['view'];
 			
 			$data["dview"]			= '';
-			$data["dviewEvent"]		= $view[153];
-			$data["dlayoutMenu"]	= $layout[102];
+			$data["dviewEvent"]		= $view[156];
+			$data["dlayoutMenu"]	= $layout[106];
 			$this->load->view($layout[100], $data);
 		}
 	
@@ -143,11 +143,11 @@ class verif_apl_02 extends CI_Controller {
 	// DATATABLES
 	public function getList_verif_apl_02()
 		{				
-			$result				= $this->M_list_verif_apl02_admlsp->get_datatables();
-			$recordsTotal		= $this->M_list_verif_apl02_admlsp->count_all();
-			$recordsFiltered	= $this->M_list_verif_apl02_admlsp->count_filtered();
+			$result				= $this->M_list_verif_apl02_sso->get_datatables();
+			$recordsTotal		= $this->M_list_verif_apl02_sso->count_all();
+			$recordsFiltered	= $this->M_list_verif_apl02_sso->count_filtered();
 
-			$output				= $this->M_list_verif_apl02_admlsp->get_json($result, $recordsTotal, $recordsFiltered);
+			$output				= $this->M_list_verif_apl02_sso->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($output);
 		}
