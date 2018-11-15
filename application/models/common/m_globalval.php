@@ -32,7 +32,7 @@
 				return $data;
 			}
 		
-		/* APPLICATION */
+		/* APPLICATION (TIDAK USAH) */
 		public function getApplication()
 			{
 				$application[100] 	= "LSP BPJS Ketenagakerjaan"; // Header
@@ -41,7 +41,7 @@
 				return $application;
 			}
 		
-		/* MENU */					
+		/* MENU (TIDAK USAH)*/					
 		public function getMenuTitle()
 			{
 				$menu_title[100] 	= "Skema Sertifikasi";
@@ -73,7 +73,7 @@
 				return $menu_title;
 			}		
 		
-		/* FORM */		
+		/* FORM (TIDAK USAH)*/		
 		public function getFormTitle()
 			{
 				$form_title[100] 	= "Tambah Skema Sertifikasi";
@@ -92,6 +92,7 @@
 				return $form_title;
 			}	
 
+			//TIDAK USAH
 		public function getFormName()
 			{
 				$form_name[100]		= "val_skema_nama";
@@ -279,6 +280,7 @@
 				return $form_name;
 			}		
 		
+		/* FORM ID (TIDAK USAH)*/
 		public function getFormId()
 			{
 				$form_id[100]		= "skema_sertifikasi_form";
@@ -385,6 +387,7 @@
 				return $form_id;
 			}	
 
+		// form button (TIDAK USAH)
 		public function getFormButton()
 			{
 				$form_button[100] 	= "Tutup";
@@ -399,7 +402,7 @@
 				return $form_button;
 			}
 
-		/* VALIDATION MESSAGE */
+		/* VALIDATION MESSAGE (TIDAK USAH)*/
 		public function getValidationMsg()
 			{
 				$validationMsg[100]	= "Nomor sudah ada.";
@@ -423,7 +426,7 @@
 				return $validationMsg;
 			}			
 		
-		/* AJAX SERVICE */
+		/* AJAX SERVICE (TIDAK USAH)*/
 		public function getAjaxURL()
 			{
 				$ajax_url[100] 	= base_url()."admin_lsp/skema_sertifikasi/saveDt";
@@ -520,7 +523,7 @@
 				return $ajax_url;
 			}
 		
-		/* LAYOUT */
+		/* LAYOUT (TIDAK USAH)*/
 		public function getLayout()
 			{
 				$layout[100]	= "common/v_layout";
@@ -533,7 +536,7 @@
 				return $layout;
 			}
 			
-		/* VIEW */
+		/* VIEW (TIDAK USAH)*/
 		public function getView()
 			{
 				$view[100]	= "admin_lsp/v_skema_sertifikasi";
@@ -587,23 +590,21 @@
 				$view[148]	= "admin_lsp/v_verif_apl_01_paging_event";
 				$view[149]	= "admin_lsp/v_verif_apl_01_form";
 				$view[150]	= "admin_lsp/v_verif_apl_01_form_event";
-
 				$view[151]	= "admin_lsp/v_verif_apl_02";
 				$view[152]	= "admin_lsp/v_verif_apl_02_event";
 				$view[153]	= "admin_lsp/v_verif_apl_02_paging_event";
 				$view[154]	= "admin_lsp/v_verif_apl_02_form";
 				$view[155]	= "admin_lsp/v_verif_apl_02_form_event";
-				
-
 				$view[156]	= "asesor/v_verif_apl_02";
 				$view[157]	= "asesor/v_verif_apl_02_event";
 				$view[158]	= "asesor/v_verif_apl_02_paging_event";
 				$view[159]	= "asesor/v_verif_apl_02_form";
 				$view[160]	= "asesor/v_verif_apl_02_form_event";
+				$view[161]	= "asesor/v_verif_apl_02_form_event";
 				return $view;
 			}
 			
-		/* VALIDATION URL */
+		/* VALIDATION URL (TIDAK USAH)*/
 		public function getIsValidUrl()
 			{
 				$isvalid_url[100]	= base_url()."common/validation/isSkemaNomorExist";

@@ -8,7 +8,10 @@
 		  <div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto">
 			  <li class="nav-item">
-				<a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="#">Beranda <span class="sr-only"></span></a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url(); ?>admin_lsp/pengelola_user">Pengelola User <span class="sr-only"></span></a>
 			  </li>
 			  
 			  <li class="nav-item dropdown">
