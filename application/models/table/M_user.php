@@ -1,5 +1,6 @@
 <?php
 	class M_user extends CI_Model{
+		//All table field 
 		public $UUID_USER;
 		public $LOGIN_ID;
 		public $USER_NAME;
@@ -13,50 +14,54 @@
 		public $DTM_UPD;
 		public $IS_ACTIVE;
 		
-		public function get_entry($condition)
+		//Get data from database
+		public function ambil_data($kondisi)
 			{
-				return $this->db->get_where('USR', $condition);
+				return $this->db->get_where('USR', $kondisi);
 			}
 			
-		public function insert_entry($form_name)
+		//Add one data
+		public function tambah_satu_data($data)
 			{
-				$this->UUID_USER	= (!$this->input->post($form_name[237]) ? $this->uuid->v4() : $this->input->post($form_name[237]));
-				$this->LOGIN_ID		= (!$this->input->post($form_name[238]) ? null : $this->input->post($form_name[238]));
-				$this->USER_NAME	= (!$this->input->post($form_name[239]) ? null : $this->input->post($form_name[239]));
-				$this->EMAIL		= (!$this->input->post($form_name[240]) ? null : $this->input->post($form_name[240]));
-				$this->PWD		= (!$this->input->post($form_name[241]) ? null : $this->input->post($form_name[241]));
-				$this->PHONE		= (!$this->input->post($form_name[242]) ? null : $this->input->post($form_name[242]));
-				$this->IS_ONLINE	= '0';
+				$this->UUID_USER	= $data["usr_uuid"];
+				$this->LOGIN_ID		= $data["usr_login_id"];
+				$this->USER_NAME	= $data["usr_full_name"];
+				$this->EMAIL		= $data["usr_email"];
+				$this->PWD			= $data["usr_pwd"];
+				$this->PHONE		= $data["usr_phone"];
+				$this->IS_ONLINE	= $data["usr_is_online"];
 				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
 				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
-				$this->IS_ACTIVE	= '1';
+				$this->IS_ACTIVE	= $data["usr_is_active"];
 				
 				return $this->db->insert('USR', $this);
 			}
 			
-		public function update_entry($form_name, $data, $condition)
+		//Update data
+		public function update_satu_data($data_lama, $data_baru, $kondisi)
 			{
-				$this->UUID_USER	= (!$this->input->post($form_name[237]) ? $data->UUID_USER : $this->input->post($form_name[237]));
-				$this->LOGIN_ID		= (!$this->input->post($form_name[238]) ? $data->LOGIN_ID : $this->input->post($form_name[238]));
-				$this->USER_NAME	= (!$this->input->post($form_name[239]) ? $data->USER_NAME : $this->input->post($form_name[239]));
-				$this->EMAIL		= (!$this->input->post($form_name[240]) ? $data->EMAIL : $this->input->post($form_name[240]));
-				$this->PWD		= (!$this->input->post($form_name[241]) ? $data->PWD : $this->input->post($form_name[241]));
-				$this->PHONE		= (!$this->input->post($form_name[242]) ? $data->PHONE : $this->input->post($form_name[242]));
-				$this->IS_ONLINE	= (!$this->input->post($form_name[243]) ? $data->IS_ONLINE : $this->input->post($form_name[243]));
-				$this->USR_CRT		= $data->USR_CRT;
-				$this->DTM_CRT		= $data->DTM_CRT;
+				$this->UUID_USER	= $data_lama->UUID_USER;
+				$this->LOGIN_ID		= $data_baru["usr_login_id"];
+				$this->USER_NAME	= $data_baru["usr_full_name"];
+				$this->EMAIL		= $data_baru["usr_email"];
+				$this->PWD			= $data_baru["usr_pwd"];
+				$this->PHONE		= $data_baru["usr_phone"];
+				$this->IS_ONLINE	= $data_baru["usr_is_online"];
+				$this->USR_CRT		= $data_lama->USR_CRT;
+				$this->DTM_CRT		= $data_lama->DTM_CRT;
 				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
-				$this->IS_ACTIVE	= (!$this->input->post($form_name[244]) ? $data->IS_ACTIVE : $this->input->post($form_name[244]));
+				$this->IS_ACTIVE	= $data_baru["usr_is_active"];
 					
-				return $this->db->update('USR', $this, $condition);
+				return $this->db->update('USR', $this, $kondisi);
 			}
 			
-		public function delete_entry($condition)
+		//Delete data
+		public function delete_data($kondisi)
 			{
-				return $this->db->delete('USR', $condition);
+				return $this->db->delete('USR', $kondisi);
 			}
 		
 	}

@@ -31,30 +31,30 @@
 			
 			<div class="modal-body">
 				<form id="id_form_pengelola_user">           
-					<input type="hidden" name="usr_uuid" id="id_usr_uuid"/> 
+					<input type="hidden" name="user_uuid" id="id_user_uuid"/> 
 					<div class="form-group">
 						<label> Pegawai </label>
-						<input name="pegawai" class="form-control" type="text">
+						<input name="user_full_name" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label> Login ID </label>
-						<input name="usr_login_id" class="form-control" type="text">
+						<input name="user_login_id" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>	
 					<div class="form-group">
 						<label> No Telepon </label>
-						<input name="usr_phone" class="form-control" type="text">
+						<input name="user_phone" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>	
 					<div class="form-group">
 						<label> Email </label>
-						<input name="usr_email" class="form-control" type="text">
+						<input name="user_email" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>	
 					<div class="form-group">
 						<label> Status </label>
-						<input name="usr_is_online" class="form-control" type="text">
+						<input name="user_is_online" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>	
 				</form>		

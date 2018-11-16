@@ -140,6 +140,7 @@ $autoload['model'] = array(
 		"datatables/M_list_verif_apl01" => "M_list_verif_apl01", 
 		"datatables/M_list_verif_apl02_admlsp" => "M_list_verif_apl02_admlsp", 
 		"datatables/M_list_verif_apl02_sso" => "M_list_verif_apl02_sso", 
+		"datatables/datatabel_user" => "datatabel_user", 
 		"form/M_form_apl_01"		=> "M_form_apl_01", 
 		"form/M_form_apl_02"		=> "M_form_apl_02", 
 		"form/M_form_mma"			=> "M_form_mma", 

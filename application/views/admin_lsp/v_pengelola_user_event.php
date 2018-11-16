@@ -1,12 +1,12 @@
 <script type = "text/javascript">
-	var setMethod;
+	var save_method;
 	var tabel;
 	var url;
 	var validator;	
 	
 	$(document).ready(function(){
 		//Set Tabel
-		tabel = $('#id_tabel_user').Datatable({
+		tabel = $('#id_tabel_user').DataTable({
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: true,
@@ -15,22 +15,93 @@
 			"order"				: [], 
 			"ajax"				: 
 				{
-					"url"		: "admin_lsp/pengelola_user/getTabel",
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_user",
 					"type"		: "POST"
 				},
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [], 
-						"orderable"	: true
+						"targets"	: [0, 6, 7], 
+						"orderable"	: false
 					}
 				],
-		})
+		});
+		
+		//Form validation
+		validator = $("#id_form_pengelola_user").validate({
+			rules: 
+				{
+					user_full_name: 
+						{
+							required	: true,
+							maxlength	: 50
+						},
+					user_login_id: 
+						{
+							required	: true,
+							maxlength	: 50
+						},
+					user_phone: 
+						{
+							required	: true,
+							maxlength	: 18
+						},
+					user_email: 
+						{
+							required	: true,
+							maxlength	: 50
+						},
+					user_is_online: 
+						{
+							required	: true
+						},
+				}, 
+			submitHandler: function (form)
+				{
+					$.ajax({
+						url			: url,
+						type		: 'POST',
+						data		: new FormData($("#<?php echo $form_id[100]; ?>")[0]),
+						cache		: false,
+						contentType	: false,
+						processData	: false,
+						success		: function(data){
+							$("[data-dismiss=modal]").trigger({ type: "click" });
+							reloadDt();		
+							
+							if(save_method == "add"){
+								if(data=="1"){		
+									alertify.success('<?php echo $validationMsg[106]; ?>');
+								}else{
+									alertify.error('<?php echo $validationMsg[107]; ?>');
+								}	
+							}else{
+								if(data=="1"){		
+									alertify.success('<?php echo $validationMsg[108]; ?>');
+								}else{
+									alertify.error('<?php echo $validationMsg[109]; ?>');
+								}
+							}
+
+							$('#<?php echo $form_id[100]; ?>')[0].reset();	
+							validator.resetForm(); 
+							$('#<?php echo $form_id[100]; ?> .form-control').removeClass('error');	
+						}
+					});
+					return false;
+				}
+		});
 	});
+	
+	function reloadTabel()
+		{
+			//Reload Table
+			tabel.ajax.reload(null,false); 
+		}
 	
 	function modal_tambah(){
 		//Set kind of data action
-		setMethod = "tambah";
+		save_method = "tambah";
 		
 		//Delete previous alert
 		$('#id_form_pengelola_user')[0].reset();
@@ -42,9 +113,9 @@
 		$('#id_modal_set_data_pengelola_user').modal('show');
 	}
 	
-	function modal_update(){
+	function modal_update(uuid){
 		//Set kind of data action
-		setMethod = "update";
+		save_method = "update";
 		
 		//Delete previous alert
 		$('#id_form_pengelola_user')[0].reset();
@@ -53,7 +124,7 @@
 		
 		//Set previous data in modal form
 		$.ajax({
-			url 		: "admin_lsp/pengelola_user/getOneData/" + uuid,
+			url 		: "<?= base_url(); ?>admin_lsp/pengelola_user/getOneData/" + uuid,
 			type		: "GET",
 			dataType	: "JSON",
 			success		: function(data)
@@ -79,7 +150,7 @@
 	function setData(){
 		if(save_method == 'tambah') {
 			//set URL for 'tambah'
-			url = "admin_lsp/pengelola_user/tambahData";	
+			url = "<?= base_url(); ?>admin_lsp/pengelola_user/tambahData";	
 			
 			//Check if the form is valid
 			if ($("#id_form_pengelola_user").valid()) {
@@ -87,7 +158,7 @@
 			}				
 		} else {		
 			//set URL for 'update'		
-			url = "admin_lsp/pengelola_user/updateData";
+			url = "<?= base_url(); ?>admin_lsp/pengelola_user/updateData";
 			
 			//Show confirmation box before updating the data
 			if ($("#id_form_pengelola_user").valid()) {
@@ -103,28 +174,31 @@
 		}			
 	}
 
-	function delete_data(){
+	function hapus_data(uuid){
 		//Show confirmation box before deleting the data
-		alertify.confirm('<?php echo $validationMsg[113]; ?>', function(){
+		alertify.confirm('Apakah anda yakin ingin menghapus data ini?', function(){
 			{
 				$.ajax({
-					url 		: "<?php echo $ajax_url[104]; ?>"+uuid,
+					url 		: "<?= base_url(); ?>admin_lsp/pengelola_user/hapusData/"+uuid,
 					type		: "POST",
 					dataType	: "JSON",
 					success		: function(data)
 						{	
-							reloadDt();
+							//Reload Table
+							reloadTabel();
 							
 							if(data=="1"){
-								alertify.success('<?php echo $validationMsg[114]; ?>');
+								alertify.success('Data berhasil dihapus');
 							}else{
-								alertify.error('<?php echo $validationMsg[110]; ?>');
+								alertify.error('Data gagal dihapus');
 							}							
 						},
 					error		: function (jqXHR, textStatus, errorThrown)
 					{
-						alertify.error('<?php echo $validationMsg[110]; ?>');
-						reloadDt();
+						//Reload Table
+						reloadTabel();
+						
+						alertify.error('Terjadi kesalahan saat menghapus data: admin_lsp/pengelola_user/deleteData');
 					}				
 				});
 
@@ -132,9 +206,9 @@
 				
 			}).setting({
 				'labels'	: {
-					ok		: '<?php echo $form_button[102]; ?>',
-					cancel	: '<?php echo $form_button[103]; ?>'
+					ok		: 'Ya',
+					cancel	: 'Tidak'
 				}
-			}).setHeader('<?php echo $form_title[104]; ?>').show();
+			}).setHeader('Konfirmasi Hapus Data').show();
 	}
 </script>
