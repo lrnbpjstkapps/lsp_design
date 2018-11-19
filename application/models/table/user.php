@@ -1,5 +1,5 @@
 <?php
-	class M_user extends CI_Model{
+	class user extends CI_Model{
 		//All table field 
 		public $UUID_USER;
 		public $LOGIN_ID;
@@ -14,6 +14,12 @@
 		public $DTM_UPD;
 		public $IS_ACTIVE;
 		
+		//Get one data from database
+		public function ambil_satu_data($kondisi)
+			{
+				return $this->db->get_where('USR', $kondisi)->row(1);
+			}
+			
 		//Get data from database
 		public function ambil_data($kondisi)
 			{
@@ -23,18 +29,18 @@
 		//Add one data
 		public function tambah_satu_data($data)
 			{
-				$this->UUID_USER	= $data["usr_uuid"];
-				$this->LOGIN_ID		= $data["usr_login_id"];
-				$this->USER_NAME	= $data["usr_full_name"];
-				$this->EMAIL		= $data["usr_email"];
-				$this->PWD			= $data["usr_pwd"];
-				$this->PHONE		= $data["usr_phone"];
-				$this->IS_ONLINE	= $data["usr_is_online"];
+				$this->UUID_USER	= $data["user_uuid"];
+				$this->LOGIN_ID		= $data["user_login_id"];
+				$this->USER_NAME	= $data["user_full_name"];
+				$this->EMAIL		= $data["user_email"];
+				$this->PWD			= $data["user_pwd"];
+				$this->PHONE		= $data["user_phone"];
+				$this->IS_ONLINE	= $data["user_is_online"];
 				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
 				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
-				$this->IS_ACTIVE	= $data["usr_is_active"];
+				$this->IS_ACTIVE	= $data["user_is_active"];
 				
 				return $this->db->insert('USR', $this);
 			}
@@ -43,23 +49,23 @@
 		public function update_satu_data($data_lama, $data_baru, $kondisi)
 			{
 				$this->UUID_USER	= $data_lama->UUID_USER;
-				$this->LOGIN_ID		= $data_baru["usr_login_id"];
-				$this->USER_NAME	= $data_baru["usr_full_name"];
-				$this->EMAIL		= $data_baru["usr_email"];
-				$this->PWD			= $data_baru["usr_pwd"];
-				$this->PHONE		= $data_baru["usr_phone"];
-				$this->IS_ONLINE	= $data_baru["usr_is_online"];
+				$this->LOGIN_ID		= $data_baru["user_login_id"];
+				$this->USER_NAME	= $data_baru["user_full_name"];
+				$this->EMAIL		= $data_baru["user_email"];
+				$this->PWD			= $data_baru["user_pwd"];
+				$this->PHONE		= $data_baru["user_phone"];
+				$this->IS_ONLINE	= $data_baru["user_is_online"];
 				$this->USR_CRT		= $data_lama->USR_CRT;
 				$this->DTM_CRT		= $data_lama->DTM_CRT;
 				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
-				$this->IS_ACTIVE	= $data_baru["usr_is_active"];
+				$this->IS_ACTIVE	= $data_baru["user_is_active"];
 					
 				return $this->db->update('USR', $this, $kondisi);
 			}
 			
 		//Delete data
-		public function delete_data($kondisi)
+		public function hapus_data($kondisi)
 			{
 				return $this->db->delete('USR', $kondisi);
 			}

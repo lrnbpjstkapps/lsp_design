@@ -10,6 +10,7 @@ class fr_apl_01 extends CI_Controller {
 			if($this->session->userdata('lsp_bpjstk_login_id') == null){
 				redirect('');
 			}
+			
 			if($this->session->userdata('lsp_bpjstk_role_code') != "ASESI"){
 				$role_code = $this->session->userdata('lsp_bpjstk_role_code');
 				redirect('common/akun/switchInterface/'.$role_code);
@@ -22,10 +23,10 @@ class fr_apl_01 extends CI_Controller {
 			$layout					= $data['layout'];
 			$view					= $data['view'];
 			
-			$data["dview"]			= '';
-			$data["dviewEvent"]		= $view[119];
-			$data["dlayoutMenu"]	= $layout[105];
-			$this->load->view($layout[100], $data);
+			$data["dview"]			= "";
+			$data["dviewEvent"]		= "asesi/v_fr_apl_01_paging_event";
+			$data["dlayoutMenu"]	= "common/v_layout_menu_asesi";
+			$this->load->view("common/v_layout", $data);
 		}
 		
 	function uniqidReal($lenght) {
@@ -45,8 +46,8 @@ class fr_apl_01 extends CI_Controller {
 			$data	= $this->m_globalval->getAllData();
 			$view	= $data['view'];
 			
-			$this->load->view($view[115], $data);
-			$this->load->view($view[116], $data);
+			$this->load->view("asesi/v_fr_apl_01", $data);
+			$this->load->view("asesi/v_fr_apl_01_event", $data);
 		}
 		
 	public function pagingAdd()

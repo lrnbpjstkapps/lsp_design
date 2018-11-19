@@ -7,6 +7,7 @@
 	<thead>
 		<tr>
 			<th> # </th>
+			<th> Jenis Akun </th>
 			<th> Pegawai </th>
 			<th> Login ID </th>
 			<th> No Telepon </th>
@@ -32,6 +33,16 @@
 			<div class="modal-body">
 				<form id="id_form_pengelola_user">           
 					<input type="hidden" name="user_uuid" id="id_user_uuid"/> 
+					<div class="form-group">
+						<label> Jenis User </label>
+						<select multiple = "multiple" name="role_uuid[]" id="id_role_uuid" class="form-control select2" style="width: 100%;">
+							<?php foreach($daftarJenisAkun->result() as $row){ ?>
+									<option value = "<?php echo $row->UUID_ROLE; ?>"><?php echo $row->ROLE_NAME; ?></option>
+							<?php } ?>
+						</select>										
+										
+						<span class="help-block"></span>
+					</div>
 					<div class="form-group">
 						<label> Pegawai </label>
 						<input name="user_full_name" class="form-control" type="text">

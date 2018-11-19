@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			//Get data from database
 			$data		= $this->tabel_user->ambil_data($kondisi);
+			
 			echo json_encode($data->row());
 		}
 		

@@ -1,5 +1,5 @@
 <?php
-	class M_role extends CI_Model{
+	class role extends CI_Model{
 		public $UUID_ROLE;
 		public $ROLE_NAME;
 		public $ROLE_CODE;
@@ -9,7 +9,8 @@
 		public $DTM_UPD;
 		public $IS_ACTIVE;
 		
-		public function get_entry($condition)
+		//Get data from database
+		public function ambil_data($condition)
 			{
 				return $this->db->get_where('ROLE', $condition);
 			}

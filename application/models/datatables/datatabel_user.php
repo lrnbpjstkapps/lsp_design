@@ -1,18 +1,20 @@
 <?php
 	class datatabel_user extends CI_Model{
-		var $table			= "USR AS usr";
-		var $order			= array('usr.DTM_CRT' => 'DESC'); 
+		var $table			= "USR AS USR";
+		var $order			= array('ROLE.ROLE_NAME' => 'ASC', 'USR.USER_NAME' => 'ASC'); 
 		var $column_order	= array(
-			null, 'usr.USER_NAME', 'usr.LOGIN_ID', 'usr.PHONE', 'usr.EMAIL', 'usr.IS_ONLINE', null, null); 
+			null, 'ROLE.ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE', null, null); 
 		var $column_search	= array(
-			'usr.USER_NAME', 'usr.LOGIN_ID', 'usr.PHONE', 'usr.EMAIL', 'usr.IS_ONLINE');
+			'ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('usr.UUID_USER, usr.LOGIN_ID, usr.USER_NAME, usr.EMAIL,
-				usr.PWD, usr.PHONE, usr.IS_ONLINE, usr.DTM_CRT, usr.IS_ACTIVE');
+			$this->db->select('USR.UUID_USER, UR.UUID_USER_ROLE, ROLE.ROLE_NAME, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
+				USR.PWD, USR.PHONE, USR.IS_ONLINE, USR.DTM_CRT, USR.IS_ACTIVE');
 			$this->db->from($this->table);
-			$this->db->where('usr.IS_ACTIVE', '1');
+			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
+			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
+			$this->db->where('USR.IS_ACTIVE', '1');
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -60,10 +62,11 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('usr.UUID_USER, usr.LOGIN_ID, usr.USER_NAME, usr.EMAIL
-				usr.PWD, usr.PHONE, usr.IS_ONLINE, usr.DTM_CRT, usr.IS_ACTIVE');
+			$this->db->select('USR.UUID_USER');
 			$this->db->from($this->table);
-			$this->db->where('usr.IS_ACTIVE', '1');
+			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
+			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
+			$this->db->where('USR.IS_ACTIVE', '1');
 			
 			return $this->db->count_all_results();
 		}
@@ -79,13 +82,18 @@
 						$no++;
 						$row	= array();
 						$row[]	= $no;
+						$row[] 	= $values->ROLE_NAME;
 						$row[] 	= $values->USER_NAME;
 						$row[] 	= $values->LOGIN_ID;
 						$row[] 	= $values->PHONE;
 						$row[] 	= $values->EMAIL;
-						$row[] 	= $values->IS_ONLINE;
-						$row[] 	= '<a href="javascript:void(0)" onclick="editDt('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
-						$row[] 	= '<a href="javascript:void(0)" onclick="deleteDt('."'".$values->UUID_USER."'".')"><i class="fa fa-trash"></i></a>';
+						if($values->IS_ONLINE == '1'){
+							$row[] 	= '<font color="green">Online</font>';
+						}else{
+							$row[] 	= '<font color="red">Offline</font>';
+						}
+						$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
+						$row[] 	= '<a href="javascript:void(0)" onclick="hapus_data('."'".$values->UUID_USER."'".','."'".$values->UUID_USER_ROLE."'".')"><i class="fa fa-trash"></i></a>';
 						$data[]	= $row;
 					}
 		

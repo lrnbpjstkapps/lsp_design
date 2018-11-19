@@ -25,6 +25,12 @@ class pengelola_user extends CI_Controller {
 		$data["dview"]			= "admin_lsp/v_pengelola_user";
 		$data["dviewEvent"]		= "admin_lsp/v_pengelola_user_event";
 		$data["dlayoutMenu"]	= "common/v_layout_menu_admin_lsp";
+		
+		// Set list of role of user
+		//Condition 
+		$kondisi	= array('IS_ACTIVE' => '1');
+		$data["daftarJenisAkun"] = $this->tabel_role->ambil_data($kondisi);
+		
 		$this->load->view("common/v_layout", $data);
 	}		
 	

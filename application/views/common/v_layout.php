@@ -3,7 +3,7 @@
 	$this->load->view("common/v_layout_header", $data);	
 	$this->load->view($dlayoutMenu, $data);	
 	$this->load->view("common/v_layout_title", $data);	
-	if(isset($dview))
+	if($dview!="")
 		{
 			$this->load->view($dview, $data);
 		}

@@ -7,9 +7,6 @@ class akun extends CI_Controller {
 	public function __construct()
 		{
 			parent::__construct();
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("table/M_user", "M_user");
-			$this->load->model("table/M_user_role", "M_user_role");
 		}
 	
 	public function index()
@@ -51,7 +48,7 @@ class akun extends CI_Controller {
 			'USR.IS_ACTIVE'	=> '1',
 			'ROLE.IS_ACTIVE'=> '1',
 			'USR.PWD'		=> $password);
-		$result		= $this->M_user_role->get_detail_entry($condition);
+		$result		= $this->tabel_user_role->get_detail_entry($condition);
 		
 		if($result->num_rows()>0){
 			$val 	= $result->row();
@@ -98,7 +95,7 @@ class akun extends CI_Controller {
 			'USR.IS_ACTIVE'	=> '1',
 			'ROLE.IS_ACTIVE'=> '1',
 			'USR.PWD'		=> $password);
-		$result		= $this->M_user_role->get_detail_entry($condition);
+		$result		= $this->tabel_user_role->get_detail_entry($condition);
 		
 		if($result->num_rows()>0){
 			echo "true";

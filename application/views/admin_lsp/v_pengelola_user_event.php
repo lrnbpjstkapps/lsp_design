@@ -21,7 +21,7 @@
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [0, 6, 7], 
+						"targets"	: [0, 7, 8], 
 						"orderable"	: false
 					}
 				],
@@ -61,31 +61,31 @@
 					$.ajax({
 						url			: url,
 						type		: 'POST',
-						data		: new FormData($("#<?php echo $form_id[100]; ?>")[0]),
+						data		: new FormData($("#id_form_pengelola_user")[0]),
 						cache		: false,
 						contentType	: false,
 						processData	: false,
 						success		: function(data){
+							//Close the modal
 							$("[data-dismiss=modal]").trigger({ type: "click" });
-							reloadDt();		
 							
-							if(save_method == "add"){
+							//Refresh datatables
+							reloadTabel();		
+							
+							//Show the result
+							if(save_method == "tambah"){
 								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[106]; ?>');
+									alertify.success('Data berhasil ditambahkan');
 								}else{
-									alertify.error('<?php echo $validationMsg[107]; ?>');
+									alertify.error('Data gagal ditambahkan');
 								}	
 							}else{
 								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[108]; ?>');
+									alertify.success('Data berhasil diperbarui');
 								}else{
-									alertify.error('<?php echo $validationMsg[109]; ?>');
+									alertify.error('Data gagal diperbarui');
 								}
 							}
-
-							$('#<?php echo $form_id[100]; ?>')[0].reset();	
-							validator.resetForm(); 
-							$('#<?php echo $form_id[100]; ?> .form-control').removeClass('error');	
 						}
 					});
 					return false;
@@ -113,7 +113,7 @@
 		$('#id_modal_set_data_pengelola_user').modal('show');
 	}
 	
-	function modal_update(uuid){
+	function modal_update(uuid){		
 		//Set kind of data action
 		save_method = "update";
 		
@@ -124,20 +124,37 @@
 		
 		//Set previous data in modal form
 		$.ajax({
-			url 		: "<?= base_url(); ?>admin_lsp/pengelola_user/getOneData/" + uuid,
+			url 		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/satuData_user/" + uuid,
 			type		: "GET",
 			dataType	: "JSON",
 			success		: function(data)
 				{						
-					$('[name="usr_uuid"]').val(data.UUID_USER);
-					$('[name="usr_login_id"]').val(data.LOGIN_ID);
-					$('[name="usr_phone"]').val(data.PHONE);	
-					$('[name="usr_email"]').val(data.EMAIL);	
-					$('[name="usr_is_online"]').val(data.IS_ONLINE);	
+					$('[name="user_uuid"]').val(data.UUID_USER);
+					$('[name="user_full_name"]').val(data.USER_NAME);
+					$('[name="user_login_id"]').val(data.LOGIN_ID);
+					$('[name="user_phone"]').val(data.PHONE);	
+					$('[name="user_email"]').val(data.EMAIL);	
+					$('[name="user_is_online"]').val(data.IS_ONLINE);	
 				},
-			error		: function (jqXHR, textStatus, errorThrown)
+			error		: function (jqXHR, exception)
 				{
-					alert('Terjadi kesalahan saat mengambil data dari admin_lsp/pengelola_user/getOneData');
+					var msg = '';
+					if (jqXHR.status === 0) {
+						msg = 'Not connect.\n Verify Network.';
+					} else if (jqXHR.status == 404) {
+						msg = 'Requested page not found. [404]';
+					} else if (jqXHR.status == 500) {
+						msg = 'Internal Server Error [500].';
+					} else if (exception === 'parsererror') {
+						msg = 'Requested JSON parse failed.';
+					} else if (exception === 'timeout') {
+						msg = 'Time out error.';
+					} else if (exception === 'abort') {
+						msg = 'Ajax request aborted.';
+					} else {
+						msg = 'Uncaught Error.\n' + jqXHR.responseText;
+					}
+					alert(msg);
 				}
 		});
 		
@@ -150,7 +167,7 @@
 	function setData(){
 		if(save_method == 'tambah') {
 			//set URL for 'tambah'
-			url = "<?= base_url(); ?>admin_lsp/pengelola_user/tambahData";	
+			url = "<?= base_url(); ?>admin_lsp/aksiTambahData/satuData_user";	
 			
 			//Check if the form is valid
 			if ($("#id_form_pengelola_user").valid()) {
@@ -158,7 +175,7 @@
 			}				
 		} else {		
 			//set URL for 'update'		
-			url = "<?= base_url(); ?>admin_lsp/pengelola_user/updateData";
+			url = "<?= base_url(); ?>admin_lsp/aksiUpdateData/satuData_user";
 			
 			//Show confirmation box before updating the data
 			if ($("#id_form_pengelola_user").valid()) {
@@ -174,12 +191,12 @@
 		}			
 	}
 
-	function hapus_data(uuid){
+	function hapus_data(uuid_user, uuid_user_role){
 		//Show confirmation box before deleting the data
 		alertify.confirm('Apakah anda yakin ingin menghapus data ini?', function(){
 			{
-				$.ajax({
-					url 		: "<?= base_url(); ?>admin_lsp/pengelola_user/hapusData/"+uuid,
+					$.ajax({
+					url 		: "<?= base_url(); ?>admin_lsp/aksiHapusData/data_user/"+uuid_user+"/"+uuid_user_role,
 					type		: "POST",
 					dataType	: "JSON",
 					success		: function(data)
