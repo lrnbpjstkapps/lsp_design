@@ -1,6 +1,6 @@
 <?php
 	class user extends CI_Model{
-		//All table field 
+		//All table fields 
 		public $UUID_USER;
 		public $LOGIN_ID;
 		public $USER_NAME;

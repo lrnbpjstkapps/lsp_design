@@ -1,5 +1,6 @@
 <?php
 	class role extends CI_Model{
+		//All table fields
 		public $UUID_ROLE;
 		public $ROLE_NAME;
 		public $ROLE_CODE;
@@ -10,42 +11,45 @@
 		public $IS_ACTIVE;
 		
 		//Get data from database
-		public function ambil_data($condition)
+		public function ambil_data($kondisi)
 			{
-				return $this->db->get_where('ROLE', $condition);
+				return $this->db->get_where('ROLE', $kondisi);
 			}
 			
-		public function insert_entry($form_name)
+		//Add one data
+		public function tambah_satu_data($data)
 			{
-				$this->UUID_ROLE	= (!$this->input->post($form_name[245]) ? $this->uuid->v4() : $this->input->post($form_name[245]));
-				$this->ROLE_NAME	= (!$this->input->post($form_name[246]) ? null : $this->input->post($form_name[246]));
-				$this->ROLE_CODE	= (!$this->input->post($form_name[247]) ? null : $this->input->post($form_name[247]));
+				$this->UUID_ROLE	= $data["role_uuid"];
+				$this->ROLE_NAME	= $data["role_name"];
+				$this->ROLE_CODE	= $data["role_code"];
 				$this->USR_CRT		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_CRT		= date('Y-m-d H:i:s');
 				$this->USR_UPD		= null;
 				$this->DTM_UPD		= null;
-				$this->IS_ACTIVE	= '1';
+				$this->IS_ACTIVE	= $data["user_is_active"];
 				
 				return $this->db->insert('ROLE', $this);
 			}
 			
-		public function update_entry($form_name, $data, $condition)
+		//Update data
+		public function update_satu_data($data_lama, $data_baru, $kondisi)
 			{
-				$this->UUID_ROLE	= (!$this->input->post($form_name[245]) ? $data->UUID_ROLE : $this->input->post($form_name[245]));
-				$this->ROLE_NAME	= (!$this->input->post($form_name[246]) ? $data->ROLE_NAME : $this->input->post($form_name[246]));
-				$this->ROLE_CODE	= (!$this->input->post($form_name[247]) ? $data->ROLE_CODE : $this->input->post($form_name[247]));
-				$this->USR_CRT		= $data->USR_CRT;
-				$this->DTM_CRT		= $data->DTM_CRT;
+				$this->UUID_ROLE	= $data_lama->UUID_ROLE;
+				$this->ROLE_NAME	= $data_baru["role_name"];
+				$this->ROLE_CODE	= $data_baru["role_code"];
+				$this->USR_CRT		= $data_lama->USR_CRT;
+				$this->DTM_CRT		= $data_lama->DTM_CRT;
 				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
-				$this->IS_ACTIVE	= (!$this->input->post($form_name[248]) ? $data->IS_ACTIVE : $this->input->post($form_name[248]));
+				$this->IS_ACTIVE	= $data_baru["user_is_active"];
 					
-				return $this->db->update('ROLE', $this, $condition);
+				return $this->db->update('ROLE', $this, $kondisi);
 			}
-			
-		public function delete_entry($condition)
+		
+		//Delete data
+		public function hapus_data($kondisi)
 			{
-				return $this->db->delete('ROLE', $condition);
+				return $this->db->delete('ROLE', $kondisi);
 			}
 		
 	}

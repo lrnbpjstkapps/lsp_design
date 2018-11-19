@@ -1,5 +1,6 @@
 <?php
 	class user_role extends CI_Model{
+		//All table fields
 		public $UUID_USER_ROLE;
 		public $UUID_USER;
 		public $UUID_ROLE;
@@ -9,19 +10,21 @@
 		public $DTM_UPD;
 		public $IS_ACTIVE;
 		
-		public function get_entry($condition)
+		//Get data from database
+		public function ambil_data($kondisi)
 			{
-				return $this->db->get_where('USER_ROLE', $condition);
+				return $this->db->get_where('USER_ROLE', $kondisi);
 			}
 			
-		public function get_detail_entry($condition)
+			
+		public function get_detail_entry($kondisi)
 			{
 				$this->db->select('UR.UUID_USER_ROLE, UR.UUID_USER, UR.UUID_ROLE, UR.IS_ACTIVE,
 					USR.LOGIN_ID, USR.USER_NAME, USR.PWD, USR.IS_ACTIVE, ROLE.ROLE_NAME, ROLE.ROLE_CODE, ROLE.IS_ACTIVE');
 				$this->db->from("USER_ROLE AS UR");
 				$this->db->join("USR", "UR.UUID_USER = USR.UUID_USER", "LEFT");
 				$this->db->join("ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-				$this->db->where($condition);
+				$this->db->where($kondisi);
 				return $this->db->get();
 			}
 			
@@ -35,7 +38,7 @@
 				$this->DTM_CRT			= date('Y-m-d H:i:s');
 				$this->USR_UPD			= null;
 				$this->DTM_UPD			= null;
-				$this->IS_ACTIVE		= $data["user_is_active"];
+				$this->IS_ACTIVE		= $data["user_role_is_active"];
 				
 				return $this->db->insert('USER_ROLE', $this);
 			}

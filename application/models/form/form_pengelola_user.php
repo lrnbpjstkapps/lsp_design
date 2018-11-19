@@ -15,7 +15,7 @@ class form_pengelola_user extends CI_Model {
 			$data["user_is_active"]	= (!$this->input->post('user_is_active') ? '1' : $this->input->post('user_is_active'));
 			
 			//Input into USER ROLE table
-			$data["role_uuid"]		= $this->input->post('role_uuid');
+			$data["role_uuid[]"]	= $this->input->post('role_uuid[]');
 			$data["user_role_uuid"]	= (!$this->input->post('user_role_uuid') ? $this->uuid->v4() : $this->input->post('user_role_uuid'));
 			$data["user_role_is_active"] = (!$this->input->post('user_role_is_active') ? '1' : $this->input->post('user_role_is_active'));
 			

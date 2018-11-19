@@ -26,5 +26,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				echo json_encode($data);
 			}
+			
+		//Get list of user role		
+		public function multipleSelect_role(){
+			//Condition 
+			$kondisi	= array('IS_ACTIVE' => '1');
+			
+			//Get data from database
+			$data 		= $this->tabel_role->ambil_data($kondisi);
+			
+			//Set multipleSelect role
+			foreach($data->result() as $row){
+				echo "<option value='".$row->UUID_ROLE."'> ".$row->ROLE_NAME."</option>";
+			}
+		}
 	}
 ?>

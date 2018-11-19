@@ -35,12 +35,7 @@
 					<input type="hidden" name="user_uuid" id="id_user_uuid"/> 
 					<div class="form-group">
 						<label> Jenis User </label>
-						<select multiple = "multiple" name="role_uuid[]" id="id_role_uuid" class="form-control select2" style="width: 100%;">
-							<?php foreach($daftarJenisAkun->result() as $row){ ?>
-									<option value = "<?php echo $row->UUID_ROLE; ?>"><?php echo $row->ROLE_NAME; ?></option>
-							<?php } ?>
-						</select>										
-										
+						<select multiple = "multiple" name="role_uuid[]" id="id_role_uuid"></select>										
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">

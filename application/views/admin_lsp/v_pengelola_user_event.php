@@ -5,6 +5,8 @@
 	var validator;	
 	
 	$(document).ready(function(){
+		multipleSelect_jenis_user();
+		
 		//Set Tabel
 		tabel = $('#id_tabel_user').DataTable({
 			"processing"		: true, 
@@ -65,6 +67,7 @@
 						cache		: false,
 						contentType	: false,
 						processData	: false,
+						dataType	: "JSON",
 						success		: function(data){
 							//Close the modal
 							$("[data-dismiss=modal]").trigger({ type: "click" });
@@ -73,18 +76,10 @@
 							reloadTabel();		
 							
 							//Show the result
-							if(save_method == "tambah"){
-								if(data=="1"){		
-									alertify.success('Data berhasil ditambahkan');
-								}else{
-									alertify.error('Data gagal ditambahkan');
-								}	
+							if(data.hasil == "sukses"){	
+								alertify.success(data.pesan);
 							}else{
-								if(data=="1"){		
-									alertify.success('Data berhasil diperbarui');
-								}else{
-									alertify.error('Data gagal diperbarui');
-								}
+								alertify.error(data.pesan);
 							}
 						}
 					});
@@ -191,12 +186,12 @@
 		}			
 	}
 
-	function hapus_data(uuid_user, uuid_user_role){
+	function hapus_data(uuid_user){
 		//Show confirmation box before deleting the data
 		alertify.confirm('Apakah anda yakin ingin menghapus data ini?', function(){
 			{
 					$.ajax({
-					url 		: "<?= base_url(); ?>admin_lsp/aksiHapusData/data_user/"+uuid_user+"/"+uuid_user_role,
+					url 		: "<?= base_url(); ?>admin_lsp/aksiHapusData/data_user/"+uuid_user,
 					type		: "POST",
 					dataType	: "JSON",
 					success		: function(data)
@@ -204,28 +199,40 @@
 							//Reload Table
 							reloadTabel();
 							
-							if(data=="1"){
-								alertify.success('Data berhasil dihapus');
+							//Show the result
+							if(data.hasil == "sukses"){	
+								alertify.success(data.pesan);
 							}else{
-								alertify.error('Data gagal dihapus');
-							}							
-						},
-					error		: function (jqXHR, textStatus, errorThrown)
-					{
-						//Reload Table
-						reloadTabel();
-						
-						alertify.error('Terjadi kesalahan saat menghapus data: admin_lsp/pengelola_user/deleteData');
-					}				
+								alertify.error(data.pesan);
+							}						
+						}				
 				});
 
-			}
-				
+			}	
 			}).setting({
 				'labels'	: {
 					ok		: 'Ya',
 					cancel	: 'Tidak'
 				}
 			}).setHeader('Konfirmasi Hapus Data').show();
+	}
+	
+	//Set list of user role
+	function multipleSelect_jenis_user(){		
+		if ($("#id_role_uuid").hasClass("error")) {
+			$('#id_role_uuid').removeClass('error');
+			$("#id_role_uuid").css("display", "block");
+		}
+		
+		$.ajax({
+			type: "POST",
+			dataType: "html",
+			url: "<?= base_url(); ?>admin_lsp/aksiAmbilData/multipleSelect_role",
+			success: function(msg){
+				$('select#id_role_uuid').multipleSelect('destroy');
+				$("select#id_role_uuid").html(msg);
+				$('select#id_role_uuid').multipleSelect({width: '100%'});                        
+			}
+		});						
 	}
 </script>

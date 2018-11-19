@@ -93,7 +93,7 @@
 							$row[] 	= '<font color="red">Offline</font>';
 						}
 						$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
-						$row[] 	= '<a href="javascript:void(0)" onclick="hapus_data('."'".$values->UUID_USER."'".','."'".$values->UUID_USER_ROLE."'".')"><i class="fa fa-trash"></i></a>';
+						$row[] 	= '<a href="javascript:void(0)" onclick="hapus_data('."'".$values->UUID_USER."'".')"><i class="fa fa-trash"></i></a>';
 						$data[]	= $row;
 					}
 		
