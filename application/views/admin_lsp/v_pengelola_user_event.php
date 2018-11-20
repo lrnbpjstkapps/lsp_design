@@ -1,6 +1,7 @@
 <script type = "text/javascript">
 	var save_method;
 	var tabel;
+	var tabel_lihat;
 	var url;
 	var validator;	
 	
@@ -8,7 +9,7 @@
 		multipleSelect_jenis_user();
 		
 		//Set Tabel
-		tabel = $('#id_tabel_user').DataTable({
+		tabel = $('#id_tabel_pengelola_user').DataTable({
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: true,
@@ -183,7 +184,7 @@
 		
 		//Set Title & Show Modal
 		$('.modal-title').text('Tambah User');
-		$('#id_modal_set_data_pengelola_user').modal('show');
+		$('#id_modal_form_pengelola_user').modal('show');
 	}
 	
 	function modal_update(uuid){		
@@ -240,7 +241,7 @@
 		
 		//Set Title & Show Modal
 		$('.modal-title').text('Edit User');
-		$('#id_modal_set_data_pengelola_user').modal('show');
+		$('#id_modal_form_pengelola_user').modal('show');
 	}
 	
 	function setData(){
@@ -320,10 +321,33 @@
 		});						
 	}
 	
-	//View kind of rule
-	function modal_lihat_jenis_akun(uuid){				
-		//Set Title & Show Modal
-		$('.modal-title').text('Daftar Jenis Akun');
-		$('#id_modal_lihat_jenis_akun').modal('show');
+	//View modal 'Jenis Akun'
+	function modal_jenis_akun(uuid, param1, param2){			
+		tabel_jenis_akun = $('#id_tabel_jenis_akun').DataTable({ 		
+			"processing"		: true, 
+			"serverSide"		: true,
+			"searching"			: false,
+			"paging"			: false,
+			"iDisplayLength"	: 10,
+			"order"				: [], 
+			"bDestroy"			: true,
+			"ajax"				: 
+				{
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_jenis_akun/"+uuid,
+					"type"		: "POST"
+				},
+			"columnDefs"		: 
+				[
+					{ 
+						"targets"	: [ 0, 1, 2],
+						"orderable"	: false
+					}
+				],
+		});	
+		
+		$('#id_modal_1_full_name').text(param1);
+		$('#id_modal_2_email').text(param2);
+		$('.modal-title').text('Daftar Jenis Akun '+param1);
+		$('#id_modal_jenis_akun').modal('show');
 	}
 </script>
