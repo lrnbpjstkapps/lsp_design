@@ -3,13 +3,13 @@
 		var $table			= "USR AS USR";
 		var $order			= array('USR.USER_NAME' => 'ASC', 'ROLE.ROLE_NAME' => 'ASC'); 
 		var $column_order	= array(
-			null, 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', null, 'USR.IS_ONLINE', null); 
+			null, 'USR.NO_KTP', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', null, 'USR.IS_ACTIVE', null); 
 		var $column_search	= array(
-			'ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE');
+			'USR.NO_KTP', 'ROLE.ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('USR.UUID_USER, UR.UUID_USER_ROLE, ROLE.ROLE_NAME, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
+			$this->db->select('USR.UUID_USER, UR.UUID_USER_ROLE, ROLE.ROLE_NAME, USR.NO_KTP, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
 				USR.PWD, USR.PHONE, USR.IS_ONLINE, USR.DTM_CRT, USR.IS_ACTIVE, COUNT(*) AS JUMLAH');
 			$this->db->from($this->table);
 			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
@@ -64,9 +64,6 @@
 		public function count_all(){
 			$this->db->select('USR.UUID_USER');
 			$this->db->from($this->table);
-			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
-			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->where('USR.IS_ACTIVE', '1');
 			
 			return $this->db->count_all_results();
 		}
@@ -82,6 +79,7 @@
 						$no++;
 						$row	= array();
 						$row[]	= $no;						
+						$row[] 	= $values->NO_KTP;
 						$row[] 	= $values->USER_NAME;
 						$row[] 	= $values->LOGIN_ID;
 						$row[] 	= $values->PHONE;
@@ -89,7 +87,8 @@
 						if($values->JUMLAH == '1'){
 							$row[] 	= $values->ROLE_NAME;
 						}else{
-							$row[] 	= '('.$values->JUMLAH.' jenis akun)';
+							//$row[] 	= '('.$values->JUMLAH.' jenis akun)';
+							$row[] 	= '<a href="javascript:void(0)" onclick="modal_lihat_jenis_akun('."'".$values->UUID_USER."'".')">('.$values->JUMLAH.' jenis akun)';
 						}
 						
 						if($values->IS_ACTIVE == '1'){

@@ -2,6 +2,7 @@
 	class user extends CI_Model{
 		//All table fields 
 		public $UUID_USER;
+		public $NO_KTP;
 		public $LOGIN_ID;
 		public $USER_NAME;
 		public $EMAIL;
@@ -30,6 +31,7 @@
 		public function tambah_satu_data($data)
 			{
 				$this->UUID_USER	= $data["user_uuid"];
+				$this->NO_KTP		= $data["user_no_ktp"];
 				$this->LOGIN_ID		= $data["user_login_id"];
 				$this->USER_NAME	= $data["user_full_name"];
 				$this->EMAIL		= $data["user_email"];
@@ -49,6 +51,7 @@
 		public function update_satu_data($data_lama, $data_baru, $kondisi)
 			{
 				$this->UUID_USER	= $data_lama->UUID_USER;
+				$this->NO_KTP		= $data_baru["user_no_ktp"];
 				$this->LOGIN_ID		= $data_baru["user_login_id"];
 				$this->USER_NAME	= $data_baru["user_full_name"];
 				$this->EMAIL		= $data_baru["user_email"];

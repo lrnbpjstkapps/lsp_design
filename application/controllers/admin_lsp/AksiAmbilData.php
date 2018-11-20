@@ -57,5 +57,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				echo "<option value='".$row->UUID_ROLE."'> ".$row->ROLE_NAME."</option>";
 			}
 		}
+		
+		//Check Form Validation
+		//Check input of LOGIN_ID
+		public function is_user_loginId_valid(){
+			//condition
+			$kondisi	= array('LOGIN_ID' => $this->input->post('user_login_id'),
+							'UUID_USER !=' => $this->input->post('user_uuid'));
+			echo $this->tabel_user->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of NO_KTP
+		public function is_user_noKTP_valid(){
+			//condition
+			$kondisi	= array('NO_KTP' => $this->input->post('user_no_ktp'),
+							'UUID_USER !=' => $this->input->post('user_uuid'));
+			echo $this->tabel_user->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of PHONE
+		public function is_user_phone_valid(){
+			//condition
+			$kondisi	= array('PHONE' => $this->input->post('user_phone'),
+							'UUID_USER !=' => $this->input->post('user_uuid'));
+			echo $this->tabel_user->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of EMAIL
+		public function is_user_email_valid(){
+			//condition
+			$kondisi	= array('EMAIL' => $this->input->post('user_email'),
+							'UUID_USER !=' => $this->input->post('user_uuid'));
+			echo $this->tabel_user->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
 	}
 ?>

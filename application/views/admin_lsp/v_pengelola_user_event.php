@@ -23,7 +23,7 @@
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [0, 5, 7], 
+						"targets"	: [0, 6, 8], 
 						"orderable"	: false
 					}
 				],
@@ -33,31 +33,109 @@
 		validator = $("#id_form_pengelola_user").validate({
 			rules: 
 				{
+					"role_uuid[]": 
+						{
+							required	: true
+						},
 					user_full_name: 
 						{
 							required	: true,
 							maxlength	: 50
-						},
-					user_login_id: 
-						{
-							required	: true,
-							maxlength	: 50
-						},
+						},					
 					user_phone: 
 						{
 							required	: true,
-							maxlength	: 18
+							minlength	: 10,
+							maxlength	: 18,
+							number		: true,
+							remote 		: 
+								{ 
+									url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_user_phone_valid", 
+									type	:"post",
+									data	: 
+										{
+											user_uuid: 
+												function() {
+													return $('[name="user_uuid"]').val();
+												}
+										}
+								}
 						},
 					user_email: 
 						{
 							required	: true,
-							maxlength	: 50
+							maxlength	: 50,
+							email		: true,
+							remote 		: 
+								{ 
+									url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_user_email_valid", 
+									type	:"post",
+									data	: 
+										{
+											user_uuid: 
+												function() {
+													return $('[name="user_uuid"]').val();
+												}
+										}
+								}
 						},
-					user_is_online: 
+					user_login_id: 
 						{
-							required	: true
+							required	: true,
+							maxlength	: 50,
+							remote 		: 
+								{ 
+									url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_user_loginId_valid", 
+									type	:"post",
+									data	: 
+										{
+											user_uuid: 
+												function() {
+													return $('[name="user_uuid"]').val();
+												}
+										}
+								}
+						},
+					user_no_ktp: 
+						{
+							required	: true,
+							maxlength	: 16,
+							minlength	: 16,
+							number		: true,
+							remote 		: 
+								{ 
+									url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_user_noKtp_valid", 
+									type	:"post",
+									data	: 
+										{
+											user_uuid: 
+												function() {
+													return $('[name="user_uuid"]').val();
+												}
+										}
+								}
 						},
 				}, 
+			ignore: [],
+			messages:
+				{
+					user_login_id : 
+						{ 
+							remote : "Login ID sudah terdaftar." 
+						},
+					user_no_ktp : 
+						{ 
+							remote : "No KTP sudah terdaftar." 
+						},
+					user_phone : 
+						{ 
+							remote : "No HP sudah terdaftar." 
+						},
+					user_email : 
+						{ 
+							remote : "Email sudah terdaftar." 
+						}
+				},
 			submitHandler: function (form)
 				{
 					$.ajax({
@@ -125,8 +203,10 @@
 			success		: function(data)
 				{						
 					$('[name="user_uuid"]').val(data[0].UUID_USER);
+					$('[name="user_pwd"]').val(data[0].PWD);
 					$('[name="user_full_name"]').val(data[0].USER_NAME);
 					$('[name="user_login_id"]').val(data[0].LOGIN_ID);
+					$('[name="user_no_ktp"]').val(data[0].NO_KTP);
 					$('[name="user_phone"]').val(data[0].PHONE);	
 					$('[name="user_email"]').val(data[0].EMAIL);	
 					if(data[0].IS_ACTIVE == '1'){
@@ -161,7 +241,6 @@
 		//Set Title & Show Modal
 		$('.modal-title').text('Edit User');
 		$('#id_modal_set_data_pengelola_user').modal('show');
-		
 	}
 	
 	function setData(){
@@ -239,5 +318,12 @@
 				$('select#id_role_uuid').multipleSelect({width: '100%'});                        
 			}
 		});						
+	}
+	
+	//View kind of rule
+	function modal_lihat_jenis_akun(uuid){				
+		//Set Title & Show Modal
+		$('.modal-title').text('Daftar Jenis Akun');
+		$('#id_modal_lihat_jenis_akun').modal('show');
 	}
 </script>

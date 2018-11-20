@@ -6,6 +6,7 @@ class form_pengelola_user extends CI_Model {
 		{
 			//Input into USER table
 			$data["user_uuid"]		= (!$this->input->post('user_uuid') ? $this->uuid->v4() : $this->input->post('user_uuid'));
+			$data["user_no_ktp"]	= $this->input->post('user_no_ktp');
 			$data["user_full_name"]	= $this->input->post('user_full_name');
 			$data["user_login_id"]	= $this->input->post('user_login_id');
 			$data["user_phone"]		= $this->input->post('user_phone');
