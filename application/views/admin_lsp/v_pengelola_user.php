@@ -6,14 +6,13 @@
 <table id="id_tabel_user" class="table table-hover dataTable" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th> # </th>
-			<th> Jenis Akun </th>
+			<th> # </th>			
 			<th> Pegawai </th>
 			<th> Login ID </th>
 			<th> No Telepon </th>
 			<th> Email </th>
+			<th> Jenis Akun </th>
 			<th> Status </th>
-			<th class="sorting_disabled" align = "center"> &nbsp </th>
 			<th class="sorting_disabled" align = "center"> &nbsp </th>
 		</tr>
 	</thead>
@@ -59,8 +58,8 @@
 						<span class="help-block"></span>
 					</div>	
 					<div class="form-group">
-						<label> Status </label>
-						<input name="user_is_online" class="form-control" type="text">
+						<input name="user_is_active" type="checkbox">
+						<label> IS_ACTIVE </label>
 						<span class="help-block"></span>
 					</div>	
 				</form>		

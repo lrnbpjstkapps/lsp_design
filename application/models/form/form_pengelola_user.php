@@ -12,7 +12,7 @@ class form_pengelola_user extends CI_Model {
 			$data["user_email"]		= $this->input->post('user_email');
 			$data["user_is_online"]	= (!$this->input->post('user_is_online') ? "0" : $this->input->post('user_is_online'));
 			$data["user_pwd"]		= (!$this->input->post('user_pwd') ? md5('welcome1') : $this->input->post('user_pwd'));
-			$data["user_is_active"]	= (!$this->input->post('user_is_active') ? '1' : $this->input->post('user_is_active'));
+			$data["user_is_active"]	= (null != $this->input->post('user_is_active') ? '1' : $this->input->post('user_is_active'));
 			
 			//Input into USER ROLE table
 			$data["role_uuid[]"]	= $this->input->post('role_uuid[]');

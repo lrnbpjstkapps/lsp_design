@@ -1,20 +1,20 @@
 <?php
 	class datatabel_user extends CI_Model{
 		var $table			= "USR AS USR";
-		var $order			= array('ROLE.ROLE_NAME' => 'ASC', 'USR.USER_NAME' => 'ASC'); 
+		var $order			= array('USR.USER_NAME' => 'ASC', 'ROLE.ROLE_NAME' => 'ASC'); 
 		var $column_order	= array(
-			null, 'ROLE.ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE', null, null); 
+			null, 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', null, 'USR.IS_ONLINE', null); 
 		var $column_search	= array(
 			'ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ONLINE');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
 			$this->db->select('USR.UUID_USER, UR.UUID_USER_ROLE, ROLE.ROLE_NAME, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
-				USR.PWD, USR.PHONE, USR.IS_ONLINE, USR.DTM_CRT, USR.IS_ACTIVE');
+				USR.PWD, USR.PHONE, USR.IS_ONLINE, USR.DTM_CRT, USR.IS_ACTIVE, COUNT(*) AS JUMLAH');
 			$this->db->from($this->table);
 			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
 			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->where('USR.IS_ACTIVE', '1');
+			$this->db->group_by('USR.UUID_USER'); 
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -81,19 +81,23 @@
 					{
 						$no++;
 						$row	= array();
-						$row[]	= $no;
-						$row[] 	= $values->ROLE_NAME;
+						$row[]	= $no;						
 						$row[] 	= $values->USER_NAME;
 						$row[] 	= $values->LOGIN_ID;
 						$row[] 	= $values->PHONE;
 						$row[] 	= $values->EMAIL;
-						if($values->IS_ONLINE == '1'){
-							$row[] 	= '<font color="green">Online</font>';
+						if($values->JUMLAH == '1'){
+							$row[] 	= $values->ROLE_NAME;
 						}else{
-							$row[] 	= '<font color="red">Offline</font>';
+							$row[] 	= '('.$values->JUMLAH.' jenis akun)';
+						}
+						
+						if($values->IS_ACTIVE == '1'){
+							$row[] 	= '<font color="green">Aktif</font>';
+						}else{
+							$row[] 	= '<font color="red">Nonaktif</font>';
 						}
 						$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
-						$row[] 	= '<a href="javascript:void(0)" onclick="hapus_data('."'".$values->UUID_USER."'".')"><i class="fa fa-trash"></i></a>';
 						$data[]	= $row;
 					}
 		

@@ -9,32 +9,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//Read data input
 			$data = $this->form_pengelola_user->baca_inputan();
 			
-			//Insert into USER table
+			//#1 Insert into USER table
 			$result_tabel_user = $this->tabel_user->tambah_satu_data($data);
 			
-			//USER ROLE table
+			//#2 Insert into USER_ROLE table
 			if($result_tabel_user == TRUE){
 				$result_tabel_user_role = '1';
 				for($i=0; $i<count($data["role_uuid[]"]); $i++){
+					//Set each USER_ROLE
+					$data["user_role_uuid"]	= $this->uuid->v4();
 					//Set each ROLE_UUID
 					$data["role_uuid"]		= $data["role_uuid[]"][$i];
-					
 					//Insert into USER_ROLE table
 					$result_tabel_user_role	= $this->tabel_user_role->tambah_satu_data($data);
 				}
-				
+								
 				if($result_tabel_user_role == TRUE){
 					$data["hasil"]	= "sukses";
 					$data["pesan"]	= "Data berhasil ditambahkan";
 					echo json_encode($data);
 				}else{
 					$data["hasil"]	= "gagal";
-					$data["pesan"]	= "Data gagal ditambahkan [USER_ROLE]";
+					$data["pesan"]	= "Data gagal ditambahkan [#2 Insert into USER_ROLE table]";
 					echo json_encode($data);
 				}
 			}else{
 				$data["hasil"]	= "gagal";
-				$data["pesan"]	= "Data gagal ditambahkan [USER]";
+				$data["pesan"]	= "Data gagal ditambahkan [#1 Insert into USER table]";
 				echo json_encode($data);
 			}
 		}

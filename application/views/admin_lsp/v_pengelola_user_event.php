@@ -23,7 +23,7 @@
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [0, 7, 8], 
+						"targets"	: [0, 5, 7], 
 						"orderable"	: false
 					}
 				],
@@ -124,12 +124,17 @@
 			dataType	: "JSON",
 			success		: function(data)
 				{						
-					$('[name="user_uuid"]').val(data.UUID_USER);
-					$('[name="user_full_name"]').val(data.USER_NAME);
-					$('[name="user_login_id"]').val(data.LOGIN_ID);
-					$('[name="user_phone"]').val(data.PHONE);	
-					$('[name="user_email"]').val(data.EMAIL);	
-					$('[name="user_is_online"]').val(data.IS_ONLINE);	
+					$('[name="user_uuid"]').val(data[0].UUID_USER);
+					$('[name="user_full_name"]').val(data[0].USER_NAME);
+					$('[name="user_login_id"]').val(data[0].LOGIN_ID);
+					$('[name="user_phone"]').val(data[0].PHONE);	
+					$('[name="user_email"]').val(data[0].EMAIL);	
+					if(data[0].IS_ACTIVE == '1'){
+						$('[name="user_is_active"]').prop('checked', true);
+					}else{
+						$('[name="user_is_active"]').prop('checked', false);
+					}					
+					$('select#id_role_uuid').multipleSelect('setSelects', data[1]);
 				},
 			error		: function (jqXHR, exception)
 				{
@@ -186,12 +191,12 @@
 		}			
 	}
 
-	function hapus_data(uuid_user){
+	function hapus_data(uuid){
 		//Show confirmation box before deleting the data
-		alertify.confirm('Apakah anda yakin ingin menghapus data ini?', function(){
+		alertify.confirm('Semua data yang berkaitan dengan user ini termasuk form, file yang telah diupload, riwayat proses administrasi dsb akan hilang. Apakah anda yakin ingin menghapus data ini?', function(){
 			{
 					$.ajax({
-					url 		: "<?= base_url(); ?>admin_lsp/aksiHapusData/data_user/"+uuid_user,
+					url 		: "<?= base_url(); ?>admin_lsp/aksiHapusData/data_user/"+uuid,
 					type		: "POST",
 					dataType	: "JSON",
 					success		: function(data)
