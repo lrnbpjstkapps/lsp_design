@@ -1,20 +1,17 @@
 <?php
-	class datatabel_user extends CI_Model{
-		var $table			= "USR AS USR";
-		var $order			= array('USR.USER_NAME' => 'ASC', 'ROLE.ROLE_NAME' => 'ASC'); 
-		var $column_order	= array(
-			null, 'USR.NO_KTP', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', null, 'USR.IS_ACTIVE', null); 
-		var $column_search	= array(
-			'USR.NO_KTP', 'ROLE.ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ACTIVE');
+	class datatabel_ss_uk extends CI_Model{
+		var $table			= "SKEMA_UK AS SUK";
+		var $order			= array('SKE.NOMOR_SKEMA' => 'ASC'); 
+		var $column_order	= array(null, 'SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA', 'JUMLAH', 'SKE.IS_ACTIVE', null); 
+		var $column_search	= array('SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA', 'UK.KODE_UK', 'SKE.IS_ACTIVE');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('USR.UUID_USER, ROLE.ROLE_NAME, USR.NO_KTP, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
-				USR.PHONE, USR.IS_ACTIVE, COUNT(*) AS JUMLAH');
+			$this->db->select('SUK.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA, COUNT(*) AS JUMLAH, SKE.IS_ACTIVE, UK.KODE_UK');
 			$this->db->from($this->table);
-			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
-			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->group_by('USR.UUID_USER'); 
+			$this->db->join("SKEMA AS SKE", "SUK.UUID_SKEMA = SKE.UUID_SKEMA", "LEFT");
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->group_by('SUK.UUID_SKEMA'); 
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -62,8 +59,11 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('USR.UUID_USER');
+			$this->db->select('SUK.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA, COUNT(*) AS JUMLAH, SKE.IS_ACTIVE');
 			$this->db->from($this->table);
+			$this->db->join("SKEMA AS SKE", "SUK.UUID_SKEMA = SKE.UUID_SKEMA", "LEFT");
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->group_by('SUK.UUID_SKEMA');
 			
 			return $this->db->count_all_results();
 		}
@@ -78,15 +78,12 @@
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->NO_KTP;
-					$row[] 	= $values->USER_NAME;
-					$row[] 	= $values->LOGIN_ID;
-					$row[] 	= $values->PHONE;
-					$row[] 	= $values->EMAIL;
+					$row[] 	= $values->NOMOR_SKEMA;
+					$row[] 	= $values->NAMA_SKEMA;
 					if($values->JUMLAH == '1'){
-						$row[] 	= $values->ROLE_NAME;
+						$row[] 	= $values->KODE_UK;
 					}else{
-						$row[] 	= '<a href="javascript:void(0)" onclick="modal_jenis_akun('."'".$values->UUID_USER."'".','."'".$values->USER_NAME."'".','."'".$values->EMAIL."'".')">('.$values->JUMLAH.' jenis akun)';
+						$row[] 	= '<a href="javascript:void(0)" onclick="modal_unit_kompetensi('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')">('.$values->JUMLAH.' unit kompetensi)';
 					}
 					
 					if($values->IS_ACTIVE == '1'){
@@ -94,7 +91,7 @@
 					}else{
 						$row[] 	= '<font color="red">Nonaktif</font>';
 					}
-					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
+					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_SKEMA."'".')"><i class="fa fa-edit"></i></a>';
 					$data[]	= $row;
 				}
 	

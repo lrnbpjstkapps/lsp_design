@@ -1,20 +1,16 @@
 <?php
-	class datatabel_user extends CI_Model{
-		var $table			= "USR AS USR";
-		var $order			= array('USR.USER_NAME' => 'ASC', 'ROLE.ROLE_NAME' => 'ASC'); 
-		var $column_order	= array(
-			null, 'USR.NO_KTP', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', null, 'USR.IS_ACTIVE', null); 
-		var $column_search	= array(
-			'USR.NO_KTP', 'ROLE.ROLE_NAME', 'USR.USER_NAME', 'USR.LOGIN_ID', 'USR.PHONE', 'USR.EMAIL', 'USR.IS_ACTIVE');
+	class datatabel_modal_unitKompetensi extends CI_Model{
+		var $table			= "SKEMA_UK AS SUK";
+		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
+		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK'); 
+		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('USR.UUID_USER, ROLE.ROLE_NAME, USR.NO_KTP, USR.LOGIN_ID, USR.USER_NAME, USR.EMAIL,
-				USR.PHONE, USR.IS_ACTIVE, COUNT(*) AS JUMLAH');
+			$this->db->select('UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
 			$this->db->from($this->table);
-			$this->db->join("USER_ROLE AS UR", "USR.UUID_USER = UR.UUID_USER", "LEFT");
-			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->group_by('USR.UUID_USER'); 
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -62,8 +58,10 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('USR.UUID_USER');
+			$this->db->select('UK.KODE_UK, UK.JUDUL_UK');
 			$this->db->from($this->table);
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			return $this->db->count_all_results();
 		}
@@ -78,23 +76,8 @@
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->NO_KTP;
-					$row[] 	= $values->USER_NAME;
-					$row[] 	= $values->LOGIN_ID;
-					$row[] 	= $values->PHONE;
-					$row[] 	= $values->EMAIL;
-					if($values->JUMLAH == '1'){
-						$row[] 	= $values->ROLE_NAME;
-					}else{
-						$row[] 	= '<a href="javascript:void(0)" onclick="modal_jenis_akun('."'".$values->UUID_USER."'".','."'".$values->USER_NAME."'".','."'".$values->EMAIL."'".')">('.$values->JUMLAH.' jenis akun)';
-					}
-					
-					if($values->IS_ACTIVE == '1'){
-						$row[] 	= '<font color="green">Aktif</font>';
-					}else{
-						$row[] 	= '<font color="red">Nonaktif</font>';
-					}
-					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_USER."'".')"><i class="fa fa-edit"></i></a>';
+					$row[] 	= $values->KODE_UK;
+					$row[] 	= $values->JUDUL_UK;
 					$data[]	= $row;
 				}
 	

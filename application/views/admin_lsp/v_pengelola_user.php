@@ -101,7 +101,6 @@
 					<tr>
 						<th> # </th>
 						<th> Jenis Akun </th>
-						<th> Status </th>
 					</tr>
 				</thead>
 					<tbody>

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	//Get Data from Database
 	class AksiAmbilData extends CI_Controller {
 		
+		//GET ONE DATA
 		//Get one data from USER table
 		public function satuData_user($uuid){
 			//Condition 
@@ -33,17 +34,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data_out);
 		}
 		
-		// Datatables for USER table
+		//DATATABLES		
+		//Datatables for USER table
 		public function datatabel_user(){				
-				$result				= $this->datatabel_user->get_datatables();				
-				$recordsFiltered	= $this->datatabel_user->count_filtered();
-				$recordsTotal		= $this->datatabel_user->count_all();
+			$result				= $this->datatabel_user->get_datatables();				
+			$recordsFiltered	= $this->datatabel_user->count_filtered();
+			$recordsTotal		= $this->datatabel_user->count_all();
 
-				$data				= $this->datatabel_user->get_json($result, $recordsTotal, $recordsFiltered);
-				
-				echo json_encode($data);
-			}
+			$data				= $this->datatabel_user->get_json($result, $recordsTotal, $recordsFiltered);
 			
+			echo json_encode($data);
+		}
+		
+		//Datatables for SKEMA_UK table
+		public function datatabel_ss_uk(){				
+			$result				= $this->datatabel_ss_uk->get_datatables();				
+			$recordsFiltered	= $this->datatabel_ss_uk->count_filtered();
+			$recordsTotal		= $this->datatabel_ss_uk->count_all();
+
+			$data				= $this->datatabel_ss_uk->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for 'modal' JENIS_AKUN table
+		public function datatabel_modal_jenisAkun(){
+			$result				= $this->datatabel_modal_jenisAkun->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_jenisAkun->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_jenisAkun->count_all();
+
+			$data				= $this->datatabel_modal_jenisAkun->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for 'modal' UNIT_KOMPETENSI table
+		public function datatabel_modal_unitKompetensi(){				
+			$result				= $this->datatabel_modal_unitKompetensi->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_unitKompetensi->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_unitKompetensi->count_all();
+
+			$data				= $this->datatabel_modal_unitKompetensi->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+			
+		//MULTIPLE SELECT 
 		//Get list of user role		
 		public function multipleSelect_role(){
 			//Condition 
@@ -58,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 		
-		//Check Form Validation
+		//CHECK FORM VALIDATION
 		//Check input of LOGIN_ID
 		public function is_user_loginId_valid(){
 			//condition

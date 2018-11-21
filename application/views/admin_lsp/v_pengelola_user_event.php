@@ -1,7 +1,7 @@
 <script type = "text/javascript">
 	var save_method;
-	var tabel;
-	var tabel_lihat;
+	var tabel_pengelola_user;
+	var tabel_jenis_akun;
 	var url;
 	var validator;	
 	
@@ -9,7 +9,7 @@
 		multipleSelect_jenis_user();
 		
 		//Set Tabel
-		tabel = $('#id_tabel_pengelola_user').DataTable({
+		tabel_pengelola_user = $('#id_tabel_pengelola_user').DataTable({
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: true,
@@ -170,7 +170,7 @@
 	function reloadTabel()
 		{
 			//Reload Table
-			tabel.ajax.reload(null,false); 
+			tabel_pengelola_user.ajax.reload(null,false); 
 		}
 	
 	function modal_tambah(){
@@ -333,20 +333,26 @@
 			"bDestroy"			: true,
 			"ajax"				: 
 				{
-					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_jenis_akun/"+uuid,
-					"type"		: "POST"
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_modal_jenisAkun",
+					"type"		: "POST",
+					"data"		: {
+									user_uuid: 
+										function() {
+											return uuid;
+										}
+								}
 				},
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [ 0, 1, 2],
+						"targets"	: [ 0, 1],
 						"orderable"	: false
 					}
 				],
 		});	
 		
 		$('#id_modal_1_full_name').text(param1);
-		$('#id_modal_2_email').text(param2);
+		$('#id_modal_1_email').text(param2);
 		$('.modal-title').text('Daftar Jenis Akun '+param1);
 		$('#id_modal_jenis_akun').modal('show');
 	}
