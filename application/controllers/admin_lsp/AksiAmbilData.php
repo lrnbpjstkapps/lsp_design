@@ -78,6 +78,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			echo json_encode($data);
 		}
+		
+		//Datatables for 'modal' UNIT_KOMPETENSI table (Form 'Urutan Unit Kompetensi')
+		public function datatabel_modal_urutan_unitKompetensi(){				
+			$result				= $this->datatabel_modal_urutan_unitKompetensi->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_urutan_unitKompetensi->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_urutan_unitKompetensi->count_all();
+
+			$data				= $this->datatabel_modal_urutan_unitKompetensi->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
 			
 		//MULTIPLE SELECT 
 		//Get list of user role		

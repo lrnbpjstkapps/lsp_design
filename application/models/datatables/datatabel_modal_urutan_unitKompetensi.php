@@ -1,17 +1,16 @@
 <?php
-	class datatabel_ss_uk extends CI_Model{
+	class datatabel_modal_urutan_unitKompetensi extends CI_Model{
 		var $table			= "SKEMA_UK AS SUK";
-		var $order			= array('SKE.NOMOR_SKEMA' => 'ASC'); 
-		var $column_order	= array(null, 'SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA', 'JUMLAH', 'SKE.IS_ACTIVE', null); 
-		var $column_search	= array('SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA', 'UK.KODE_UK', 'SKE.IS_ACTIVE');
+		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
+		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK', null); 
+		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('SUK.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA, COUNT(*) AS JUMLAH, SKE.IS_ACTIVE, UK.KODE_UK');
+			$this->db->select('SUK.UUID_SKEMA_UK, UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
 			$this->db->from($this->table);
-			$this->db->join("SKEMA AS SKE", "SUK.UUID_SKEMA = SKE.UUID_SKEMA", "LEFT");
 			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
-			$this->db->group_by('SUK.UUID_SKEMA'); 
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -59,11 +58,10 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('SUK.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA, COUNT(*) AS JUMLAH, SKE.IS_ACTIVE');
+			$this->db->select('UK.KODE_UK, UK.JUDUL_UK');
 			$this->db->from($this->table);
-			$this->db->join("SKEMA AS SKE", "SUK.UUID_SKEMA = SKE.UUID_SKEMA", "LEFT");
 			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
-			$this->db->group_by('SUK.UUID_SKEMA');
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			return $this->db->count_all_results();
 		}
@@ -73,26 +71,17 @@
 			$data 		= array();
 			$no			= $_POST['start'];
 			
+			$i = 0;
 			foreach ($result as $values) 
 				{
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->NOMOR_SKEMA;
-					$row[] 	= $values->NAMA_SKEMA;
-					if($values->JUMLAH == '1'){
-						$row[] 	= $values->KODE_UK;
-					}else{
-						$row[] 	= '<a href="javascript:void(0)" onclick="modal_unit_kompetensi('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')">('.$values->JUMLAH.' unit kompetensi)';
-					}
-					
-					if($values->IS_ACTIVE == '1'){
-						$row[] 	= '<font color="green">Aktif</font>';
-					}else{
-						$row[] 	= '<font color="red">Nonaktif</font>';
-					}
-					$row[] 	= '<a href="javascript:void(0)" onclick="modal_urutan_unitKompetensi('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')"><i class="fa fa-edit"></i>';
+					$row[] 	= $values->KODE_UK;
+					$row[] 	= $values->JUDUL_UK;
+					$row[] 	= '<input name="uuid_suk[]" value="'.$values->URUTAN.'" class="form-control" type="text">';
 					$data[]	= $row;
+					$i++;
 				}
 	
 			$output 	= array

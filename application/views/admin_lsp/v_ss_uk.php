@@ -69,29 +69,32 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>	
 			
-			<div class="modal-body">				
-				<dl class="row">
-					<dt class="col-md-5"> Kode Skema Sertifikasi </dt>
-						<dd id="id_modal_1_kodeSkema" class="col-md-7">Text</dd>
-					<dt class="col-md-5"> Nomor Skema Sertifikasi </dt>
-						<dd id="id_modal_1_nomorSkema" class="col-md-7">Text</dd>
-				</dl>
-			  
-				<table id="id_tabel_unit_kompetensi" class="table table-hover dataTable" width="100%">
-				<thead>
-					<tr>
-						<th> # </th>
-						<th> Kode Unit Kompetensi </th>
-						<th> Nama Unit Kompetensi </th>
-						<th> Urutan </th>
-					</tr>
-				</thead>
-					<tbody>
-					</tbody>
-				</table>			
+			<div class="modal-body">	
+				<form id="id_form_urutan_unitKompetensi"> 	
+					<dl class="row">
+						<dt class="col-md-5"> Kode Skema Sertifikasi </dt>
+							<dd id="id_modal_2_kodeSkema" class="col-md-7">Text</dd>
+						<dt class="col-md-5"> Nomor Skema Sertifikasi </dt>
+							<dd id="id_modal_2_nomorSkema" class="col-md-7">Text</dd>
+					</dl>
+				  
+					<table id="id_tabel_urutan_unitKompetensi" class="table table-hover dataTable" width="100%">
+					<thead>
+						<tr>
+							<th> # </th>
+							<th> Kode Unit Kompetensi </th>
+							<th> Nama Unit Kompetensi </th>
+							<th> Urutan </th>
+						</tr>
+					</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</form>
 			</div>
 			
 			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="setData()"> Simpan </button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
 			</div>			
 		</div>
