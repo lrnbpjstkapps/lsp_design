@@ -50,17 +50,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		
 		//Update data in SKEMA_UK table
-		public function data_skema_uk(){	
-			$uuid_suk	= $this->input->post('uuid_suk[]');
-			for($i=0; $i<count($uuid_suk); $i++){
-				$kondisi	= array('UUID_SKEMA_UK' => $uuid_suk[$i]);
-				$data_lama	= $this->tabel_skema_uk->ambil_satu_data($kondisi);
-				$data_baru	= $this->form_skema_uk->baca_inputan();
-				$result_user_upd=  $this->tabel_skema_uk->update_satu_data($data_lama, $data_baru, $kondisi);
-			}
+		public function data_ss_uk(){				
+			/*if($result_ss_uk_upd == TRUE){
+				$data["hasil"]	= "sukses";
+				$data["pesan"]	= "Data berhasil diupdate.";
+				echo json_encode($data);
+			}else{
+				$data["hasil"]	= "gagal";
+				$data["pesan"]	= "Data gagal diupdate [#1 Update data in USER table]";
+				echo json_encode($data);
+			}*/
 			
-			$data["hasil"]	= "gagal";
-			$data["pesan"]	= "Data gagal diupdate [#1 Update data in USER table]";
+			$data["hasil"]	= "sukses";
+			$data["pesan"]	= "Data berhasil diupdate.";
 			echo json_encode($data);
 			
 		}

@@ -83,7 +83,7 @@
 					if($values->JUMLAH == '1'){
 						$row[] 	= $values->KODE_UK;
 					}else{
-						$row[] 	= '<a href="javascript:void(0)" onclick="modal_unit_kompetensi('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')">('.$values->JUMLAH.' unit kompetensi)';
+						$row[] 	= '<a href="javascript:void(0)" onclick="modal_tabel_uk('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')">('.$values->JUMLAH.' unit kompetensi)';
 					}
 					
 					if($values->IS_ACTIVE == '1'){
@@ -91,7 +91,7 @@
 					}else{
 						$row[] 	= '<font color="red">Nonaktif</font>';
 					}
-					$row[] 	= '<a href="javascript:void(0)" onclick="modal_urutan_unitKompetensi('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')"><i class="fa fa-edit"></i>';
+					$row[] 	= '<a href="javascript:void(0)" onclick="modal_form_urutan_uk('."'".$values->UUID_SKEMA."'".','."'".$values->NOMOR_SKEMA."'".','."'".$values->NAMA_SKEMA."'".')"><i class="fa fa-edit"></i>';
 					$data[]	= $row;
 				}
 	

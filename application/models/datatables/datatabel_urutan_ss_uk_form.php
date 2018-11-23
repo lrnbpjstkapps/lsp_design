@@ -1,13 +1,13 @@
 <?php
-	class datatabel_modal_unitKompetensi extends CI_Model{
+	class datatabel_urutan_ss_uk_form extends CI_Model{
 		var $table			= "SKEMA_UK AS SUK";
 		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
-		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK'); 
+		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK', null); 
 		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
+			$this->db->select('SUK.UUID_SKEMA_UK, UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
 			$this->db->from($this->table);
 			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
 			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
@@ -71,6 +71,7 @@
 			$data 		= array();
 			$no			= $_POST['start'];
 			
+			$i = 0;
 			foreach ($result as $values) 
 				{
 					$no++;
@@ -78,7 +79,9 @@
 					$row[]	= $no;						
 					$row[] 	= $values->KODE_UK;
 					$row[] 	= $values->JUDUL_UK;
+					$row[] 	= '<input name="'.$values->UUID_SKEMA_UK.'" value="'.$values->URUTAN.'" class="form-control" type="text">';
 					$data[]	= $row;
+					$i++;
 				}
 	
 			$output 	= array

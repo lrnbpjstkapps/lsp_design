@@ -134,17 +134,19 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
 		"common/m_globalval"		=> "m_globalval",
+		
+		"datatables/datatabel_modal_jenisAkun" 				=> "datatabel_modal_jenisAkun", 
+		"datatables/datatabel_modal_uk" 					=> "datatabel_modal_uk", 
+		"datatables/datatabel_urutan_ss_uk_form"			=> "datatabel_urutan_ss_uk_form",	
+		"datatables/datatabel_user" 						=> "datatabel_user",
+		"datatables/datatabel_ss_uk" 						=> "datatabel_ss_uk",
+		
 		"datatables/M_list_apl01"	=> "M_list_apl01",
 		"datatables/M_list_apl02"	=> "M_list_apl02",		
 		"datatables/M_list_mma" 	=> "M_list_mma",
 		"datatables/M_list_verif_apl01" 					=> "M_list_verif_apl01", 
 		"datatables/M_list_verif_apl02_admlsp" 				=> "M_list_verif_apl02_admlsp", 
 		"datatables/M_list_verif_apl02_sso" 				=> "M_list_verif_apl02_sso", 
-		"datatables/datatabel_user" 						=> "datatabel_user", 
-		"datatables/datatabel_modal_jenisAkun" 				=> "datatabel_modal_jenisAkun", 
-		"datatables/datatabel_modal_unitKompetensi" 		=> "datatabel_modal_unitKompetensi", 
-		"datatables/datatabel_ss_uk" 						=> "datatabel_ss_uk",
-		"datatables/datatabel_modal_urutan_unitKompetensi"	=> "datatabel_modal_urutan_unitKompetensi",		
 		"form/M_form_apl_01"		=> "M_form_apl_01", 
 		"form/M_form_apl_02"		=> "M_form_apl_02", 
 		"form/M_form_mma"			=> "M_form_mma", 

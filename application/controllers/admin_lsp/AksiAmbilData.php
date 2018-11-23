@@ -69,23 +69,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		
 		//Datatables for 'modal' UNIT_KOMPETENSI table
-		public function datatabel_modal_unitKompetensi(){				
-			$result				= $this->datatabel_modal_unitKompetensi->get_datatables();				
-			$recordsFiltered	= $this->datatabel_modal_unitKompetensi->count_filtered();
-			$recordsTotal		= $this->datatabel_modal_unitKompetensi->count_all();
+		public function datatabel_modal_uk(){				
+			$result				= $this->datatabel_modal_uk->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_uk->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_uk->count_all();
 
-			$data				= $this->datatabel_modal_unitKompetensi->get_json($result, $recordsTotal, $recordsFiltered);
+			$data				= $this->datatabel_modal_uk->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
 		
 		//Datatables for 'modal' UNIT_KOMPETENSI table (Form 'Urutan Unit Kompetensi')
-		public function datatabel_modal_urutan_unitKompetensi(){				
-			$result				= $this->datatabel_modal_urutan_unitKompetensi->get_datatables();				
-			$recordsFiltered	= $this->datatabel_modal_urutan_unitKompetensi->count_filtered();
-			$recordsTotal		= $this->datatabel_modal_urutan_unitKompetensi->count_all();
+		public function datatabel_urutan_ss_uk_form(){				
+			$result				= $this->datatabel_urutan_ss_uk_form->get_datatables();				
+			$recordsFiltered	= $this->datatabel_urutan_ss_uk_form->count_filtered();
+			$recordsTotal		= $this->datatabel_urutan_ss_uk_form->count_all();
 
-			$data				= $this->datatabel_modal_urutan_unitKompetensi->get_json($result, $recordsTotal, $recordsFiltered);
+			$data				= $this->datatabel_urutan_ss_uk_form->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}

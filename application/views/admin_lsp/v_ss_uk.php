@@ -25,7 +25,7 @@
 	</tbody>
 </table>
 
-<div class="modal fade" id="id_modal_unit_kompetensi" role="dialog">
+<div class="modal fade" id="id_modal_tabel_uk" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<div class="modal-header">
@@ -41,7 +41,7 @@
 						<dd id="id_modal_1_nomorSkema" class="col-md-7">Text</dd>
 				</dl>
 			  
-				<table id="id_tabel_unit_kompetensi" class="table table-hover dataTable" width="100%">
+				<table id="id_tabel_uk" class="table table-hover dataTable" width="100%">
 				<thead>
 					<tr>
 						<th> # </th>
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="id_modal_urutan_unitKompetensi" role="dialog">
+<div class="modal fade" id="id_modal_form_urutan_uk" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<div class="modal-header">
@@ -70,7 +70,7 @@
 			</div>	
 			
 			<div class="modal-body">	
-				<form id="id_form_urutan_unitKompetensi"> 	
+				<form id="id_form_urutan_uk"> 	
 					<dl class="row">
 						<dt class="col-md-5"> Kode Skema Sertifikasi </dt>
 							<dd id="id_modal_2_kodeSkema" class="col-md-7">Text</dd>
@@ -78,7 +78,7 @@
 							<dd id="id_modal_2_nomorSkema" class="col-md-7">Text</dd>
 					</dl>
 				  
-					<table id="id_tabel_urutan_unitKompetensi" class="table table-hover dataTable" width="100%">
+					<table id="id_tabel_urutan_uk" class="table table-hover dataTable" width="100%">
 					<thead>
 						<tr>
 							<th> # </th>
@@ -94,7 +94,7 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="setData()"> Simpan </button>
+				<button type="button" class="btn btn-primary" onClick="setData()"> Simpan </button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
 			</div>			
 		</div>
