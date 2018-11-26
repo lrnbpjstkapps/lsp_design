@@ -79,7 +79,7 @@
 					$row[]	= $no;						
 					$row[] 	= $values->KODE_UK;
 					$row[] 	= $values->JUDUL_UK;
-					$row[] 	= '<input name="'.$values->UUID_SKEMA_UK.'" value="'.$values->URUTAN.'" class="form-control" type="text">';
+					$row[] 	= '<input name="'.$values->UUID_SKEMA_UK.'" value="'.$values->URUTAN.'" class="form-control" type="number" min="10" max="999">';
 					$data[]	= $row;
 					$i++;
 				}

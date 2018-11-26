@@ -50,20 +50,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		
 		//Update data in SKEMA_UK table
-		public function data_ss_uk(){				
-			/*if($result_ss_uk_upd == TRUE){
+		public function data_ss_uk(){	
+			//Convert JSON data into array
+			$data_input = json_decode(file_get_contents('php://input'), true);
+			$uuid_ss_uk = array_keys($data_input);
+			$values_ss_uk = array_values($data_input);
+			
+			//Update data in SS_UK table
+			$result_sukses 	= 0;
+			$result_gagal 	= 0;
+			for($i=0; $i<count($uuid_ss_uk); $i++){			
+				$kondisi		= array('UUID_SKEMA_UK' => $uuid_ss_uk[$i]);
+				$data_lama		= $this->tabel_skema_uk->ambil_satu_data($kondisi);
+				$result_upd		= $this->tabel_skema_uk->update_satu_data($data_lama, $values_ss_uk[$i], $kondisi);
+				
+				//Count failed update transaction
+				if($result_upd == TRUE){
+					$result_sukses++;
+				}else{
+					$result_gagal++;
+				}
+			}
+			
+			if($result_sukses == count($uuid_ss_uk)){
 				$data["hasil"]	= "sukses";
 				$data["pesan"]	= "Data berhasil diupdate.";
 				echo json_encode($data);
 			}else{
 				$data["hasil"]	= "gagal";
-				$data["pesan"]	= "Data gagal diupdate [#1 Update data in USER table]";
+				$data["pesan"]	= $result_gagal." dari ".count($uuid_ss_uk)." data gagal diupdate.";
 				echo json_encode($data);
-			}*/
+			}
 			
-			$data["hasil"]	= "sukses";
-			$data["pesan"]	= "Data berhasil diupdate.";
-			echo json_encode($data);
 			
 		}
 	}

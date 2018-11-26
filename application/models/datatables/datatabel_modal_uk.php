@@ -2,7 +2,7 @@
 	class datatabel_modal_uk extends CI_Model{
 		var $table			= "SKEMA_UK AS SUK";
 		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
-		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK'); 
+		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK', 'SUK.URUTAN'); 
 		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
@@ -78,6 +78,7 @@
 					$row[]	= $no;						
 					$row[] 	= $values->KODE_UK;
 					$row[] 	= $values->JUDUL_UK;
+					$row[] 	= $values->URUTAN;
 					$data[]	= $row;
 				}
 	

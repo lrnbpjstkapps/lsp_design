@@ -47,6 +47,7 @@
 						<th> # </th>
 						<th> Kode Unit Kompetensi </th>
 						<th> Nama Unit Kompetensi </th>
+						<th> Urutan </th>
 					</tr>
 				</thead>
 					<tbody>

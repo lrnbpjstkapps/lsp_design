@@ -41,7 +41,7 @@
 					$.ajax({
 						url			: url,
 						type		: 'POST',
-						data		: new FormData($("#id_form_urutan_uk")[0]),
+						data		: formData_json,
 						cache		: false,
 						contentType	: false,
 						processData	: false,
@@ -146,8 +146,10 @@
 		//set URL for 'update'		
 		url 		= "<?= base_url(); ?>admin_lsp/aksiUpdateData/data_ss_uk";
 		
+		//formData
 		var formData 	= new FormData($("#id_form_urutan_uk")[0]);
 		
+		//formData to JSON
 		var object = {};
 		formData.forEach(function(value, key){
 			object[key] = value;

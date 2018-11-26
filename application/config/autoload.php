@@ -152,6 +152,9 @@ $autoload['model'] = array(
 		"form/M_form_mma"			=> "M_form_mma", 
 		"form/M_form_mma_kuk"		=> "M_form_mma_kuk", 
 		"form/form_pengelola_user"	=> "form_pengelola_user", 
+		"form/form_skema_uk"		=> "form_skema_uk", 
+		
+		
 		"table/M_administrasi"		=> "M_administrasi",
 		"table/M_answer_apl_02"		=> "M_ans_apl02",
 		"table/M_apl01_bukti"		=> "M_apl01_bukti",

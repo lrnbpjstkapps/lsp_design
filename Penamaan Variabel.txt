@@ -1,0 +1,37 @@
+#Nama Form
+//PENGELOLA USER
+- id_pengelolaUser_form_user
+//SS_UK
+- id_form_urutan_uk
+
+#Nama Tabel
+//SS_UK
+- id_tabel_ss_uk
+- id_tabel_uk
+- id_tabel_urutan_uk
+
+#Nama Modal
+//SS_UK
+- id_modal_tabel_uk
+- id_modal_form_urutan_uk
+
+aksiTambahData
+-
+
+aksiAmbilData
+//SS_UK
+- datatabel_ss_uk
+- datatabel_modal_uk
+- datatabel_urutan_ss_uk_form
+
+aksiUpdateData
+- data_ss_uk
+
+aksiHapusData
+
+
+- Absensi Kegiatan 28 - 30 
+- Absensi Pembinaan Personil 30 - 1
+
+
+
