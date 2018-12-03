@@ -1,14 +1,47 @@
 <script type = "text/javascript">
 	var save_method;
-	var tabel_ss_uk;
-	var tabel_uk;
-	var tabel_urutan_uk;
 	var url;
 	var validator;	
 	var formData_json;
 	
+	var tabel_ss_uk;
+	var tabel_uk;
+	var tabel_form_ss_uk;
+	
+	function setData(){	
+		//set URL for 'update'		
+		url 		= "<?= base_url(); ?>admin_lsp/aksiUpdateData/data_ss_uk";
+		
+		//Initiate formData
+		var formData 	= new FormData($("#id_form_urutan_uk")[0]);
+		
+		//formData to JSON
+		var object = {};
+		formData.forEach(function(value, key){
+			object[key] = value;
+		});
+		formData_json = JSON.stringify(object);
+		
+		//Show confirmation box before updating the data
+		if ($("#id_form_urutan_uk").valid()) {
+			alertify.confirm('Apakah anda yakin ingin mengupdate data?', function(){
+				$("#id_form_urutan_uk").submit();						
+			}).setting({
+				'labels'	: {
+					ok		: 'Ya',
+					cancel	: 'Tidak'
+				}
+			}).setHeader('Konfirmasi Update Data').show();					
+		}					
+	}
+	
+	function reloadTabel(){
+		//Reload Table
+		tabel_ss_uk.ajax.reload(null,false); 
+	}
+	
 	$(document).ready(function(){		
-		//Set Tabel
+		//Tabel Utama Skema Sertifikasi - Unit Kompetensi
 		tabel_ss_uk = $('#id_tabel_ss_uk').DataTable({
 			"processing"		: true, 
 			"serverSide"		: true,
@@ -30,7 +63,7 @@
 				],
 		});
 		
-		//Form validation
+		//Validation: Modal Form SS - UK
 		validator = $("#id_form_urutan_uk").validate({
 			rules: 
 				{
@@ -66,12 +99,7 @@
 		});
 	});
 	
-	function reloadTabel(){
-		//Reload Table
-		tabel_ss_uk.ajax.reload(null,false); 
-	}
-	
-	//View modal 'Unit Kompetensi'
+	//Modal Tabel Unit Kompetensi
 	function modal_tabel_uk(uuid, param1, param2){			
 		tabel_uk = $('#id_tabel_uk').DataTable({ 		
 			"processing"		: true, 
@@ -107,8 +135,9 @@
 		$('#id_modal_tabel_uk').modal('show');
 	}
 	
+	//Modal Form SS - UK
 	function modal_form_urutan_uk(uuid, param1, param2){			
-		tabel_urutan_unitKompetensi = $('#id_tabel_urutan_uk').DataTable({ 		
+		tabel_form_ss_uk = $('#id_tabel_urutan_uk').DataTable({ 		
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: false,
@@ -118,7 +147,7 @@
 			"bDestroy"			: true,
 			"ajax"				: 
 				{
-					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_urutan_ss_uk_form",
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_form_ss_uk",
 					"type"		: "POST",
 					"data"		: {
 									skema_uuid: 
@@ -140,32 +169,5 @@
 		$('#id_modal_2_nomorSkema').text(param2);
 		$('.modal-title').text('Daftar Unit Kompetensi '+param1);
 		$('#id_modal_form_urutan_uk').modal('show');
-	}
-	
-	function setData(){	
-		//set URL for 'update'		
-		url 		= "<?= base_url(); ?>admin_lsp/aksiUpdateData/data_ss_uk";
-		
-		//formData
-		var formData 	= new FormData($("#id_form_urutan_uk")[0]);
-		
-		//formData to JSON
-		var object = {};
-		formData.forEach(function(value, key){
-			object[key] = value;
-		});
-		formData_json = JSON.stringify(object);
-		
-		//Show confirmation box before updating the data
-		if ($("#id_form_urutan_uk").valid()) {
-			alertify.confirm('Apakah anda yakin ingin mengupdate data?', function(){
-				$("#id_form_urutan_uk").submit();						
-			}).setting({
-				'labels'	: {
-					ok		: 'Ya',
-					cancel	: 'Tidak'
-				}
-			}).setHeader('Konfirmasi Update Data').show();					
-		}					
 	}
 </script>

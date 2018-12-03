@@ -9,6 +9,7 @@
 
 </br>
 
+<!-- Tabel Utama Skema Sertifikasi - Unit Kompetensi -->
 <table id="id_tabel_ss_uk" class="table table-hover dataTable" cellspacing="0" width="100%">
 	<thead>
 		<tr>
@@ -25,6 +26,7 @@
 	</tbody>
 </table>
 
+<!-- Modal Tabel Unit Kompetensi -->
 <div class="modal fade" id="id_modal_tabel_uk" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -62,7 +64,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="id_modal_form_urutan_uk" role="dialog">
+<!-- Modal Form SS - UK -->
+<div class="modal fade" id="id_modal_form_ss_uk" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 			<div class="modal-header">
@@ -71,7 +74,7 @@
 			</div>	
 			
 			<div class="modal-body">	
-				<form id="id_form_urutan_uk"> 	
+				<form id="id_form_ss_uk"> 	
 					<dl class="row">
 						<dt class="col-md-5"> Kode Skema Sertifikasi </dt>
 							<dd id="id_modal_2_kodeSkema" class="col-md-7">Text</dd>
@@ -79,7 +82,7 @@
 							<dd id="id_modal_2_nomorSkema" class="col-md-7">Text</dd>
 					</dl>
 				  
-					<table id="id_tabel_urutan_uk" class="table table-hover dataTable" width="100%">
+					<table id="id_tabel_form_ss_uk" class="table table-hover dataTable" width="100%">
 					<thead>
 						<tr>
 							<th> # </th>
