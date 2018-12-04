@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//#1 Update data in USER table
 			$kondisi		= array('UUID_USER' => $this->input->post('user_uuid'));
 			$data_lama_user	= $this->tabel_user->ambil_satu_data($kondisi);
-			$data_baru_user	= $this->form_pengelola_user->baca_inputan();
+			$data_baru_user	= $this->form_user->baca_inputan();
 			$result_user_upd=  $this->tabel_user->update_satu_data($data_lama_user, $data_baru_user, $kondisi);
 			
 			//#2 Delete previous data from USER_ROLE table
@@ -47,6 +47,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$data["pesan"]	= "Data gagal diupdate [#1 Update data in USER table]";
 				echo json_encode($data);
 			}
+		}
+		
+		//Update one data in SKEMA table
+		public function satuData_ss(){				
+			//#1 Update data in SKEMA table
+			$kondisi		= array('UUID_SKEMA' => $this->input->post('ss_uuid'));
+			$data_lama		= $this->tabel_skema->ambil_satu_data($kondisi);
+			$data_baru		= $this->form_ss->baca_inputan();
+			$result			= $this->tabel_skema->update_satu_data($data_lama, $data_baru, $kondisi);
+
+			if($result == TRUE){
+				$data["hasil"]	= "sukses";
+				$data["pesan"]	= "Data berhasil diupdate";
+				echo json_encode($data);
+			}else{
+				$data["hasil"]	= "gagal";
+				$data["pesan"]	= "Data gagal diupdate";
+				echo json_encode($data);
+			}									
 		}
 		
 		//Update data in SKEMA_UK table

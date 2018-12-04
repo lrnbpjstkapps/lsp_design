@@ -1,16 +1,16 @@
 <?php
-	class datatabel_modal_jenisAkun extends CI_Model{
-		var $table			= "USER_ROLE AS UR";
-		var $order			= array('ROLE.ROLE_NAME' => 'ASC'); 
-		var $column_order	= array(null, null); 
-		var $column_search	= array('ROLE.ROLE_NAME');
+	class datatabel_form_ss_uk extends CI_Model{
+		var $table			= "SKEMA_UK AS SUK";
+		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
+		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK', null); 
+		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('UR.UUID_USER_ROLE, UR.UUID_USER, ROLE.ROLE_NAME');
+			$this->db->select('SUK.UUID_SKEMA_UK, UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
 			$this->db->from($this->table);
-			$this->db->join("ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->where('UR.UUID_USER', $this->input->post('user_uuid'));
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -58,10 +58,10 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('UR.UUID_USER_ROLE, UR.UUID_USER, ROLE.ROLE_NAME');
+			$this->db->select('UK.KODE_UK, UK.JUDUL_UK');
 			$this->db->from($this->table);
-			$this->db->join("ROLE AS ROLE", "UR.UUID_ROLE = ROLE.UUID_ROLE", "LEFT");
-			$this->db->where('UR.UUID_USER', $this->input->post('user_uuid'));
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			return $this->db->count_all_results();
 		}
@@ -71,13 +71,17 @@
 			$data 		= array();
 			$no			= $_POST['start'];
 			
+			$i = 0;
 			foreach ($result as $values) 
 				{
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->ROLE_NAME;
+					$row[] 	= $values->KODE_UK;
+					$row[] 	= $values->JUDUL_UK;
+					$row[] 	= '<input name="'.$values->UUID_SKEMA_UK.'" value="'.$values->URUTAN.'" class="form-control" type="number" min="10" max="999" required>';
 					$data[]	= $row;
+					$i++;
 				}
 	
 			$output 	= array

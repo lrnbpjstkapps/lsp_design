@@ -7,10 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//GET ONE DATA
 		//Get one data from USER table
 		public function satuData_user($uuid){
-			//Condition 
+			//Get data from USER table 
 			$kondisi		= array('UUID_USER' => $uuid);
-			
-			//Get data from USER table
 			$data_user		= $this->tabel_user->ambil_data($kondisi);
 			
 			//Initialitation of array data
@@ -24,14 +22,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$i				= 0;
 			foreach($data_user_role->result() as $row){
 				$role_uuid[$i++] = $row->UUID_ROLE;
-			}
-			
+			}			
 			$data["role_uuid"] = $role_uuid;
 			
 			//Compile arrays
 			$data_out		= array_values($data);
 			
 			echo json_encode($data_out);
+		}
+		
+		//Get one data from SKEMA table
+		public function satuData_ss($uuid){
+			//Get data from SKEMA table
+			$kondisi		= array('UUID_SKEMA' => $uuid);
+			$data_skema		= $this->tabel_skema->ambil_satu_data($kondisi);
+			
+			echo json_encode($data_skema);
 		}
 		
 		//DATATABLES		
@@ -42,6 +48,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$recordsTotal		= $this->datatabel_user->count_all();
 
 			$data				= $this->datatabel_user->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for SKEMA table
+		public function datatabel_ss(){				
+			$result				= $this->datatabel_ss->get_datatables();				
+			$recordsFiltered	= $this->datatabel_ss->count_filtered();
+			$recordsTotal		= $this->datatabel_ss->count_all();
+
+			$data				= $this->datatabel_ss->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -57,13 +74,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data);
 		}
 		
-		//Datatables for 'modal' JENIS_AKUN table
-		public function datatabel_modal_jenisAkun(){
-			$result				= $this->datatabel_modal_jenisAkun->get_datatables();				
-			$recordsFiltered	= $this->datatabel_modal_jenisAkun->count_filtered();
-			$recordsTotal		= $this->datatabel_modal_jenisAkun->count_all();
+		//Datatables for 'modal' ROLE table
+		public function datatabel_modal_role(){
+			$result				= $this->datatabel_modal_role->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_role->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_role->count_all();
 
-			$data				= $this->datatabel_modal_jenisAkun->get_json($result, $recordsTotal, $recordsFiltered);
+			$data				= $this->datatabel_modal_role->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -80,12 +97,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		
 		//Datatables for 'modal' UNIT_KOMPETENSI table (Form 'Urutan Unit Kompetensi')
-		public function datatabel_urutan_ss_uk_form(){				
-			$result				= $this->datatabel_urutan_ss_uk_form->get_datatables();				
-			$recordsFiltered	= $this->datatabel_urutan_ss_uk_form->count_filtered();
-			$recordsTotal		= $this->datatabel_urutan_ss_uk_form->count_all();
+		public function datatabel_form_ss_uk(){				
+			$result				= $this->datatabel_form_ss_uk->get_datatables();				
+			$recordsFiltered	= $this->datatabel_form_ss_uk->count_filtered();
+			$recordsTotal		= $this->datatabel_form_ss_uk->count_all();
 
-			$data				= $this->datatabel_urutan_ss_uk_form->get_json($result, $recordsTotal, $recordsFiltered);
+			$data				= $this->datatabel_form_ss_uk->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -136,6 +153,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$kondisi	= array('EMAIL' => $this->input->post('user_email'),
 							'UUID_USER !=' => $this->input->post('user_uuid'));
 			echo $this->tabel_user->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of NOMOR_SKEMA
+		public function is_ss_nomor_valid(){
+			//condition
+			$kondisi	= array('NOMOR_SKEMA' => $this->input->post('ss_nomor'),
+							'UUID_SKEMA !=' => $this->input->post('ss_uuid'));
+			echo $this->tabel_skema->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
 		}
 	}
 ?>

@@ -1,5 +1,5 @@
 <?php
-	class role extends CI_Model{
+	class tabel_role extends CI_Model{
 		//All table fields
 		public $UUID_ROLE;
 		public $ROLE_NAME;

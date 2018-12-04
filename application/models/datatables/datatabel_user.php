@@ -86,7 +86,7 @@
 					if($values->JUMLAH == '1'){
 						$row[] 	= $values->ROLE_NAME;
 					}else{
-						$row[] 	= '<a href="javascript:void(0)" onclick="modal_jenis_akun('."'".$values->UUID_USER."'".','."'".$values->USER_NAME."'".','."'".$values->EMAIL."'".')">('.$values->JUMLAH.' jenis akun)';
+						$row[] 	= '<a href="javascript:void(0)" onclick="modal_role('."'".$values->UUID_USER."'".','."'".$values->USER_NAME."'".','."'".$values->EMAIL."'".')">('.$values->JUMLAH.' jenis akun)';
 					}
 					
 					if($values->IS_ACTIVE == '1'){

@@ -3,7 +3,8 @@
 
 </br></br>
 
-<table id="id_tabel_pengelola_user" class="table table-hover dataTable" cellspacing="0" width="100%">
+<!-- Tabel Utama Pengelola User -->
+<table id="id_tabel_user" class="table table-hover dataTable" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th> # </th>	
@@ -22,7 +23,44 @@
 	</tbody>
 </table>
 
-<div class="modal fade" id="id_modal_form_pengelola_user" role="dialog">
+<!-- Modal Tabel Role -->
+<div class="modal fade" id="id_modal_tabel_role" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-center"> Title </h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>	
+			
+			<div class="modal-body">				
+				<dl class="row">
+					<dt class="col-md-5"> Pegawai </dt>
+						<dd id="id_modal_1_full_name" class="col-md-7">Text</dd>
+					<dt class="col-md-5"> Email </dt>
+						<dd id="id_modal_1_email" class="col-md-7">Text</dd>
+				</dl>
+			  
+				<table id="id_tabel_role" class="table table-hover dataTable" width="100%">
+				<thead>
+					<tr>
+						<th> # </th>
+						<th> Jenis Akun </th>
+					</tr>
+				</thead>
+					<tbody>
+					</tbody>
+				</table>			
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
+			</div>			
+		</div>
+    </div>
+</div>
+
+<!-- Modal Form Pengelola User -->
+<div class="modal fade" id="id_modal_form_user" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,7 +69,7 @@
             </div>
 			
 			<div class="modal-body">
-				<form id="id_form_pengelola_user">           
+				<form id="id_form_user">           
 					<input type="hidden" name="user_uuid" id="id_user_uuid"/> 
 					<input type="hidden" name="user_pwd" id="id_user_pwd"/> 
 					<div class="form-group">
@@ -77,40 +115,5 @@
 				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
 			</div>			
         </div>
-    </div>
-</div>
-
-<div class="modal fade" id="id_modal_jenis_akun" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title text-center"> Title </h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			</div>	
-			
-			<div class="modal-body">				
-				<dl class="row">
-					<dt class="col-md-5"> Pegawai </dt>
-						<dd id="id_modal_1_full_name" class="col-md-7">Text</dd>
-					<dt class="col-md-5"> Email </dt>
-						<dd id="id_modal_1_email" class="col-md-7">Text</dd>
-				</dl>
-			  
-				<table id="id_tabel_jenis_akun" class="table table-hover dataTable" width="100%">
-				<thead>
-					<tr>
-						<th> # </th>
-						<th> Jenis Akun </th>
-					</tr>
-				</thead>
-					<tbody>
-					</tbody>
-				</table>			
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
-			</div>			
-		</div>
     </div>
 </div>

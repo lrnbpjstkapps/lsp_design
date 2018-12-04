@@ -135,11 +135,18 @@ $autoload['language'] = array();
 $autoload['model'] = array(
 		"common/m_globalval"		=> "m_globalval",
 		
-		"datatables/datatabel_modal_jenisAkun" 				=> "datatabel_modal_jenisAkun", 
-		"datatables/datatabel_modal_uk" 					=> "datatabel_modal_uk", 
-		"datatables/datatabel_urutan_ss_uk_form"			=> "datatabel_urutan_ss_uk_form",	
+		//BEGIN OF DATATABLES
+		//#1
 		"datatables/datatabel_user" 						=> "datatabel_user",
+		"datatables/datatabel_modal_role"	 				=> "datatabel_modal_role", 
+		
+		//#2
+		"datatables/datatabel_modal_uk" 					=> "datatabel_modal_uk", 
+		"datatables/datatabel_form_ss_uk"					=> "datatabel_form_ss_uk",	
 		"datatables/datatabel_ss_uk" 						=> "datatabel_ss_uk",
+		
+		//#3
+		"datatables/datatabel_ss"	 						=> "datatabel_ss",
 		
 		"datatables/M_list_apl01"	=> "M_list_apl01",
 		"datatables/M_list_apl02"	=> "M_list_apl02",		
@@ -147,13 +154,32 @@ $autoload['model'] = array(
 		"datatables/M_list_verif_apl01" 					=> "M_list_verif_apl01", 
 		"datatables/M_list_verif_apl02_admlsp" 				=> "M_list_verif_apl02_admlsp", 
 		"datatables/M_list_verif_apl02_sso" 				=> "M_list_verif_apl02_sso", 
+		//END OF DATATABLES
+		
+		//BEGIN OF FORM
+		//#1
+		"form/form_user"									=> "form_user",
+		
+		//#2
+		"form/form_ss"										=> "form_ss",
+		
 		"form/M_form_apl_01"		=> "M_form_apl_01", 
 		"form/M_form_apl_02"		=> "M_form_apl_02", 
 		"form/M_form_mma"			=> "M_form_mma", 
-		"form/M_form_mma_kuk"		=> "M_form_mma_kuk", 
-		"form/form_pengelola_user"	=> "form_pengelola_user", 
-		"form/form_skema_uk"		=> "form_skema_uk", 
+		"form/M_form_mma_kuk"		=> "M_form_mma_kuk",  
+		//END OF FORM
 		
+		//BEGIN OF TABLE		
+		//#1
+		"table/tabel_role" 									=> "tabel_role",
+		"table/tabel_user" 									=> "tabel_user",
+		"table/tabel_user_role"								=> "tabel_user_role",
+		
+		//#2
+		"table/tabel_skema_uk" 								=> "tabel_skema_uk",
+		
+		//#3
+		"table/tabel_skema" 								=> "tabel_skema",
 		
 		"table/M_administrasi"		=> "M_administrasi",
 		"table/M_answer_apl_02"		=> "M_ans_apl02",
@@ -166,12 +192,8 @@ $autoload['model'] = array(
 		"table/M_fr_mma" 			=> "M_fr_mma",
 		"table/M_kuk" 				=> "M_kuk",
 		"table/M_mma_kuk" 			=> "M_mma_kuk",
-		"table/role" 				=> "tabel_role",
-		"table/M_skema" 			=> "M_skema",
-		"table/skema_uk" 			=> "tabel_skema_uk",
 		"table/M_status_administrasi" => "M_sa",
 		"table/M_uk" 				=> "M_uk",
-		"table/M_unit_kompetensi" 	=> "M_unit_kompetensi",
-		"table/user" 				=> "tabel_user",
-		"table/user_role" 			=> "tabel_user_role"			
+		"table/M_unit_kompetensi" 	=> "M_unit_kompetensi"
+		//END OF TABLE
 	);

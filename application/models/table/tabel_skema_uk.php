@@ -1,5 +1,5 @@
 <?php
-	class skema_uk extends CI_Model{
+	class tabel_skema_uk extends CI_Model{
 		//All table fields
 		public $UUID_SKEMA_UK;
 		public $UUID_SKEMA;

@@ -1,27 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//ADMIN_LSP		
 class skema_sertifikasi extends CI_Controller {
 
-	// Admin LSP		
-	public function __construct()
-		{
-			parent::__construct();
-			if($this->session->userdata('lsp_bpjstk_login_id') == null){
-				redirect('');
-			}
-			if($this->session->userdata('lsp_bpjstk_role_code') != "ADMIN_LSP"){
-				$role_code = $this->session->userdata('lsp_bpjstk_role_code');
-				redirect('common/akun/switchInterface/'.$role_code);
-			}
-			
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("common/m_crud", "m_crud");
-			$this->load->model("admin_lsp/skema_sertifikasi/m_param", "m_param");
-			$this->load->model("admin_lsp/skema_sertifikasi/m_list_skema", "m_list_skema");
+	public function __construct(){
+		parent::__construct();
+		
+		//Check Login Status
+		if($this->session->userdata('lsp_bpjstk_login_id') == null){
+			redirect('');
 		}
+		
+		//Check Permissions
+		if($this->session->userdata('lsp_bpjstk_role_code') != "ADMIN_LSP"){
+			$role_code = $this->session->userdata('lsp_bpjstk_role_code');
+			redirect('common/akun/switchInterface/'.$role_code);
+		}
+	}
 	
-	public function index()
+	//Default Function
+	public function index(){
+		// Set layout for Skema Sertifikasi
+		$data["dview"]			= "admin_lsp/v_skema_sertifikasi";
+		$data["dviewEvent"]		= "admin_lsp/v_skema_sertifikasi_event";
+		$data["dlayoutMenu"]	= "common/v_layout_menu_admin_lsp";
+		
+		$this->load->view("common/v_layout", $data);
+	}
+	
+	/*public function index()
 		{		
 			$data					= $this->m_globalval->getAllData();
 			$layout					= $data['layout'];
@@ -91,5 +99,5 @@ class skema_sertifikasi extends CI_Controller {
 			}else{
 				echo "true";
 			}
-		}
+		}*/
 }

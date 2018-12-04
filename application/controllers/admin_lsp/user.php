@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //ADMIN_LSP
-class pengelola_user extends CI_Controller {
+class user extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();

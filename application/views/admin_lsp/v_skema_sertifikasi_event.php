@@ -1,132 +1,152 @@
 <script text="text/javascript">
-	var table;
-	var validator;
 	var save_method;
 	var url;
+	var validator;
 	
-	function addDt()
-		{
-			save_method = "add";		
-			$('#<?php echo $form_id[100]; ?>')[0].reset();
-			validator.resetForm();
-			$('#<?php echo $form_id[100]; ?> .form-control').removeClass('error');
-			
-			$('.modal-title').text('<?php echo $form_title[100]; ?>');
-			$('#<?php echo $form_id[103]; ?>').modal('show');
-		};
+	var tabel_ss;
+	
+	function modal_tambah(){
+		//Set kind of data action
+		save_method = "tambah";
+		
+		//Delete previous alert
+		$('#id_form_ss')[0].reset();
+		validator.resetForm();
+		$('#id_form_ss').removeClass('error');
+		
+		//Set Title & Show Modal
+		$('.modal-title').text('Tambah Skema Sertifikasi');
+		$('#id_modal_form_ss').modal('show');
+	};
 
-	function editDt(uuid)
-		{
-			save_method = "update";	
-			$('#<?php echo $form_id[100]; ?>')[0].reset();	
-			validator.resetForm(); 
-			$('#<?php echo $form_id[100]; ?> .form-control').removeClass('error');			
-			
-			$.ajax({
-				url 		: "<?php echo $ajax_url[102]; ?>" + uuid,
-				type		: "GET",
-				dataType	: "JSON",
-				success		: function(data)
-					{						
-						$('[name="<?php echo $form_name[102]; ?>"]').val(data.UUID_SKEMA);
-						$('[name="<?php echo $form_name[100]; ?>"]').val(data.NAMA_SKEMA);
-						$('[name="<?php echo $form_name[101]; ?>"]').val(data.NOMOR_SKEMA);	
-					},
-				error		: function (jqXHR, textStatus, errorThrown)
-					{
-						alert('Error get data from ajax');
+	function modal_update(uuid){
+		//Set kind of data action
+		save_method = "update";
+		
+		//Delete previous alert
+		$('#id_form_ss')[0].reset();
+		validator.resetForm();
+		$('#id_form_ss').removeClass('error');
+		
+		//Set previous data in modal form
+		$.ajax({
+			url 		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/satuData_ss/" + uuid,
+			type		: "GET",
+			dataType	: "JSON",
+			success		: function(data)
+				{						
+					$('[name="ss_uuid"]').val(data.UUID_SKEMA);
+					$('[name="ss_nama"]').val(data.NAMA_SKEMA);
+					$('[name="ss_nomor"]').val(data.NOMOR_SKEMA);	
+					
+					if(data.IS_ACTIVE == '1'){
+						$('[name="ss_is_active"]').prop('checked', true);
+					}else{
+						$('[name="ss_is_active"]').prop('checked', false);
 					}
-			});
-			
-			$('.modal-title').text('<?php echo $form_title[102]; ?>');
-			$('#<?php echo $form_id[103]; ?>').modal('show'); 
-		}
-		
-	function saveDt()
-		{	
-			if(save_method == 'add') {
-				url = "<?php echo $ajax_url[100]; ?>";	
-				
-				if ($("#<?php echo $form_id[100]; ?>").valid()) {
-					$("#<?php echo $form_id[100]; ?>").submit();
-				}				
-			} else {				
-				url = "<?php echo $ajax_url[103]; ?>";
-				
-				if ($("#<?php echo $form_id[100]; ?>").valid()) {
-					alertify.confirm('<?php echo $validationMsg[112]; ?>', function(){
-						$("#<?php echo $form_id[100]; ?>").submit();						
-					}).setting({
-						'labels'	: {
-							ok		: '<?php echo $form_button[102]; ?>',
-							cancel	: '<?php echo $form_button[103]; ?>'
-						}
-					}).setHeader('<?php echo $form_title[103]; ?>').show();					
-				}
-			}						
-		}
-		
-	function deleteDt(uuid)
-		{	
-			alertify.confirm('<?php echo $validationMsg[113]; ?>', function(){
+				},
+			error		: function (jqXHR, exception)
 				{
-					$.ajax({
-						url 		: "<?php echo $ajax_url[104]; ?>"+uuid,
-						type		: "POST",
-						dataType	: "JSON",
-						success		: function(data)
-							{	
-								reloadDt();
-								
-								if(data=="1"){
-									alertify.success('<?php echo $validationMsg[114]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[110]; ?>');
-								}							
-							},
-						error		: function (jqXHR, textStatus, errorThrown)
-						{
-							alertify.error('<?php echo $validationMsg[110]; ?>');
-							reloadDt();
-						}				
-					});
-
+					var msg = '';
+					if (jqXHR.status === 0) {
+						msg = 'Not connect.\n Verify Network.';
+					} else if (jqXHR.status == 404) {
+						msg = 'Requested page not found. [404]';
+					} else if (jqXHR.status == 500) {
+						msg = 'Internal Server Error [500].';
+					} else if (exception === 'parsererror') {
+						msg = 'Requested JSON parse failed.';
+					} else if (exception === 'timeout') {
+						msg = 'Time out error.';
+					} else if (exception === 'abort') {
+						msg = 'Ajax request aborted.';
+					} else {
+						msg = 'Uncaught Error.\n' + jqXHR.responseText;
+					}
+					alert(msg);
 				}
-				
-			}).setting({
-				'labels'	: {
-					ok		: '<?php echo $form_button[102]; ?>',
-					cancel	: '<?php echo $form_button[103]; ?>'
-				}
-			}).setHeader('<?php echo $form_title[104]; ?>').show();
-		}
+		});
 		
-	function reloadDt()
-		{
-			table.ajax.reload(null,false); 
-		}
+		//Set Title & Show Modal
+		$('.modal-title').text('Edit Skema Sertifikasi');
+		$('#id_modal_form_ss').modal('show');
+	}
+		
+	function setData(){	
+		if(save_method == 'tambah') {
+			//set URL for 'tambah'
+			url = "<?= base_url(); ?>admin_lsp/aksiTambahData/satuData_ss";	
+			
+			//Check if the form is valid
+			if ($("#id_form_ss").valid()) {
+				$("#id_form_ss").submit();
+			}				
+		} else {		
+			//set URL for 'update'		
+			url = "<?= base_url(); ?>admin_lsp/aksiUpdateData/satuData_ss";
+			
+			//Show confirmation box before updating the data
+			if ($("#id_form_ss").valid()) {
+				alertify.confirm('Apakah anda yakin ingin mengupdate data?', function(){
+					$("#id_form_ss").submit();						
+				}).setting({
+					'labels'	: {
+						ok		: 'Ya',
+						cancel	: 'Tidak'
+					}
+				}).setHeader('Konfirmasi Update Data').show();					
+			}
+		}						
+	}
+		
+	function reloadTabel(){
+		//Reload Table
+		tabel_ss.ajax.reload(null,false); 
+	}
 
 	$(document).ready(function() {
-		validator = $("#<?php echo $form_id[100]; ?>").validate({
+		tabel_ss = $('#id_tabel_ss').DataTable({ 		
+			"processing"		: true, 
+			"serverSide"		: true,
+			"searching"			: true,
+			"paging"			: false,
+			"iDisplayLength"	: 10,
+			"order"				: [], 
+			"bDestroy"			: true,
+			"ajax"				: 
+				{
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_ss",
+					"type"		: "POST"
+				},
+			"columnDefs"		: 
+				[
+					{ 
+						"targets"	: [ 0, 4 ], 
+						"orderable"	: false
+					}
+				],
+		});
+		
+		validator = $("#id_form_ss").validate({
 			rules: 
 				{
-					<?php echo $form_name[100]; ?>: 
+					ss_nama: 
 						{
 							required	: true,
 							maxlength	: 50
 						},
-					<?php echo $form_name[101]; ?>: 
+					ss_nomor: 
 						{
 							required	: true,
 							maxlength	: 50,
 							remote : { 
-								url		: "<?php echo $isvalid_url[100]; ?>", 
+								url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_ss_nomor_valid", 
 								type	:"post",
 								data	: 
 									{
-										<?php echo $form_name[102]; ?>: 
+										skema_uuid: 
 											function() {
-												return $("#<?php echo $form_id[105]; ?>").val();
+												return $("#id_skema_uuid").val();
 											}
 									}
 							}
@@ -134,9 +154,9 @@
 				}, 
 			messages:
 				{
-					<?php echo $form_name[101]; ?> : 
+					ss_nomor : 
 						{ 
-							remote : "<?php echo $validationMsg[100]; ?>" 
+							remote : "Nomor sudah ada." 
 						}
 				},
 			submitHandler: function (form)
@@ -144,56 +164,28 @@
 					$.ajax({
 						url			: url,
 						type		: 'POST',
-						data		: new FormData($("#<?php echo $form_id[100]; ?>")[0]),
+						data		: new FormData($("#id_form_ss")[0]),
 						cache		: false,
 						contentType	: false,
 						processData	: false,
+						dataType	: "JSON",
 						success		: function(data){
+							//Close the modal
 							$("[data-dismiss=modal]").trigger({ type: "click" });
-							reloadDt();		
 							
-							if(save_method == "add"){
-								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[106]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[107]; ?>');
-								}	
+							//Refresh datatables
+							reloadTabel();		
+							
+							//Show the result
+							if(data.hasil == "sukses"){	
+								alertify.success(data.pesan);
 							}else{
-								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[108]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[109]; ?>');
-								}
+								alertify.error(data.pesan);
 							}
-
-							$('#<?php echo $form_id[100]; ?>')[0].reset();	
-							validator.resetForm(); 
-							$('#<?php echo $form_id[100]; ?> .form-control').removeClass('error');	
 						}
 					});
 					return false;
 				}
-		});
-			
-		table = $('#<?php echo $form_id[104]; ?>').DataTable({ 		
-			"processing"		: true, 
-			"serverSide"		: true,
-			"searching"			: false,
-			"paging"			: false,
-			"iDisplayLength"	: 10,
-			"order"				: [], 
-			"ajax"				: 
-				{
-					"url"		: "<?php echo $ajax_url[101]; ?>",
-					"type"		: "POST"
-				},
-			"columnDefs"		: 
-				[
-					{ 
-						"targets"	: [ 0, 1, 2, 3, 4 ], 
-						"orderable"	: false
-					}
-				],
 		});
 	});
 </script>

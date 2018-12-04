@@ -1,5 +1,5 @@
 <?php
-class form_pengelola_user extends CI_Model {		
+class form_user extends CI_Model {		
 		
 	// Read data input from user 
 	public function baca_inputan()

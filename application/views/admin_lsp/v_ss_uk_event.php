@@ -13,7 +13,7 @@
 		url 		= "<?= base_url(); ?>admin_lsp/aksiUpdateData/data_ss_uk";
 		
 		//Initiate formData
-		var formData 	= new FormData($("#id_form_urutan_uk")[0]);
+		var formData 	= new FormData($("#id_form_ss_uk")[0]);
 		
 		//formData to JSON
 		var object = {};
@@ -23,9 +23,9 @@
 		formData_json = JSON.stringify(object);
 		
 		//Show confirmation box before updating the data
-		if ($("#id_form_urutan_uk").valid()) {
+		if ($("#id_form_ss_uk").valid()) {
 			alertify.confirm('Apakah anda yakin ingin mengupdate data?', function(){
-				$("#id_form_urutan_uk").submit();						
+				$("#id_form_ss_uk").submit();						
 			}).setting({
 				'labels'	: {
 					ok		: 'Ya',
@@ -64,7 +64,7 @@
 		});
 		
 		//Validation: Modal Form SS - UK
-		validator = $("#id_form_urutan_uk").validate({
+		validator = $("#id_form_ss_uk").validate({
 			rules: 
 				{
 					
@@ -136,8 +136,8 @@
 	}
 	
 	//Modal Form SS - UK
-	function modal_form_urutan_uk(uuid, param1, param2){			
-		tabel_form_ss_uk = $('#id_tabel_urutan_uk').DataTable({ 		
+	function modal_form_ss_uk(uuid, param1, param2){			
+		tabel_form_ss_uk = $('#id_tabel_form_ss_uk').DataTable({ 		
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: false,
@@ -168,6 +168,6 @@
 		$('#id_modal_2_kodeSkema').text(param1);
 		$('#id_modal_2_nomorSkema').text(param2);
 		$('.modal-title').text('Daftar Unit Kompetensi '+param1);
-		$('#id_modal_form_urutan_uk').modal('show');
+		$('#id_modal_form_ss_uk').modal('show');
 	}
 </script>

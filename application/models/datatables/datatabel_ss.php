@@ -1,16 +1,14 @@
 <?php
-	class datatabel_urutan_ss_uk_form extends CI_Model{
-		var $table			= "SKEMA_UK AS SUK";
-		var $order			= array('SUK.URUTAN' => 'ASC', 'UK.KODE_UK' => 'ASC'); 
-		var $column_order	= array(null, 'UK.KODE_UK', 'UK.JUDUL_UK', null); 
-		var $column_search	= array('UK.KODE_UK', 'UK.JUDUL_UK');
+	class datatabel_SS extends CI_Model{
+		var $table			= "SKEMA AS SKE";
+		var $order			= array('SKE.NOMOR_SKEMA' => 'ASC'); 
+		var $column_order	= array(null, 'SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA', 'SKE.IS_ACTIVE', null); 
+		var $column_search	= array('SKE.NOMOR_SKEMA', 'SKE.NAMA_SKEMA');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('SUK.UUID_SKEMA_UK, UK.KODE_UK, UK.JUDUL_UK, SUK.URUTAN');
+			$this->db->select('SKE.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA, SKE.IS_ACTIVE');
 			$this->db->from($this->table);
-			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
-			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -58,10 +56,8 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('UK.KODE_UK, UK.JUDUL_UK');
+			$this->db->select('SKE.UUID_SKEMA');
 			$this->db->from($this->table);
-			$this->db->join("UNIT_KOMPETENSI AS UK", "SUK.UUID_UK = UK.UUID_UK", "LEFT");
-			$this->db->where('SUK.UUID_SKEMA', $this->input->post('skema_uuid'));
 			
 			return $this->db->count_all_results();
 		}
@@ -71,17 +67,22 @@
 			$data 		= array();
 			$no			= $_POST['start'];
 			
-			$i = 0;
 			foreach ($result as $values) 
 				{
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->KODE_UK;
-					$row[] 	= $values->JUDUL_UK;
-					$row[] 	= '<input name="'.$values->UUID_SKEMA_UK.'" value="'.$values->URUTAN.'" class="form-control" type="number" min="10" max="999">';
+					$row[] 	= $values->NOMOR_SKEMA;
+					$row[] 	= $values->NAMA_SKEMA;
+					
+					if($values->IS_ACTIVE == '1'){
+						$row[] 	= '<font color="green">Aktif</font>';
+					}else{
+						$row[] 	= '<font color="red">Nonaktif</font>';
+					}
+					
+					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_SKEMA."'".')"><i class="fa fa-edit"></i></a>';
 					$data[]	= $row;
-					$i++;
 				}
 	
 			$output 	= array

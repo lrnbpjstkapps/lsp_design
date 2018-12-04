@@ -5,11 +5,13 @@
   </ol>
 </nav>
 	
-<h3 class="box-title"> <?php echo $menu_title[100]; ?> </h3>
-<button onClick="addDt()" class="btn btn-primary float-right"> <?php echo $form_button[106]; ?> </button>
+<h3 class="box-title"> Skema Sertifikasi </h3>
+<button onClick="modal_tambah()" class="btn btn-primary float-right"> Tambah </button>
+
 </br></br>
 
- <table id="<?php echo $form_id[104]; ?>" class="table table-hover dataTable" cellspacing="0" width="100%">
+<!-- Tabel Utama Skema Sertifikasi -->
+ <table id="id_tabel_ss" class="table table-hover dataTable" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th> # </th>
@@ -23,7 +25,8 @@
 	</tbody>
  </table>
    
-<div class="modal fade" id="<?php echo $form_id[103]; ?>" role="dialog">
+  <!-- Modal Form Skema Sertifikasi -->
+<div class="modal fade" id="id_modal_form_ss" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,24 +35,29 @@
             </div>
 			
 			<div class="modal-body">
-				<form id="<?php echo $form_id[100]; ?>">           
-					<input type="hidden" name="<?php echo $form_name[102]; ?>" id="<?php echo $form_id[105]; ?>"/> 
+				<form id="id_form_ss">           
+					<input type="hidden" name="ss_uuid" id="id_ss_uuid"/> 
 					<div class="form-group">
 						<label> Nomor Skema Sertifikasi </label>
-						<input name="<?php echo $form_name[101]; ?>" class="form-control" type="text">
+						<input name="ss_nomor" class="form-control" type="text">
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label> Judul Skema Sertifikasi </label>
-						<input name="<?php echo $form_name[100]; ?>" class="form-control" type="text">
+						<input name="ss_nama" class="form-control" type="text">
+						<span class="help-block"></span>
+					</div>	
+					<div class="form-group">
+						<input name="ss_is_active" type="checkbox" checked>
+						<label> IS_ACTIVE </label>
 						<span class="help-block"></span>
 					</div>	
 				</form>		
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="saveDt()"> <?php echo $form_button[101]; ?> </button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal"> <?php echo $form_button[100]; ?> </button>
+				<button type="button" class="btn btn-primary" onclick="setData()"> Simpan </button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
 			</div>			
         </div>
     </div>
