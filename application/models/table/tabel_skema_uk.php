@@ -21,27 +21,15 @@
 			return $this->db->get_where('SKEMA_UK', $kondisi);
 		}
 		
-		/*public function ambil_data($condition)
-			{
-				$this->db->select('skemauk.UUID_SKEMA_UK, skemauk.UUID_SKEMA, skemauk.UUID_UK,
-					skemauk.USR_CRT, skemauk.DTM_CRT, skemauk.USR_UPD, skemauk.DTM_UPD, skemauk.IS_ACTIVE,
-					skema.NAMA_SKEMA, skema.NOMOR_SKEMA, uk.JUDUL_UK, uk.KODE_UK');
-				$this->db->from("SKEMA_UK skemauk");
-				$this->db->join("SKEMA AS skema", "skemauk.UUID_SKEMA = skema.UUID_SKEMA", "LEFT");
-				$this->db->join("UNIT_KOMPETENSI AS uk", "skemauk.UUID_UK = uk.UUID_UK", "LEFT");
-				$this->db->where($condition);
-				return $this->db->get();
-				
-				/*
-					SELECT SKEMA_UK.UUID_SKEMA_UK, SKEMA.NOMOR_SKEMA, SKEMA.NAMA_SKEMA, UK.KODE_UK, UK.JUDUL_UK, EK.NOMOR_EK, EK.NAMA_EK, KUK.NOMOR_KUK, KUK.PERNYATAAN, KUK.PERTANYAAN
-FROM SKEMA_UK
-LEFT JOIN SKEMA ON SKEMA_UK.UUID_SKEMA = SKEMA.UUID_SKEMA
-LEFT JOIN UNIT_KOMPETENSI AS UK ON SKEMA_UK.UUID_UK = UK.UUID_UK
-LEFT JOIN ELEMEN_KOMPETENSI AS EK ON UK.UUID_UK = EK.UUID_UK
-LEFT JOIN KRITERIA_UNJUK_KERJA AS KUK ON EK.UUID_EK = KUK.UUID_EK
-ORDER BY SKEMA.NOMOR_SKEMA, UK.KODE_UK, EK.NOMOR_EK, KUK.NOMOR_KUK
-				
-			}*/
+		public function ambil_data_detail($kondisi){
+			$this->db->select('SKE.UUID_SKEMA, SKE.NOMOR_SKEMA, SKE.NAMA_SKEMA,
+				UK.UUID_UK, UK.KODE_UK, UK.JUDUL_UK');
+			$this->db->from("SKEMA_UK AS SKE_UK");
+			$this->db->join("SKEMA AS SKE", "SKE_UK.UUID_SKEMA = SKE.UUID_SKEMA", "LEFT");
+			$this->db->join("UNIT_KOMPETENSI AS UK", "SKE_UK.UUID_UK = UK.UUID_UK", "LEFT");
+			$this->db->where($kondisi);
+			return $this->db->get();					
+		}
 		
 		//Add one data
 		public function tambah_satu_data($data)

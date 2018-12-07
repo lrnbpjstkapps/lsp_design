@@ -40,6 +40,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data_skema);
 		}
 		
+		//Get one data from UK table
+		public function satuData_uk($uuid){
+			//Get data from UK table 
+			$kondisi		= array('UUID_UK' => $uuid);
+			$data_uk		= $this->tabel_uk->ambil_data($kondisi);
+			
+			//Initialitation of array data
+			$data			= array();
+			$data["data_uk"]= $data_uk->row();
+			
+			//Get data from SS_UK table
+			$data_ss_uk		= $this->tabel_ss_uk->ambil_data($kondisi);
+			
+			//Set the array of UUID_SKEMA 
+			$i				= 0;
+			foreach($data_ss_uk->result() as $row){
+				$ss_uuid[$i++] = $row->UUID_SKEMA;
+			}			
+			$data["ss_uuid"] = $ss_uuid;
+			
+			//Compile arrays
+			$data_out		= array_values($data);
+			
+			echo json_encode($data_out);
+		}
+		
 		//DATATABLES		
 		//Datatables for USER table
 		public function datatabel_user(){				
@@ -74,6 +100,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data);
 		}
 		
+		//Datatables for UK table
+		public function datatabel_uk(){				
+			$result				= $this->datatabel_uk->get_datatables();				
+			$recordsFiltered	= $this->datatabel_uk->count_filtered();
+			$recordsTotal		= $this->datatabel_uk->count_all();
+
+			$data				= $this->datatabel_uk->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
 		//Datatables for 'modal' ROLE table
 		public function datatabel_modal_role(){
 			$result				= $this->datatabel_modal_role->get_datatables();				
@@ -92,6 +129,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$recordsTotal		= $this->datatabel_modal_uk->count_all();
 
 			$data				= $this->datatabel_modal_uk->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for 'modal' SKEMA table
+		public function datatabel_modal_ss(){
+			$result				= $this->datatabel_modal_ss->get_datatables();				
+			$recordsFiltered	= $this->datatabel_modal_ss->count_filtered();
+			$recordsTotal		= $this->datatabel_modal_ss->count_all();
+
+			$data				= $this->datatabel_modal_ss->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -119,6 +167,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//Set multipleSelect role
 			foreach($data->result() as $row){
 				echo "<option value='".$row->UUID_ROLE."'> ".$row->ROLE_NAME."</option>";
+			}
+		}
+		
+		//Get list of ss		
+		public function multipleSelect_ss(){
+			//Condition 
+			$kondisi	= array('IS_ACTIVE' => '1');
+			
+			//Get data from database
+			$data 		= $this->tabel_ss->ambil_data($kondisi);
+			
+			//Set multipleSelect ss
+			foreach($data->result() as $row){
+				echo "<option value='".$row->UUID_SKEMA."'> ".$row->NAMA_SKEMA."</option>";
 			}
 		}
 		
@@ -160,6 +222,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//condition
 			$kondisi	= array('NOMOR_SKEMA' => $this->input->post('ss_nomor'),
 							'UUID_SKEMA !=' => $this->input->post('ss_uuid'));
+			echo $this->tabel_skema->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of KODE_UK
+		public function is_uk_kode_valid(){
+			//condition
+			$kondisi	= array('KODE_UK' => $this->input->post('uk_kode'),
+							'UUID_UK !=' => $this->input->post('uk_uuid'));
 			echo $this->tabel_skema->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
 		}
 	}

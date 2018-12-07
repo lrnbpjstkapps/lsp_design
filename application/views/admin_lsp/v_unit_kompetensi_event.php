@@ -1,218 +1,135 @@
 <script text="text/javascript">
-	var table1, table2;
-	var validator;
 	var save_method;
 	var url;
-			
-	function listDt(uuid, param1, param2)
-		{			
-			table2 = $('#<?php echo $form_id[107]; ?>').DataTable({ 		
-				"processing"		: true, 
-				"serverSide"		: true,
-				"searching"			: false,
-				"paging"			: false,
-				"iDisplayLength"	: 10,
-				"order"				: [], 
-				"bDestroy"			: true,
-				"ajax"				: 
-					{
-						"url"		: "<?php echo $ajax_url[110]; ?>" + uuid,
-						"type"		: "POST"
-					},
-				"columnDefs"		: 
-					[
-						{ 
-							"targets"	: [ 0, 1, 2],
-							"orderable"	: false
-						}
-					],
-			});	
-			
-			$('#<?php echo $form_id[109]; ?>').text(param1);
-			$('#<?php echo $form_id[108]; ?>').text(param2);
-			$('.modal-title').text('Daftar Skema '+param1);
-			$('#<?php echo $form_id[106]; ?>').modal('show');			
+	var validator;
+	
+	var tabel_ss;
+	var tabel_uk;
+		
+	//Set list of ss
+	function multipleSelect_ss(){		
+		if ($("#id_ss_uuid").hasClass("error")) {
+			$('#id_ss_uuid').removeClass('error');
+			$("#id_ss_uuid").css("display", "block");
 		}
 		
-	function addDt()
-		{
-			save_method = "add";		
-			$('#<?php echo $form_id[110]; ?>')[0].reset();
-			validator.resetForm();
-			$('#<?php echo $form_id[110]; ?> .form-control').removeClass('error');
-			$('#<?php echo $form_id[105]; ?>').val('').trigger('change');						
-			
-			$('.modal-title').text('<?php echo $form_title[105]; ?>');
-			$('#<?php echo $form_id[113]; ?>').modal('show');
-		};
-
-	function editDt(uuid)
-		{
-			save_method = "update";	
-			$('#<?php echo $form_id[110]; ?>')[0].reset();	
-			validator.resetForm(); 
-			$('#<?php echo $form_id[110]; ?> .form-control').removeClass('error');
-			$('#<?php echo $form_id[105]; ?>').val('').trigger('change');			
-			
-			$.ajax({
-				url 		: "<?php echo $ajax_url[107]; ?>" + uuid,
-				type		: "GET",
-				dataType	: "JSON",
-				success		: function(data)
-					{						
-						$('[name="<?php echo $form_name[105]; ?>"]').val(data.UUID_UK);
-						$('[name="<?php echo $form_name[103]; ?>"]').val(data.JUDUL_UK);
-						$('[name="<?php echo $form_name[104]; ?>"]').val(data.KODE_UK);	
-						$('#<?php echo $form_id[105]; ?>').val(data.UUID_SKEMA).trigger('change');						
-					},
-				error		: function (jqXHR, textStatus, errorThrown)
-					{
-						alert('Error get data from ajax');
-					}
-			});
-			
-			$('.modal-title').text('<?php echo $form_title[106]; ?>');
-			$('#<?php echo $form_id[113]; ?>').modal('show'); 
-		}
+		$.ajax({
+			type: "POST",
+			dataType: "html",
+			url: "<?= base_url(); ?>admin_lsp/aksiAmbilData/multipleSelect_ss",
+			success: function(msg){
+				$('select#id_ss_uuid').multipleSelect('destroy');
+				$("select#id_ss_uuid").html(msg);
+				$('select#id_ss_uuid').multipleSelect({width: '100%'});                        
+			}
+		});						
+	}
+	
+	function modal_tambah(){
+		//Set kind of data action
+		save_method = "tambah";
 		
-	function saveDt()
-		{	
-			if(save_method == 'add') {
-				url = "<?php echo $ajax_url[105]; ?>";	
-				
-				if ($("#<?php echo $form_id[110]; ?>").valid()) {
-					$("#<?php echo $form_id[110]; ?>").submit();
-				}				
-			} else {				
-				url = "<?php echo $ajax_url[108]; ?>";
-				
-				if ($("#<?php echo $form_id[110]; ?>").valid()) {
-					alertify.confirm('<?php echo $validationMsg[112]; ?>', function(){
-						$("#<?php echo $form_id[110]; ?>").submit();						
-					}).setting({
-						'labels'	: {
-							ok		: '<?php echo $form_button[102]; ?>',
-							cancel	: '<?php echo $form_button[103]; ?>'
-						}
-					}).setHeader('<?php echo $form_title[103]; ?>').show();					
-				}
-			}						
-		}
+		//Delete previous alert
+		$('#id_form_uk')[0].reset();
+		validator.resetForm();
+		$('#id_form_uk').removeClass('error');
 		
-	function deleteDt(uuid)
-		{	
-			alertify.confirm('<?php echo $validationMsg[113]; ?>', function(){
-				{
-					$.ajax({
-						url 		: "<?php echo $ajax_url[109]; ?>"+uuid,
-						type		: "POST",
-						dataType	: "JSON",
-						success		: function(data)
-							{	
-								if(data=="1"){
-									alertify.success('<?php echo $validationMsg[114]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[110]; ?>');
-								}								
-								reloadDt();;
-							},
-						error		: function (jqXHR, textStatus, errorThrown)
-						{
-							alertify.error('<?php echo $validationMsg[110]; ?>');
-							reloadDt();
-						}				
-					});
-
-				}
-				
-			}).setting({
-				'labels'	: {
-					ok		: '<?php echo $form_button[102]; ?>',
-					cancel	: '<?php echo $form_button[103]; ?>'
-				}
-			}).setHeader('<?php echo $form_title[104]; ?>').show();
-		}
+		//Set Title & Show Modal
+		$('.modal-title').text('Tambah Unit Kompetensi');
+		$('#id_modal_form_uk').modal('show');
+	};
+	
+	function modal_update(uuid){
+		//Set kind of data action
+		save_method = "update";
 		
-	function reloadDt()
-		{
-			table1.ajax.reload(null,false); 
-		}
-
-	$(document).ready(function() {
-		validator = $("#<?php echo $form_id[110]; ?>").validate({
-			rules: 
-				{
-					'<?php echo $form_name[106]; ?>': 
-						{
-							required	: true
-						},
-					'<?php echo $form_name[103]; ?>': 
-						{
-							required	: true,
-							maxlength	: 100
-						},
-					'<?php echo $form_name[104]; ?>': 
-						{
-							required	: true,
-							maxlength	: 50,
-							remote : { 
-								url		: "<?php echo $isvalid_url[101]; ?>", 
-								type	:"post",
-								data	: 
-									{
-										<?php echo $form_name[105]; ?>: 
-											function() {
-												return $("#<?php echo $form_id[115]; ?>").val();
-											}
-									}
-							}
-						}
-				}, 
-			messages:
-				{
-					<?php echo $form_name[104]; ?> : 
-						{ 
-							remote : "<?php echo $validationMsg[101]; ?>" 
-						}
+		//Delete previous alert
+		$('#id_form_uk')[0].reset();
+		validator.resetForm();
+		$('#id_form_uk').removeClass('error');
+		
+		//Set previous data in modal form
+		$.ajax({
+			url 		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/satuData_uk/" + uuid,
+			type		: "GET",
+			dataType	: "JSON",
+			success		: function(data)
+				{						
+					$('[name="uk_uuid"]').val(data[0].UUID_UK);
+					$('[name="uk_kode"]').val(data[0].KODE_UK);
+					$('[name="uk_judul"]').val(data[0].JUDUL_UK);
+					//$('#id_ss_uuid').val(data[1].UUID_SKEMA).trigger('change');
+					$('select#id_ss_uuid').multipleSelect('setSelects', data[1]);
+					
+					if(data[0].IS_ACTIVE == '1'){
+						$('[name="uk_is_active"]').prop('checked', true);
+					}else{
+						$('[name="uk_is_active"]').prop('checked', false);
+					}					
 				},
-			submitHandler: function (form)
+			error		: function (jqXHR, exception)
 				{
-					$.ajax({
-						url			: url,
-						type		: 'POST',
-						data		: new FormData($("#<?php echo $form_id[110]; ?>")[0]),
-						cache		: false,
-						contentType	: false,
-						processData	: false,
-						success		: function(data){
-							$("[data-dismiss=modal]").trigger({ type: "click" });
-							reloadDt();		
-							
-							if(save_method == "add"){
-								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[106]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[107]; ?>');
-								}	
-							}else{
-								if(data=="1"){		
-									alertify.success('<?php echo $validationMsg[108]; ?>');
-								}else{
-									alertify.error('<?php echo $validationMsg[109]; ?>');
-								}
-							}	
-
-							$('#<?php echo $form_id[110]; ?>')[0].reset();	
-							validator.resetForm(); 
-							$('#<?php echo $form_id[110]; ?> .form-control').removeClass('error');
-							$('#<?php echo $form_id[105]; ?>').val('').trigger('change');							
-						}
-					});
-					return false;
+					var msg = '';
+					if (jqXHR.status === 0) {
+						msg = 'Not connect.\n Verify Network.';
+					} else if (jqXHR.status == 404) {
+						msg = 'Requested page not found. [404]';
+					} else if (jqXHR.status == 500) {
+						msg = 'Internal Server Error [500].';
+					} else if (exception === 'parsererror') {
+						msg = 'Requested JSON parse failed.';
+					} else if (exception === 'timeout') {
+						msg = 'Time out error.';
+					} else if (exception === 'abort') {
+						msg = 'Ajax request aborted.';
+					} else {
+						msg = 'Uncaught Error.\n' + jqXHR.responseText;
+					}
+					alert(msg);
 				}
 		});
+		
+		//Set Title & Show Modal
+		$('.modal-title').text('Edit User');
+		$('#id_modal_form_uk').modal('show');
+	}
+		
+	function setData(){	
+		if(save_method == 'tambah') {
+			//set URL for 'tambah'
+			url = "<?= base_url(); ?>admin_lsp/aksiTambahData/satuData_uk";	
 			
-		table1 = $('#<?php echo $form_id[114]; ?>').DataTable({ 		
+			//Check if the form is valid
+			if ($("#id_form_uk").valid()) {
+				$("#id_form_uk").submit();
+			}				
+		} else {		
+			//set URL for 'update'		
+			url = "<?= base_url(); ?>admin_lsp/aksiUpdateData/satuData_uk";
+			
+			//Show confirmation box before updating the data
+			if ($("#id_form_uk").valid()) {
+				alertify.confirm('Apakah anda yakin ingin mengupdate data?', function(){
+					$("#id_form_uk").submit();						
+				}).setting({
+					'labels'	: {
+						ok		: 'Ya',
+						cancel	: 'Tidak'
+					}
+				}).setHeader('Konfirmasi Update Data').show();					
+			}
+		}						
+	}
+		
+	function reloadTabel(){
+		tabel_uk.ajax.reload(null,false); 
+	}
+
+	$(document).ready(function() {
+		multipleSelect_ss();
+		
+		// Set Tabel
+		tabel_uk = $('#id_tabel_uk').DataTable({ 		
 			"processing"		: true, 
 			"serverSide"		: true,
 			"searching"			: true,
@@ -221,16 +138,117 @@
 			"order"				: [], 
 			"ajax"				: 
 				{
-					"url"		: "<?php echo $ajax_url[106]; ?>",
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_uk",
 					"type"		: "POST"
 				},
 			"columnDefs"		: 
 				[
 					{ 
-						"targets"	: [ 0, 1, 2, 3, 4, 5],
+						"targets"	: [ 0, 3, 5],
 						"orderable"	: false
 					}
 				],
-		});		
+		});
+		
+		// Form validation
+		validator = $("#id_modal_form_uk").validate({
+			rules: 
+				{
+					'ss_uuid[]': 
+						{
+							required	: true
+						},
+					'uk_judul': 
+						{
+							required	: true,
+							maxlength	: 100
+						},
+					'uk_kode': 
+						{
+							required	: true,
+							maxlength	: 50,
+							remote : { 
+								url		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/is_uk_kode_valid", 
+								type	:"post",
+								data	: 
+									{
+										'uk_uuid': 
+											function() {
+												return $("#uk_uuid").val();
+											}
+									}
+							}
+						}
+				}, 
+			messages:
+				{
+					uk_kode : 
+						{ 
+							remote : "Kode Unit Kompetensi sudah ada." 
+						}
+				},
+			submitHandler: function (form)
+				{
+					$.ajax({
+						url			: url,
+						type		: 'POST',
+						data		: new FormData($("#id_form_uk")[0]),
+						cache		: false,
+						contentType	: false,
+						processData	: false,
+						success		: function(data){
+							//Close the modal
+							$("[data-dismiss=modal]").trigger({ type: "click" });
+							
+							//Refresh datatables
+							reloadTabel();		
+							
+							//Show the result
+							if(data.hasil == "sukses"){	
+								alertify.success(data.pesan);
+							}else{
+								alertify.error(data.pesan);
+							}	
+						}
+					});
+					return false;
+				}
+		});
 	});
+	
+	//View modal 'Skema Sertifikasi'
+	function modal_ss(uuid, param1, param2){			
+		tabel_ss = $('#id_tabel_ss').DataTable({ 		
+			"processing"		: true, 
+			"serverSide"		: true,
+			"searching"			: false,
+			"paging"			: false,
+			"iDisplayLength"	: 10,
+			"order"				: [], 
+			"bDestroy"			: true,
+			"ajax"				: 
+				{
+					"url"		: "<?= base_url(); ?>admin_lsp/aksiAmbilData/datatabel_modal_ss",
+					"type"		: "POST",
+					"data"		: {
+									uk_uuid: 
+										function() {
+											return uuid;
+										}
+								}
+				},
+			"columnDefs"		: 
+				[
+					{ 
+						"targets"	: [ 0, 1, 2],
+						"orderable"	: false
+					}
+				],
+		});	
+		
+		$('#id_uk_kode').text(param1);
+		$('#id_uk_judul').text(param2);
+		$('.modal-title').text('Daftar Skema Sertifikasi '+param1);
+		$('#id_modal_tabel_ss').modal('show');			
+	}
 </script>

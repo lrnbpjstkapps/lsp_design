@@ -148,6 +148,10 @@ $autoload['model'] = array(
 		//#3
 		"datatables/datatabel_ss"	 						=> "datatabel_ss",
 		
+		//#4
+		"datatables/datatabel_uk"							=> "datatabel_uk",
+		"datatables/datatabel_modal_ss"						=> "datatabel_modal_ss",
+		
 		"datatables/M_list_apl01"	=> "M_list_apl01",
 		"datatables/M_list_apl02"	=> "M_list_apl02",		
 		"datatables/M_list_mma" 	=> "M_list_mma",
@@ -176,10 +180,13 @@ $autoload['model'] = array(
 		"table/tabel_user_role"								=> "tabel_user_role",
 		
 		//#2
-		"table/tabel_skema_uk" 								=> "tabel_skema_uk",
+		"table/tabel_skema_uk" 								=> "tabel_ss_uk",
 		
 		//#3
-		"table/tabel_skema" 								=> "tabel_skema",
+		"table/tabel_skema" 								=> "tabel_ss",
+		
+		//#4
+		"table/tabel_uk"									=> "tabel_uk",
 		
 		"table/M_administrasi"		=> "M_administrasi",
 		"table/M_answer_apl_02"		=> "M_ans_apl02",
@@ -193,7 +200,6 @@ $autoload['model'] = array(
 		"table/M_kuk" 				=> "M_kuk",
 		"table/M_mma_kuk" 			=> "M_mma_kuk",
 		"table/M_status_administrasi" => "M_sa",
-		"table/M_uk" 				=> "M_uk",
 		"table/M_unit_kompetensi" 	=> "M_unit_kompetensi"
 		//END OF TABLE
 	);

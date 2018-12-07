@@ -17,7 +17,7 @@
 			<th> # </th>
 			<th> Nomor </th>
 			<th> Judul Skema Sertifikasi </th>
-			<th class="sorting_disabled" align = "center"> &nbsp </th>
+			<th> Status </th>
 			<th class="sorting_disabled" align = "center"> &nbsp </th>
 		</tr>
 	</thead>

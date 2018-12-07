@@ -5,18 +5,20 @@
   </ol>
 </nav>
 
-<h3 class="box-title"> <?php echo $menu_title[101]; ?> </h3>
-<button onClick="addDt()" class="btn btn-primary float-right"> <?php echo $form_button[106]; ?> </button>
+<h3 class="box-title"> Unit Kompetensi </h3>
+<button onClick="modal_tambah()" class="btn btn-primary float-right"> Tambah </button>
+
 </br></br>
 	  
- <table id="<?php echo $form_id[114]; ?>" class="table table-hover dataTable" cellspacing="0" width="100%">
+<!-- Tabel Utama Unit Kompetensi -->
+ <table id="id_tabel_uk" class="table table-hover dataTable" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th> # </th>					
 			<th> Kode Unit Kompetensi </th>
 			<th> Judul Unit Kompetensi </th>
 			<th> &nbsp </th>
-			<th> &nbsp </th>
+			<th> Status </th>
 			<th> &nbsp </th>
 		</tr>
 	</thead>
@@ -24,47 +26,8 @@
 	</tbody>
  </table>
 
-<div class="modal fade" id="<?php echo $form_id[113]; ?>" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-				<h4 class="modal-title"> Title </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-			
-			<div class="modal-body">
-				<form id="<?php echo $form_id[110]; ?>">           
-					<input type="hidden" name="<?php echo $form_name[105]; ?>" id="<?php echo $form_id[115]; ?>"/> 					
-					<div class="form-group">
-						<label> Kode Unit Kompetensi </label>
-						<input name="<?php echo $form_name[104]; ?>" id="<?php echo $form_id[112]; ?>" class="form-control" type="text">
-						<span class="help-block"></span>
-					</div>
-					<div class="form-group">
-						<label> Judul Unit Kompetensi </label>
-						<textarea name="<?php echo $form_name[103]; ?>" id="<?php echo $form_id[111]; ?>" class="form-control" rows="2" style="resize:none"></textarea>
-						<span class="help-block"></span>
-					</div>
-					<div class="form-group">
-						<label> Skema Sertifikasi </label>
-						  <select class="form-control select2" multiple = "multiple" style="width: 100%;" name="<?php echo $form_name[106]; ?>" id="<?php echo $form_id[105]; ?>"> 
-							<?php foreach($listSkema->result() as $row){ ?>
-								<option value = "<?php echo $row->UUID_SKEMA; ?>"><?php echo $row->NOMOR_SKEMA." - ".$row->NAMA_SKEMA; ?></option>
-							<?php } ?>						
-						  </select>
-					</div>
-				</form>	
-			</div>
-				
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="saveDt()"> <?php echo $form_button[101]; ?> </button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal"> <?php echo $form_button[100]; ?> </button>
-			</div>					
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="<?php echo $form_id[106]; ?>" role="dialog">
+<!-- Modal Tabel Skema-->
+<div class="modal fade" id="id_modal_tabel_ss" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
 			<div class="modal-header">
@@ -75,12 +38,12 @@
 			<div class="modal-body">				
 				<dl class="row">
 					<dt class="col-md-5"> Kode Unit Kompetensi </dt>
-						<dd id="<?php echo $form_id[109]; ?>" class="col-md-7">Text</dd>
+						<dd id="id_uk_kode" class="col-md-7">Text</dd>
 					<dt class="col-md-5"> Judul Unit Kompetensi </dt>
-						<dd id="<?php echo $form_id[108]; ?>" class="col-md-7">Text</dd>
+						<dd id="id_uk_judul" class="col-md-7">Text</dd>
 				</dl>
 			  
-				<table id="<?php echo $form_id[107]; ?>" class="table table-hover dataTable" width="100%">
+				<table id="id_tabel_ss" class="table table-hover dataTable" width="100%">
 				<thead>
 					<tr>
 						<th> # </th>
@@ -94,8 +57,50 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal"> <?php echo $form_button[100]; ?> </button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
 			</div>			
 		</div>
+    </div>
+</div>
+
+<!-- Modal Form Unit Kompetensi -->
+<div class="modal fade" id="id_modal_form_uk" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<h4 class="modal-title"> Title </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+			
+			<div class="modal-body">
+				<form id="id_form_uk">           
+					<input type="hidden" name="uk_uuid" id="id_uk_uuid"/> 					
+					<div class="form-group">
+						<label> Kode Unit Kompetensi </label>
+						<input name="uk_kode" class="form-control" type="text">
+						<span class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<label> Judul Unit Kompetensi </label>
+						<textarea name="uk_judul" class="form-control" rows="2" style="resize:none"></textarea>
+						<span class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<label> Skema Sertifikasi </label>
+						<select multiple = "multiple" name="ss_uuid[]" id="id_ss_uuid"></select>
+					</div>
+					<div class="form-group">
+						<input name="uk_is_active" type="checkbox" checked>
+						<label> IS_ACTIVE </label>
+						<span class="help-block"></span>
+					</div>	
+				</form>	
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="setData()"> Simpan </button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"> Tutup </button>
+			</div>					
+        </div>
     </div>
 </div>

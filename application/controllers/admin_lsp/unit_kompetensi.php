@@ -1,36 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// Admin LSP
 class unit_kompetensi extends CI_Controller {
-
-	// Admin LSP		
-	public function __construct()
-		{
-			parent::__construct();
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("common/m_crud", "m_crud");
-			$this->load->model("admin_lsp/unit_kompetensi/m_custom", "m_custom");
-			$this->load->model("admin_lsp/unit_kompetensi/m_param", "m_param");
-			$this->load->model("admin_lsp/unit_kompetensi/m_list_uk", "m_list_uk");
-			$this->load->model("admin_lsp/unit_kompetensi/m_list_ske", "m_list_ske");
+		
+	public function __construct(){
+		parent::__construct();
+		
+		//Check Login Status
+		if($this->session->userdata('lsp_bpjstk_login_id') == null){
+			redirect('');
 		}
-	
-	public function index()
-		{		
-			$data					= $this->m_globalval->getAllData();
-			$layout					= $data['layout'];
-			$view					= $data['view'];
-			
-			$addtionalParam	 		= $this->m_param->getDt_SKE();
-			$listSkema				= $this->m_crud->selectDt("SKEMA",  $addtionalParam);
-			$data["listSkema"]		= $listSkema;
-			
-			$data["dview"]			= $view[101];
-			$data["dviewEvent"]		= $view[103];
-			$data["dlayoutMenu"]	= $layout[102];
-			$this->load->view($layout[100], $data);
+		
+		//Check Permissions
+		if($this->session->userdata('lsp_bpjstk_role_code') != "ADMIN_LSP"){
+			$role_code = $this->session->userdata('lsp_bpjstk_role_code');
+			redirect('common/akun/switchInterface/'.$role_code);
 		}
+	}
 	
+	//Default Function
+	public function index(){		
+		//Set layout for Unit Kompetensi
+		$data["dview"]			= "admin_lsp/v_unit_kompetensi";
+		$data["dviewEvent"]		= "admin_lsp/v_unit_kompetensi_event";
+		$data["dlayoutMenu"]	= "common/v_layout_menu_admin_lsp";
+		
+		$this->load->view("common/v_layout", $data);
+	}
+	
+	/*
 	// SAVE 
 	public function saveDt()
 		{
@@ -107,5 +106,5 @@ class unit_kompetensi extends CI_Controller {
 				echo var_dump($e->getMessage());
 			}
 		}
-	
+	*/
 }
