@@ -34,6 +34,10 @@
 		validator.resetForm();
 		$('#id_form_uk').removeClass('error');
 		
+		//Delete previous multiple select data
+		$('select#id_ss_uuid').multipleSelect('destroy');
+		$('select#id_ss_uuid').multipleSelect({width: '100%'});
+		
 		//Set Title & Show Modal
 		$('.modal-title').text('Tambah Unit Kompetensi');
 		$('#id_modal_form_uk').modal('show');
@@ -47,6 +51,10 @@
 		$('#id_form_uk')[0].reset();
 		validator.resetForm();
 		$('#id_form_uk').removeClass('error');
+		
+		//Delete previous multiple select data
+		$('select#id_ss_uuid').multipleSelect('destroy');
+		$('select#id_ss_uuid').multipleSelect({width: '100%'});
 		
 		//Set previous data in modal form
 		$.ajax({
@@ -151,7 +159,7 @@
 		});
 		
 		// Form validation
-		validator = $("#id_modal_form_uk").validate({
+		validator = $("#id_form_uk").validate({
 			rules: 
 				{
 					'ss_uuid[]': 
@@ -174,12 +182,13 @@
 									{
 										'uk_uuid': 
 											function() {
-												return $("#uk_uuid").val();
+												return $("#id_uk_uuid").val();
 											}
 									}
 							}
 						}
 				}, 
+			ignore: [],
 			messages:
 				{
 					uk_kode : 
@@ -196,6 +205,7 @@
 						cache		: false,
 						contentType	: false,
 						processData	: false,
+						dataType	: "JSON",
 						success		: function(data){
 							//Close the modal
 							$("[data-dismiss=modal]").trigger({ type: "click" });

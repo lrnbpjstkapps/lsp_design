@@ -31,22 +31,22 @@
 				$this->DTM_UPD		= null;
 				$this->IS_ACTIVE	= $data["uk_is_active"];
 				
-				return $this->db->insert('USR', $this);
+				return $this->db->insert('UNIT_KOMPETENSI', $this);
 			}
 		
 		//Update data
-		public function update_entry($form_name, $data, $condition)
+		public function update_satu_data($data_lama, $data_baru, $kondisi)
 			{
-				$this->UUID_UK		= (!$this->input->post($form_name[105]) ? $data->UUID_UK : $this->input->post($form_name[105]));
-				$this->JUDUL_UK		= (!$this->input->post($form_name[103]) ? $data->JUDUL_UK : $this->input->post($form_name[103]));
-				$this->KODE_UK		= (!$this->input->post($form_name[104]) ? $data->KODE_UK : $this->input->post($form_name[104]));
-				$this->USR_CRT		= $data->USR_CRT;
-				$this->DTM_CRT		= $data->DTM_CRT;
+				$this->UUID_UK		= $data_lama->UUID_UK;
+				$this->JUDUL_UK		= $data_baru["uk_judul"];
+				$this->KODE_UK		= $data_baru["uk_kode"];
+				$this->USR_CRT		= $data_lama->USR_CRT;
+				$this->DTM_CRT		= $data_lama->DTM_CRT;
 				$this->USR_UPD		= $this->session->userdata('lsp_bpjstk_user_name');
 				$this->DTM_UPD		= date('Y-m-d H:i:s');
-				$this->IS_ACTIVE	= (!$this->input->post($form_name[156]) ? $data->IS_ACTIVE : $this->input->post($form_name[156]));
+				$this->IS_ACTIVE	= $data_baru["uk_is_active"];
 					
-				return $this->db->update('UNIT_KOMPETENSI', $this, $condition);
+				return $this->db->update('UNIT_KOMPETENSI', $this, $kondisi);
 			}
 			
 		//Delete data

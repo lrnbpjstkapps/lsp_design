@@ -167,6 +167,9 @@ $autoload['model'] = array(
 		//#2
 		"form/form_ss"										=> "form_ss",
 		
+		//#3
+		"form/form_uk"										=> "form_uk",
+			
 		"form/M_form_apl_01"		=> "M_form_apl_01", 
 		"form/M_form_apl_02"		=> "M_form_apl_02", 
 		"form/M_form_mma"			=> "M_form_mma", 

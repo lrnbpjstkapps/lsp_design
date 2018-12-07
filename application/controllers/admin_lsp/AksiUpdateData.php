@@ -49,6 +49,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 		
+		//Update one data in UK table & SKEMA_UK table
+		public function satuData_uk(){				
+			//#1 Update data in UK table
+			$kondisi			= array('UUID_UK' => $this->input->post('uk_uuid'));
+			$data_lama_uk		= $this->tabel_uk->ambil_satu_data($kondisi);
+			$_POST['uk_uuid']	= $data_lama_uk->UUID_UK;
+			$data_baru_uk		= $this->form_uk->baca_inputan();
+			$result_uk_upd		=  $this->tabel_uk->update_satu_data($data_lama_uk, $data_baru_uk, $kondisi);
+			
+			//#2 Delete previous data from SKEMA_UK table
+			if($result_uk_upd == TRUE){
+				$kondisi				= array('UUID_UK' => $this->input->post('uk_uuid'));
+				$result_ss_uk_del		= $this->tabel_ss_uk->hapus_data($kondisi);
+				
+				//#3 Insert into SKEMA_UK table
+				if($result_ss_uk_del == TRUE){
+					for($i=0; $i<count($data_baru_uk["ss_uuid[]"]); $i++){
+						//Set each SKEMA_UK
+						$data["suk_uuid"]		= $this->uuid->v4();
+						//Set each SKEMA_UUID
+						$data["suk_uuid_skema"]	= $data_baru_uk["ss_uuid[]"][$i];
+						//Set UUID_UK
+						$data["suk_uuid_uk"] 		= $data_baru_uk['uk_uuid'];
+						$data["suk_urutan"] 		= $data_baru_uk['suk_urutan'];
+						$data["suk_is_active"] 		= $data_baru_uk['suk_is_active'];
+						//Insert into SKEMA_UK table
+						$result_tabel_ss_uk		= $this->tabel_ss_uk->tambah_satu_data($data);
+					}
+
+					if($result_tabel_ss_uk == TRUE){
+						$data["hasil"]	= "sukses";
+						$data["pesan"]	= "Data berhasil diupdate";
+						echo json_encode($data);
+					}else{
+						$data["hasil"]	= "gagal";
+						$data["pesan"]	= "Data gagal diupdate [#3 Insert into SKEMA_UK table]";
+						echo json_encode($data);
+					}					
+				}else{
+					$data["hasil"]	= "gagal";
+					$data["pesan"]	= "Data gagal diupdate [#2 Delete previous data from SKEMA_UK table]";
+					echo json_encode($data);
+				}	
+			}else{
+				$data["hasil"]	= "gagal";
+				$data["pesan"]	= "Data gagal diupdate [#1 Update data in UK table]";
+				echo json_encode($data);
+			}
+		}
+		
 		//Update one data in SKEMA table
 		public function satuData_ss(){				
 			//#1 Update data in SKEMA table

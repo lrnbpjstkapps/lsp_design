@@ -222,7 +222,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//condition
 			$kondisi	= array('NOMOR_SKEMA' => $this->input->post('ss_nomor'),
 							'UUID_SKEMA !=' => $this->input->post('ss_uuid'));
-			echo $this->tabel_skema->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+			echo $this->tabel_ss->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
 		}
 		
 		//Check input of KODE_UK
@@ -230,7 +230,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//condition
 			$kondisi	= array('KODE_UK' => $this->input->post('uk_kode'),
 							'UUID_UK !=' => $this->input->post('uk_uuid'));
-			echo $this->tabel_skema->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+							//echo $this->input->post('uk_kode').' '.$this->input->post('uk_uuid');
+			echo $this->tabel_uk->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
 		}
 	}
 ?>
