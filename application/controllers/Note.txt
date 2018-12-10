@@ -1,0 +1,5 @@
+<select class="form-control select2" multiple = "multiple" style="width: 100%;" name="<?php echo $form_name[106]; ?>" id="<?php echo $form_id[105]; ?>"> 
+							<?php foreach($listSkema->result() as $row){ ?>
+								<option value = "<?php echo $row->UUID_SKEMA; ?>"><?php echo $row->NOMOR_SKEMA." - ".$row->NAMA_SKEMA; ?></option>
+							<?php } ?>						
+						  </select>

@@ -152,6 +152,10 @@ $autoload['model'] = array(
 		"datatables/datatabel_uk"							=> "datatabel_uk",
 		"datatables/datatabel_modal_ss"						=> "datatabel_modal_ss",
 		
+		//#5 
+		"datatables/datatabel_ek"							=> "datatabel_ek",
+		
+		
 		"datatables/M_list_apl01"	=> "M_list_apl01",
 		"datatables/M_list_apl02"	=> "M_list_apl02",		
 		"datatables/M_list_mma" 	=> "M_list_mma",
@@ -169,6 +173,9 @@ $autoload['model'] = array(
 		
 		//#3
 		"form/form_uk"										=> "form_uk",
+		
+		//#4
+		"form/form_ek"										=> "form_ek",
 			
 		"form/M_form_apl_01"		=> "M_form_apl_01", 
 		"form/M_form_apl_02"		=> "M_form_apl_02", 
@@ -191,12 +198,14 @@ $autoload['model'] = array(
 		//#4
 		"table/tabel_uk"									=> "tabel_uk",
 		
+		//#5
+		"table/tabel_ek"									=> "tabel_ek",
+		
 		"table/M_administrasi"		=> "M_administrasi",
 		"table/M_answer_apl_02"		=> "M_ans_apl02",
 		"table/M_apl01_bukti"		=> "M_apl01_bukti",
 		"table/M_apl01_uk" 			=> "M_apl01_uk",
 		"table/M_bukti" 			=> "M_bukti",
-		"table/M_ek" 				=> "M_ek",
 		"table/M_fr_apl_01" 		=> "M_apl_01",
 		"table/M_fr_apl_02" 		=> "M_apl_02",
 		"table/M_fr_mma" 			=> "M_fr_mma",

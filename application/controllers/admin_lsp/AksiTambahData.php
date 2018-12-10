@@ -94,5 +94,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				echo json_encode($data);
 			}
 		}
+		
+		//Add one data into EK table	 
+		public function satuData_ek(){
+			//Read data input
+			$data = $this->form_ek->baca_inputan();
+			
+			//Insert into EK table
+			$result_tabel_ek = $this->tabel_ek->tambah_satu_data($data);
+											
+			if($result_tabel_ek == TRUE){
+				$data["hasil"]	= "sukses";
+				$data["pesan"]	= "Data berhasil ditambahkan";
+				echo json_encode($data);
+			}else{
+				$data["hasil"]	= "gagal";
+				$data["pesan"]	= "Data gagal ditambahkan";
+				echo json_encode($data);
+			}
+		}
 	}
 ?>

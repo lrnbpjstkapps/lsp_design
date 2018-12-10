@@ -66,6 +66,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data_out);
 		}
 		
+		//Get one data from EK table
+		public function satuData_ek($uuid){
+			//Get data from EK table
+			$kondisi		= array('UUID_EK' => $uuid);
+			$data_ek		= $this->tabel_ek->ambil_satu_data($kondisi);
+			
+			echo json_encode($data_ek);
+		}
+		
 		//DATATABLES		
 		//Datatables for USER table
 		public function datatabel_user(){				
@@ -107,6 +116,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$recordsTotal		= $this->datatabel_uk->count_all();
 
 			$data				= $this->datatabel_uk->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for EK table()
+		public function datatabel_ek(){
+			$result				= $this->datatabel_ek->get_datatables();				
+			$recordsFiltered	= $this->datatabel_ek->count_filtered();
+			$recordsTotal		= $this->datatabel_ek->count_all();
+
+			$data				= $this->datatabel_ek->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -230,8 +250,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//condition
 			$kondisi	= array('KODE_UK' => $this->input->post('uk_kode'),
 							'UUID_UK !=' => $this->input->post('uk_uuid'));
-							//echo $this->input->post('uk_kode').' '.$this->input->post('uk_uuid');
 			echo $this->tabel_uk->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of NOMOR_EK
+		public function is_ek_nomor_valid(){
+			//condition
+			$kondisi	= array('NOMOR_EK' => $this->input->post('ek_nomor'),
+							'UUID_EK !=' => $this->input->post('ek_uuid'));
+			echo $this->tabel_ek->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
 		}
 	}
 ?>

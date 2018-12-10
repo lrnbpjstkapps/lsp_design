@@ -1,28 +1,20 @@
 <script text="text/javascript">
-function findDt()
-	{		
-		$("#<?php echo $form_id[118]; ?>").submit();		
+function cari_data(){		
+		$("#id_form_ek_search").submit();		
 	}
 
 $(document).ready(function() {
-	$("#<?php echo $form_id[116]; ?>").hide();
+	$("#id_page_ek").hide();
 			
-	$("#<?php echo $form_id[118]; ?>").validate({
+	$("#id_form_ek_search").validate({
 		rules: {
-			valTglMulai: {
-				required: true,
-				date: true
-			},
-			valTglSelesai: {
-				required: true,
-				date: true
-			}
+			
 		},
 		submitHandler: function(form){			
 			$.ajax({
-				url: '<?php echo $ajax_url[111]; ?>',
+				url: '<?= base_url(); ?>admin_lsp/elemen_kompetensi/hasil_pencarian',
 				type: 'POST',
-				data: new FormData($("#<?php echo $form_id[118]; ?>")[0]),
+				data: new FormData($("#id_form_ek_search")[0]),
 				beforeSend: function (){
 					//loading's thing
 				},
@@ -30,8 +22,8 @@ $(document).ready(function() {
 				contentType: false,
 				processData: false,
 				success: function(data){					
-					$("#<?php echo $form_id[116]; ?>").html(data);
-					$("#<?php echo $form_id[116]; ?>").show();
+					$("#id_page_ek").html(data);
+					$("#id_page_ek").show();
 				}
 			});
 			return false;
