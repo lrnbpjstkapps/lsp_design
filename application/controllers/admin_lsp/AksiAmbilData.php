@@ -75,6 +75,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo json_encode($data_ek);
 		}
 		
+		//Get one data from KUK table
+		public function satuData_kuk($uuid){
+			//Get data from KUK table
+			$kondisi		= array('UUID_KUK' => $uuid);
+			$data_kuk		= $this->tabel_kuk->ambil_satu_data($kondisi);
+			
+			echo json_encode($data_kuk);
+		}
+		
 		//DATATABLES		
 		//Datatables for USER table
 		public function datatabel_user(){				
@@ -127,6 +136,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$recordsTotal		= $this->datatabel_ek->count_all();
 
 			$data				= $this->datatabel_ek->get_json($result, $recordsTotal, $recordsFiltered);
+			
+			echo json_encode($data);
+		}
+		
+		//Datatables for KUK table()
+		public function datatabel_kuk(){
+			$result				= $this->datatabel_kuk->get_datatables();				
+			$recordsFiltered	= $this->datatabel_kuk->count_filtered();
+			$recordsTotal		= $this->datatabel_kuk->count_all();
+
+			$data				= $this->datatabel_kuk->get_json($result, $recordsTotal, $recordsFiltered);
 			
 			echo json_encode($data);
 		}
@@ -259,6 +279,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$kondisi	= array('NOMOR_EK' => $this->input->post('ek_nomor'),
 							'UUID_EK !=' => $this->input->post('ek_uuid'));
 			echo $this->tabel_ek->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Check input of NOMOR_KUK
+		public function is_kuk_nomor_valid(){
+			//condition
+			$kondisi	= array('NOMOR_KUK' => $this->input->post('kuk_nomor'),
+							'UUID_KUK !=' => $this->input->post('kuk_uuid'));
+			echo $this->tabel_kuk->ambil_data($kondisi)->num_rows() == 0 ? "true" : "false";
+		}
+		
+		//Dropdown Elemen Kompetensi by Unit Kompetensi
+		public function dropdown_ek(){
+			//Get data from ELEMEN_KOMPETENSI table 
+			$kondisi				= array('UUID_UK' => $this->input->post('uk_uuid'));
+			$lis_ek					= $this->tabel_ek->ambil_data($kondisi);
+			$data["lis_ek"]			= $lis_ek;
+			 
+			if($lis_ek->num_rows()>0){
+			foreach($lis_ek->result() as $row){
+				echo "<option value='".$row->UUID_EK."'>  ".$row->NOMOR_EK." - ".$row->NAMA_EK."</option>";
+			}
+		}
 		}
 	}
 ?>

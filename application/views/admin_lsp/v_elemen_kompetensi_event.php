@@ -11,7 +11,7 @@
 	
 		//Delete previous alert
 		$('#id_form_ek')[0].reset();
-		//validator.resetForm();
+		validator.resetForm();
 		$('#id_form_ek').removeClass('error');
 		
 		$('[name="uk_uuid"]').val('<?= $uk_uuid; ?>');
@@ -29,7 +29,7 @@
 		//Delete previous alert
 		$('#id_form_ek')[0].reset();
 		validator.resetForm();
-		$('#id_form_ek').removeClass('error');
+		$('#id_form_ek .form-control').removeClass('error');
 		
 		//Set previous data in modal form
 		$.ajax({

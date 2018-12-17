@@ -1,16 +1,16 @@
 <?php
-	class datatabel_ek extends CI_Model{
-		var $table			= "ELEMEN_KOMPETENSI AS EK";
-		var $order			= array('EK.NOMOR_EK' => 'ASC', 'EK.NAMA_EK' => 'ASC'); 
+	class datatabel_kuk extends CI_Model{
+		var $table			= "KRITERIA_UNJUK_KERJA AS KUK";
+		var $order			= array('KUK.NOMOR_KUK' => 'ASC', 'KUK.PERNYATAAN' => 'ASC'); 
 		var $column_order	= array(
-			null, 'EK.NOMOR_EK', 'EK.NAMA_EK', 'EK.IS_ACTIVE', null); 
-		var $column_search	= array('EK.NOMOR_EK', 'EK.NAMA_EK');
+			null, 'KUK.NOMOR_KUK', 'KUK.PERNYATAAN', 'KUK.PERTANYAAN', 'KUK.IS_ACTIVE', null); 
+		var $column_search	= array('KUK.NOMOR_KUK', 'KUK.PERNYATAAN', 'KUK.PERTANYAAN');
 		
 		// Fungsi yang berisi syntax - syntax untuk mengambil sejumlah data.
 		public function _get_datatables_query(){
-			$this->db->select('EK.UUID_EK, EK.UUID_UK, EK.NOMOR_EK, EK.NAMA_EK, EK.IS_ACTIVE');
+			$this->db->select('KUK.UUID_KUK, KUK.UUID_EK, KUK.NOMOR_KUK, KUK.PERNYATAAN, KUK.PERTANYAAN, KUK.IS_ACTIVE');
 			$this->db->from($this->table);
-			$this->db->where('EK.UUID_UK', $this->input->post('uk_uuid'));
+			$this->db->where('KUK.UUID_EK', $this->input->post('ek_uuid'));
 			
 			$i = 0;
 			foreach ($this->column_search as $item){
@@ -58,9 +58,9 @@
 
 		// Menghitung jumlah seluruh data tanpa filter.
 		public function count_all(){
-			$this->db->select('EK.UUID_EK');
+			$this->db->select('KUK.UUID_KUK');
 			$this->db->from($this->table);
-			$this->db->where('EK.UUID_UK', $this->input->post('uk_uuid'));
+			$this->db->where('KUK.UUID_EK', $this->input->post('ek_uuid'));
 			
 			return $this->db->count_all_results();
 		}
@@ -75,14 +75,15 @@
 					$no++;
 					$row	= array();
 					$row[]	= $no;						
-					$row[] 	= $values->NOMOR_EK;
-					$row[] 	= $values->NAMA_EK;
+					$row[] 	= $values->NOMOR_KUK;
+					$row[] 	= $values->PERNYATAAN;
+					$row[] 	= $values->PERTANYAAN;
 					if($values->IS_ACTIVE == '1'){
 						$row[] 	= '<font color="green">Aktif</font>';
 					}else{
 						$row[] 	= '<font color="red">Nonaktif</font>';
 					}
-					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_EK."'".')"><i class="fa fa-edit"></i></a>';
+					$row[] 	= '<a href="javascript:void(0)" onclick="modal_update('."'".$values->UUID_KUK."'".')"><i class="fa fa-edit"></i></a>';
 					$data[]	= $row;
 				}
 	

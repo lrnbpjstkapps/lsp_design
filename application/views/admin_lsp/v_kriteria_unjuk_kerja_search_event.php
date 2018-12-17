@@ -1,54 +1,43 @@
 <script text="text/javascript">
-function findDt()
-	{		
-		$("#<?php echo $form_id[126]; ?>").submit();		
-	}
+function cari_data(){		
+	$("#id_form_kuk_search").submit();		
+}
 
-function dropdown1()
-	{		
-		var e = document.getElementById("<?php echo $form_id[115]; ?>");
+function dropdown_ek(){		
+		var e = document.getElementById("id_uk_uuid");
 		var valOpt1 = e.options[e.selectedIndex].value;
 		
 		$.ajax({
 			type: "POST",
 			dataType: "html",
-			url: "<?php echo $ajax_url[123]; ?>",
+			url: "<?= base_url(); ?>admin_lsp/aksiAmbilData/dropdown_ek",
 			beforeSend: function (){
 				//loading things
 			},
-			data: "<?php echo $form_name[105]; ?>="+valOpt1,
+			data: "uk_uuid="+valOpt1,
 			success: function(msg){
 				if(msg==''){				
-					$("select#<?php echo $form_id[124]; ?>").html("");
-					document.getElementById("<?php echo $form_id[135]; ?>").disabled = true;
+					$("select#id_ek_uuid").html("");
 				}else{
-					$("select#<?php echo $form_id[124]; ?>").html(msg);
-					document.getElementById("<?php echo $form_id[135]; ?>").disabled = false;
+					$("select#id_ek_uuid").html(msg);
 				}                                     
 			}
 		});
 	}
 	
 $(document).ready(function() {
-	$("#<?php echo $form_id[116]; ?>").hide();
-	dropdown1();
+	//$("#id_page_kuk").hide();
+	dropdown_ek();
 			
-	$("#<?php echo $form_id[126]; ?>").validate({
+	$("#id_form_kuk_search").validate({
 		rules: {
-			valTglMulai: {
-				required: true,
-				date: true
-			},
-			valTglSelesai: {
-				required: true,
-				date: true
-			}
+			
 		},
 		submitHandler: function(form){			
 			$.ajax({
-				url: '<?php echo $ajax_url[117]; ?>',
+				url: '<?= base_url(); ?>admin_lsp/kriteria_unjuk_kerja/hasil_pencarian',
 				type: 'POST',
-				data: new FormData($("#<?php echo $form_id[126]; ?>")[0]),
+				data: new FormData($("#id_form_kuk_search")[0]),
 				beforeSend: function (){
 					//loading's thing
 				},
@@ -56,8 +45,8 @@ $(document).ready(function() {
 				contentType: false,
 				processData: false,
 				success: function(data){					
-					$("#<?php echo $form_id[116]; ?>").html(data);
-					$("#<?php echo $form_id[116]; ?>").show();
+					$("#id_page_kuk").html(data);
+					$("#id_page_kuk").show();
 				}
 			});
 			return false;

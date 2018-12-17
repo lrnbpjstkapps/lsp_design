@@ -137,6 +137,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}									
 		}
 		
+		//Update one data in KUK table
+		public function satuData_kuk(){				
+			//#1 Update data in KUK table
+			$kondisi		= array('UUID_KUK' => $this->input->post('kuk_uuid'));
+			$data_lama		= $this->tabel_kuk->ambil_satu_data($kondisi);
+			$data_baru		= $this->form_kuk->baca_inputan();
+			$result			= $this->tabel_kuk->update_satu_data($data_lama, $data_baru, $kondisi);
+
+			if($result == TRUE){
+				$data["hasil"]	= "sukses";
+				$data["pesan"]	= "Data berhasil diupdate";
+				echo json_encode($data);
+			}else{
+				$data["hasil"]	= "gagal";
+				$data["pesan"]	= "Data gagal diupdate";
+				echo json_encode($data);
+			}									
+		}
+		
 		//Update data in SKEMA_UK table
 		public function data_ss_uk(){	
 			//Convert JSON data into array

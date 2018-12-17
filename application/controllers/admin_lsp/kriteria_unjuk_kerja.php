@@ -1,34 +1,56 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// ADMIN_LSP
 class kriteria_unjuk_kerja extends CI_Controller {
 
-	// Admin LSP		
-	public function __construct()
-		{
-			parent::__construct();
-			$this->load->model("common/m_globalval", "m_globalval");
-			$this->load->model("common/m_crud", "m_crud");
-			$this->load->model("admin_lsp/kriteria_unjuk_kerja/m_param", "m_param");
-			$this->load->model("admin_lsp/kriteria_unjuk_kerja/m_list_kuk", "m_list_kuk");
+	public function __construct(){
+		parent::__construct();
+		
+		//Check Login Status
+		if($this->session->userdata('lsp_bpjstk_login_id') == null){
+			redirect('');
 		}
-	
-	public function index()
-		{		
-			$data					= $this->m_globalval->getAllData();
-			$layout					= $data['layout'];
-			$view					= $data['view'];
-			
-			$addtionalParam	 		= $this->m_param->getDt_105($data);
-			$listUK					= $this->m_crud->selectDt("UNIT_KOMPETENSI",  $addtionalParam);
-			$data["listUK"]			= $listUK;
-			
-			$data["dview"]			= $view[110];
-			$data["dviewEvent"]		= $view[111];
-			$data["dlayoutMenu"]	= $layout[102];
-			$this->load->view($layout[100], $data);
+		
+		//Check Permissions
+		if($this->session->userdata('lsp_bpjstk_role_code') != "ADMIN_LSP"){
+			$role_code = $this->session->userdata('lsp_bpjstk_role_code');
+			redirect('common/akun/switchInterface/'.$role_code);
 		}
+	}
 	
+	//Default Function
+	public function index(){		
+		//Get data from UNIT_KOMPETENSI table 
+		$kondisi				= array('IS_ACTIVE' => '1');
+		$lis_uk					= $this->tabel_uk->ambil_data($kondisi);
+		$data["lis_uk"]			= $lis_uk;
+			
+		$data["dview"]			= "admin_lsp/v_kriteria_unjuk_kerja_search";
+		$data["dviewEvent"]		= "admin_lsp/v_kriteria_unjuk_kerja_search_event";
+		$data["dlayoutMenu"]	= "common/v_layout_menu_admin_lsp";
+		$this->load->view("common/v_layout", $data);
+	}
+	
+	public function hasil_pencarian(){							
+		$kondisi				= array('UUID_UK' => $this->input->post('uk_uuid'));
+		$data_uk				= $this->tabel_uk->ambil_satu_data($kondisi);
+		$kondisi				= array('UUID_EK' => $this->input->post('ek_uuid'));
+		$data_ek				= $this->tabel_ek->ambil_satu_data($kondisi);
+		
+		$data['uk_uuid']		= $data_uk->UUID_UK;
+		$data['uk_kode']		= $data_uk->KODE_UK;	
+		$data['uk_judul']		= $data_uk->JUDUL_UK;
+		
+		$data['ek_uuid']		= $data_ek->UUID_EK;
+		$data['ek_nomor']		= $data_ek->NOMOR_EK;	
+		$data['ek_nama']		= $data_ek->NAMA_EK;				
+		
+		$this->load->view("admin_lsp/v_kriteria_unjuk_kerja", $data);
+		$this->load->view("admin_lsp/v_kriteria_unjuk_kerja_event");
+	}
+	
+	/*
 	// CREATE
 	public function saveDt()
 		{
@@ -110,5 +132,5 @@ class kriteria_unjuk_kerja extends CI_Controller {
 			$addtionalParam	= $this->m_param->deleteDt($data, $uuid);
 			echo $this->m_crud->deleteDt("KRITERIA_UNJUK_KERJA", $addtionalParam);
 		}
-		
+		*/
 }

@@ -5,19 +5,19 @@
   </ol>
 </nav>
 
-<h3 class="box-title"> <?php echo $menu_title[103]; ?> </h3> 
+<h3 class="box-title"> Kriteria Unjuk Kerja </h3> 
 
 <div class = "alert alert-info" role = "alert">		  
-	<form id="<?php echo $form_id[126]; ?>">
+	<form id="id_form_kuk_search">
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-2">
 					<label> Unit Kompetensi </label>
 				</div>
 				<div class="col-md-7">
-				  <select class="form-control select2" style="width: 100%;" name="<?php echo $form_name[105]; ?>" id="<?php echo $form_id[115]; ?>" onchange="dropdown1();"> 
-					<?php foreach($listUK->result() as $row){ ?>
-						<option value = "<?php echo $row->UUID_UK; ?>"><?php echo $row->KODE_UK." - ".$row->JUDUL_UK; ?></option>
+				  <select class="form-control select2" style="width: 100%;" name="uk_uuid" id="id_uk_uuid" onchange="dropdown_ek();"> 
+					<?php foreach($lis_uk->result() as $row){ ?>
+						<option value = "<?= $row->UUID_UK; ?>"><?= $row->KODE_UK." - ".$row->JUDUL_UK; ?></option>
 					<?php } ?>						
 				  </select>
 				</div>
@@ -29,17 +29,19 @@
 					<label> Elemen Kompetensi </label>
 				</div>
 				<div class="col-md-7">
-				  <select class="form-control select2" style="width: 100%;" name="<?php echo $form_name[109]; ?>" id="<?php echo $form_id[124]; ?>"></select>
+				  <select class="form-control select2" style="width: 100%;" name="ek_uuid" id="id_ek_uuid"></select>
 				</div>
 				<div class="col-md-3">
-					<button type="button" class="btn btn-danger float-right" onclick="findDt()" id="<?php echo $form_id[135]; ?>"> <?php echo $form_button[104]; ?> </button>
+					<button type="button" class="btn btn-danger float-right" onclick="cari_data()"> Cari </button>
 				</div>
 			</div>
 		</div>
 	</form>	
 </div>
+
 <hr>
-<div id="<?php echo $form_id[116]; ?>">
+
+<div id="id_page_kuk">
 	
 </div>
 
