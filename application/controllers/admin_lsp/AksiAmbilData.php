@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function satuData_ss($uuid){
 			//Get data from SKEMA table
 			$kondisi		= array('UUID_SKEMA' => $uuid);
-			$data_skema		= $this->tabel_skema->ambil_satu_data($kondisi);
+			$data_skema		= $this->tabel_ss->ambil_satu_data($kondisi);
 			
 			echo json_encode($data_skema);
 		}

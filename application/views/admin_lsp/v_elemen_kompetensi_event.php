@@ -38,6 +38,8 @@
 			dataType	: "JSON",
 			success		: function(data)
 				{						
+					$('[name="uk_kode_judul"]').val('<?= $uk_kode." - ".$uk_judul; ?>');
+					
 					$('[name="ek_uuid"]').val(data.UUID_EK);
 					$('[name="uk_uuid"]').val(data.UUID_UK);
 					$('[name="ek_nomor"]').val(data.NOMOR_EK);

@@ -20,8 +20,6 @@
 				  <div class="dropdown-menu" aria-labelledby="dropdown10">
 					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_apl_01">FR-APL-01</a>
 					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_apl_02">FR-APL-02</a>
-					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_mak_02">FR-MAK-02</a>
-					<a class="dropdown-item" href="<?php echo base_url(); ?>asesi/fr_mak_03">FR-MAK-03</a>
 				  </div>
 				</li>
 			</ul>
