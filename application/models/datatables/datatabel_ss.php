@@ -37,7 +37,7 @@
 			}
 		}
 
-		// Mengambil sebagian data berdasarkan filternya.
+		// Data per page.
 		public function get_datatables(){
 			$this->_get_datatables_query();
 			
@@ -47,7 +47,7 @@
 			return $this->db->get()->result();
 		}
 
-		// Menghitung jumlah data yang ditampilkan.
+		// Menghitung jumlah data terfilter.
 		public function count_filtered(){
 			$this->_get_datatables_query();
 			
@@ -62,7 +62,7 @@
 			return $this->db->count_all_results();
 		}
 		
-		// Mengirim data sebagai JSON.
+		// Mengirim data ke view sebagai JSON.
 		public function get_json($result, $recordsTotal, $recordsFiltered){			
 			$data 		= array();
 			$no			= $_POST['start'];
